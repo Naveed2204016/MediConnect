@@ -1,0 +1,42 @@
+.title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4B0082; /* dark purple */
+}
+
+.input-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+.form-button {
+    -fx-background-color: #6a0dad; /* purple */
+    -fx-text-fill: white;
+    -fx-padding: 8 16 8 16;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.form-button:hover {
+    -fx-background-color: #5c00b3;
+}
+
+.error-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+}
+
+.back-button {
+    -fx-background-color: #e63946;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.back-button:hover {
+    -fx-background-color: #c5303c;
+}

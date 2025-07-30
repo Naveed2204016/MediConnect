@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.DoctorSignupController"
+            stylesheets="@../css/style.css"
+            prefWidth="600" prefHeight="700"
+            >
+
+    <Button fx:id="backButton" text="←" onAction="#handleBack"
+            styleClass="back-button"
+            AnchorPane.topAnchor="12.0" AnchorPane.leftAnchor="12.0"
+            prefWidth="40" prefHeight="40"/>
+
+    <VBox alignment="CENTER" spacing="20.0"
+          AnchorPane.topAnchor="70.0"
+          AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0">
+
+        <Label text="Doctor Sign Up" styleClass="title-label"/>
+
+        <VBox spacing="10.0" alignment="CENTER" maxWidth="380">
+            <TextField fx:id="nameField" promptText="Name" maxWidth="300"/>
+            <TextField fx:id="hospitalField" promptText="Hospital Name" maxWidth="300"/>
+            <TextField fx:id="cityField" promptText="City" maxWidth="300"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <TextField fx:id="startTimeField" promptText="Start Time (e.g. 10:00)" maxWidth="145"/>
+                <TextField fx:id="endTimeField" promptText="End Time (e.g. 13:00)" maxWidth="145"/>
+            </HBox>
+
+            <TextField fx:id="specializationField" promptText="Specialization" maxWidth="300"/>
+            <TextField fx:id="qualificationField" promptText="Qualification" maxWidth="300"/>
+            <TextField fx:id="feesField" promptText="Fees (BDT)" maxWidth="300"/>
+            <TextField fx:id="contactField" promptText="Contact Number" maxWidth="300"/>
+            <TextField fx:id="emailField" promptText="Email" maxWidth="300"/>
+            <TextField fx:id="capacityField" promptText="Daily Patient Capacity" maxWidth="300"/>
+            <TextField fx:id="emergencySlotsField" promptText="Emergency Slots Per Day" maxWidth="300"/>
+            <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300"/>
+
+            <Button text="Sign Up" onAction="#handleSignup" styleClass="form-button" maxWidth="150"/>
+
+
+            <Label fx:id="errorLabel" textFill="red" styleClass="error-text"/>
+
+        </VBox>
+    </VBox>
+</AnchorPane>
+

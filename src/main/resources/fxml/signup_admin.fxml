@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.AdminSignupController"
+            stylesheets="@../css/style.css"
+            prefWidth="500" prefHeight="420">
+
+    <!-- Back Button (top-left) -->
+    <Button fx:id="backButton" text="←" onAction="#handleBack"
+            styleClass="back-button"
+            layoutX="20" layoutY="20"
+            prefWidth="40" prefHeight="40"/>
+
+    <VBox alignment="CENTER" spacing="20.0"
+          AnchorPane.topAnchor="70.0"
+          AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0">
+
+        <Label text="Admin Sign Up" styleClass="title-label"/>
+
+        <VBox spacing="12.0" alignment="CENTER" maxWidth="320">
+
+            <VBox spacing="5.0" alignment="CENTER">
+                <Label text="Name" styleClass="input-label"/>
+                <TextField fx:id="nameField" promptText="Enter Name" maxWidth="280"/>
+            </VBox>
+
+            <VBox spacing="5.0" alignment="CENTER">
+                <Label text="Password" styleClass="input-label"/>
+                <PasswordField fx:id="passwordField" promptText="Enter Password" maxWidth="280"/>
+            </VBox>
+
+            <Button text="Sign Up" onAction="#handleSignup"
+                    styleClass="form-button" maxWidth="150"/>
+
+            <Label fx:id="errorLabel" textFill="red" styleClass="error-text"/>
+        </VBox>
+    </VBox>
+</AnchorPane>
+
