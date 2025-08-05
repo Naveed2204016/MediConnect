@@ -6,9 +6,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.PatientCancelAppointment"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.CancelAppointmentController"
+      spacing="15" alignment="TOP_CENTER"
+      style="-fx-padding: 20;">
 
-</AnchorPane>
+    <Label text="Cancel Appointment" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" prefWidth="300"/>
+        </columnConstraints>
+
+        <Label text="Search an appointment" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="DoctorName" promptText="Doctor Name"
+                   GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Button text="Search" onAction="#handleSearch"
+                GridPane.rowIndex="2" GridPane.columnIndex="0"
+                GridPane.halignment="RIGHT"/>
+    </GridPane>
+
+    <TableView fx:id="appointmentTable" prefHeight="200">
+        <columns>
+            <TableColumn text="Doctor Name" prefWidth="150" fx:id="dname"/>
+            <TableColumn text="Hospital" prefWidth="150" fx:id="hospital"/>
+            <TableColumn text="Appointment Date" prefWidth="150" fx:id="appdate"/>
+        </columns>
+    </TableView>
+
+    <Button text="Confirm Cancel" onAction="#handleCancelAppointment"/>
+</VBox>
+
+
+
+
+
+
