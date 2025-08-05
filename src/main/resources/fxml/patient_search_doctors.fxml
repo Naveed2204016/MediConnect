@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.PatientSearchDoctorsController"
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: linear-gradient(to bottom right, #f2e8ff, #ffffff);">
+
+    <VBox alignment="TOP_CENTER" spacing="25"
+          AnchorPane.topAnchor="30.0"
+          AnchorPane.leftAnchor="50.0"
+          AnchorPane.rightAnchor="50.0"
+          AnchorPane.bottomAnchor="30.0">
+
+        <!-- Title -->
+        <Label text="Search and Book Doctors" styleClass="title-label"/>
+
+        <!-- Search Fields -->
+        <HBox spacing="30" alignment="CENTER">
+            <VBox spacing="10">
+                <Label text="Specialization"/>
+                <TextField fx:id="specializationField" promptText="e.g. Neurology"/>
+            </VBox>
+
+            <VBox spacing="10">
+                <Label text="Location"/>
+                <TextField fx:id="locationField" promptText="e.g. Dhanmondi"/>
+            </VBox>
+
+            <Button text="Search" onAction="#handleSearch" prefHeight="40" />
+        </HBox>
+
+        <!-- Doctors Table -->
+        <TableView fx:id="doctorsTable" prefHeight="400" prefWidth="900">
+            <columns>
+                <TableColumn fx:id="nameCol" text="Name" prefWidth="150"/>
+                <TableColumn fx:id="specCol" text="Specialization" prefWidth="200"/>
+                <TableColumn fx:id="locCol" text="Location" prefWidth="150"/>
+                <TableColumn fx:id="feeCol" text="Fees" prefWidth="100"/>
+                <TableColumn fx:id="availCol" text="Availability" prefWidth="150"/>
+            </columns>
+        </TableView>
+
+        <!-- Action Buttons -->
+        <HBox spacing="20" alignment="CENTER_RIGHT">
+            <Button text="Request Emergency" onAction="#handleEmergency"/>
+            <Button text="Book Appointment" onAction="#handleBook"/>
+        </HBox>
+
+    </VBox>
+</AnchorPane>

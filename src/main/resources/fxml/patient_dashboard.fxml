@@ -1,1 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.DashboardPatientController"
+            stylesheets="@../css/style.css"
+            prefWidth="1000" prefHeight="700">
+
+    <VBox fx:id="sidebar" spacing="10" styleClass="sidebar" prefWidth="200">
+        <Button text="Search Doctors" onAction="#loadSearchDoctors" styleClass="sidebar-button"/>
+        <Button text="Update Info" onAction="#loadUpdateInfo" styleClass="sidebar-button"/>
+        <Button text="Cancel Appointment" onAction="#loadCancelAppointment" styleClass="sidebar-button"/>
+        <Button text="Book Diagnostic Test" onAction="#loadBookTest" styleClass="sidebar-button"/>
+        <Button text="Notifications" onAction="#loadNotifications" styleClass="sidebar-button"/>
+    </VBox>
+
+    <StackPane fx:id="contentArea" />
+</BorderPane>
