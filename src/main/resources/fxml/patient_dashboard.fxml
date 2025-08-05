@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controllers.DashboardPatientController"
             stylesheets="@../css/style.css"
             prefWidth="1000" prefHeight="700">
 
-    <VBox fx:id="sidebar" spacing="10" styleClass="sidebar" prefWidth="200">
-        <Button text="Search Doctors" onAction="#loadSearchDoctors" styleClass="sidebar-button"/>
-        <Button text="Update Info" onAction="#loadUpdateInfo" styleClass="sidebar-button"/>
-        <Button text="Cancel Appointment" onAction="#loadCancelAppointment" styleClass="sidebar-button"/>
-        <Button text="Book Diagnostic Test" onAction="#loadBookTest" styleClass="sidebar-button"/>
-        <Button text="Notifications" onAction="#loadNotifications" styleClass="sidebar-button"/>
-    </VBox>
+    <!-- Left Sidebar Navigation -->
+    <left>
+        <VBox styleClass="sidebar" spacing="10" prefWidth="200">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
 
-    <StackPane fx:id="contentArea" />
+            <Label text="Patient Dashboard" styleClass="sidebar-title"/>
+
+            <Button text="Search Doctors" onAction="#loadSearchDoctors" styleClass="nav-button"/>
+            <Button text="Update Info" onAction="#loadUpdateInfo" styleClass="nav-button"/>
+            <Button text="Cancel Appointment" onAction="#loadCancelAppointment" styleClass="nav-button"/>
+            <Button text="Book Diagnostic Test" onAction="#loadBookTest" styleClass="nav-button"/>
+            <Button text="Notifications" onAction="#loadNotifications" styleClass="nav-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" onAction="#logout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-pane">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </StackPane>
+    </center>
+
+    <!-- Status Bar -->
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_RIGHT">
+            <Label text="Welcome, Patient" styleClass="welcome-message"/>
+            <Label fx:id="statusMessage" text="Ready" styleClass="status-message"/>
+        </HBox>
+    </bottom>
 </BorderPane>

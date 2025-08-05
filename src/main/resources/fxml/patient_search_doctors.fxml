@@ -6,49 +6,49 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controllers.PatientSearchDoctorsController"
-            prefWidth="1000" prefHeight="700"
-            style="-fx-background-color: linear-gradient(to bottom right, #f2e8ff, #ffffff);">
+            prefHeight="600" prefWidth="800">
 
-    <VBox alignment="TOP_CENTER" spacing="25"
-          AnchorPane.topAnchor="30.0"
-          AnchorPane.leftAnchor="50.0"
-          AnchorPane.rightAnchor="50.0"
-          AnchorPane.bottomAnchor="30.0">
+    <VBox alignment="TOP_CENTER" spacing="20"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
 
-        <!-- Title -->
-        <Label text="Search and Book Doctors" styleClass="title-label"/>
-
-        <!-- Search Fields -->
-        <HBox spacing="30" alignment="CENTER">
-            <VBox spacing="10">
-                <Label text="Specialization"/>
-                <TextField fx:id="specializationField" promptText="e.g. Neurology"/>
-            </VBox>
-
-            <VBox spacing="10">
-                <Label text="Location"/>
-                <TextField fx:id="locationField" promptText="e.g. Dhanmondi"/>
-            </VBox>
-
-            <Button text="Search" onAction="#handleSearch" prefHeight="40" />
+        <!-- Search Header -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Search Doctors" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
         </HBox>
 
-        <!-- Doctors Table -->
-        <TableView fx:id="doctorsTable" prefHeight="400" prefWidth="900">
+        <!-- Search Criteria -->
+        <GridPane hgap="10" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" prefWidth="100"/>
+                <ColumnConstraints halignment="LEFT" prefWidth="200"/>
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints prefHeight="30"/>
+                <RowConstraints prefHeight="30"/>
+            </rowConstraints>
+
+            <Label text="Specialization:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="specializationField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Location:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="locationField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        </GridPane>
+
+        <!-- Search Button -->
+        <Button text="Search" onAction="#handleSearch" prefWidth="100"/>
+
+        <!-- Results Table -->
+        <TableView fx:id="doctorsTable" prefHeight="300">
             <columns>
                 <TableColumn fx:id="nameCol" text="Name" prefWidth="150"/>
-                <TableColumn fx:id="specCol" text="Specialization" prefWidth="200"/>
-                <TableColumn fx:id="locCol" text="Location" prefWidth="150"/>
-                <TableColumn fx:id="feeCol" text="Fees" prefWidth="100"/>
-                <TableColumn fx:id="availCol" text="Availability" prefWidth="150"/>
+                <TableColumn fx:id="specializationCol" text="Specialization" prefWidth="200"/>
+                <TableColumn fx:id="locationCol" text="Location" prefWidth="150"/>
+                <TableColumn fx:id="feeCol" text="Fee" prefWidth="100"/>
+                <TableColumn fx:id="availabilityCol" text="Availability" prefWidth="150"/>
+                <TableColumn fx:id="actionCol" text="Action" prefWidth="100"/>
             </columns>
         </TableView>
-
-        <!-- Action Buttons -->
-        <HBox spacing="20" alignment="CENTER_RIGHT">
-            <Button text="Request Emergency" onAction="#handleEmergency"/>
-            <Button text="Book Appointment" onAction="#handleBook"/>
-        </HBox>
 
     </VBox>
 </AnchorPane>
