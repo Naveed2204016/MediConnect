@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.PatientBookTest"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.BookDiagnosticTestController"
+      spacing="15" alignment="TOP_CENTER"
+      style="-fx-padding: 20;">
 
-</AnchorPane>
+    <Label text="Book Diagnostic Tests" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <!-- Search Section -->
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" prefWidth="100"/>
+            <ColumnConstraints halignment="LEFT" prefWidth="200"/>
+        </columnConstraints>
+
+        <Label text="Test Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="testNameField" promptText="e.g. Blood Test"
+                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Hospital:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="hospitalField" promptText="(Optional)"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Button text="Search" onAction="#handleSearch"
+                GridPane.rowIndex="2" GridPane.columnIndex="1"
+                GridPane.halignment="RIGHT"/>
+    </GridPane>
+
+    <!-- Tests Table -->
+    <TableView fx:id="testsTable" prefHeight="200">
+        <columns>
+            <TableColumn text="Test" prefWidth="150" fx:id="nameCol"/>
+            <TableColumn text="Hospital" prefWidth="150" fx:id="hospitalCol"/>
+            <TableColumn text="Fee" prefWidth="100" fx:id="feeCol"/>
+            <TableColumn text="Action" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <!-- Selected Tests -->
+    <VBox spacing="5" style="-fx-padding: 10; -fx-border-color: #ddd; -fx-border-radius: 5;">
+        <Label text="Selected Tests:" style="-fx-font-weight: bold;"/>
+        <ListView fx:id="selectedTestsList" prefHeight="100"/>
+        <Label fx:id="totalLabel" text="Total: $0.00" style="-fx-font-weight: bold;"/>
+    </VBox>
+
+    <!-- Test Date Selection -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Test Date:"/>
+        <DatePicker fx:id="testDatePicker"/>
+    </HBox>
+
+    <!-- Payment Button -->
+    <Button text="Proceed to Payment ($0.00)" fx:id="paymentButton" onAction="#handlePayment"/>
+</VBox>

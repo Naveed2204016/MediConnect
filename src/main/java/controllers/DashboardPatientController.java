@@ -59,6 +59,8 @@ public class DashboardPatientController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login_patient.fxml"));
             Scene scene = new Scene(loader.load());
+            LoginController loginController=loader.getController();
+            loginController.setRole("patient");
             Stage stage=(Stage) contentArea.getScene().getWindow();
             stage.setScene(scene);
         }catch(IOException e)
