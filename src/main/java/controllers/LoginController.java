@@ -44,6 +44,19 @@ public class LoginController {
             {
                 query="SELECT password FROM patient WHERE patient_id=?";
             }
+            else if(role.equals("admin"))
+            {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    Stage stage=(Stage) userIdField.getScene().getWindow();
+                    stage.setScene(scene);
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
             PreparedStatement preparedStatement= connection.prepareStatement(query);
             preparedStatement.setInt(1,Integer.parseInt(userId));
             ResultSet resultSet=preparedStatement.executeQuery();

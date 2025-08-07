@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.AdminLoadTestController"
+      spacing="15" alignment="TOP_LEFT"
+      style="-fx-padding: 20;">
+
+    <Label text="Add Diagnostic Tests"
+           style="-fx-font-size: 16; -fx-font-weight: bold;" />
+
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" prefWidth="120"/>
+            <ColumnConstraints halignment="LEFT" prefWidth="250"/>
+        </columnConstraints>
+
+        <Label text="Test Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="testNameField" promptText="e.g. Blood Test"
+                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Hospital:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="hospitalField" promptText="e.g. EverCare"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Fee:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="feeField" promptText="e.g. 500"
+                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Time Slot:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="timeSlotField" promptText="e.g. 10:00 AM - 12:00 PM"
+                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Instructions:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextArea fx:id="instructionArea" promptText="Up to 50 characters"
+                  prefRowCount="2"
+                  wrapText="true"
+                  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Button text="Add" onAction="#handleadd"
+                GridPane.rowIndex="5" GridPane.columnIndex="1"
+                GridPane.halignment="RIGHT"/>
+    </GridPane>
+</VBox>

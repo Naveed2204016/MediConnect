@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.DashboardAdminController"
+            stylesheets="@../css/style.css"
+            prefWidth="1000" prefHeight="700">
+
+    <!-- Left Sidebar Navigation -->
+    <left>
+        <VBox styleClass="sidebar" spacing="10" prefWidth="200">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+
+            <Label text="Admin Dashboard" styleClass="sidebar-title"/>
+
+            <Button text="Manage Tests" onAction="#loadtests"  styleClass="nav-button"/>
+            <Button text="Update Info" onAction="#loadUpdateInfo" styleClass="nav-button"/>
+            <Button text="Handle Doctors" onAction="#loadhandledoctors" styleClass="nav-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" onAction="#logout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-pane">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </StackPane>
+    </center>
+
+    <!-- Status Bar -->
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_RIGHT">
+            <Label text="Welcome, Admin" styleClass="welcome-message"/>
+            <Label fx:id="statusMessage" text="Ready" styleClass="status-message"/>
+        </HBox>
+    </bottom>
+</BorderPane>
