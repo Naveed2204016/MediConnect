@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import models.Doctor; // Make sure you have this model class
+import models.Doctor;
 
 public class PatientSearchDoctorsController {
 
