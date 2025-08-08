@@ -28,9 +28,8 @@ public class PatientSearchDoctorsController {
         // Set up table columns
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         specializationCol.setCellValueFactory(cellData -> cellData.getValue().specializationProperty());
-        locationCol.setCellValueFactory(cellData -> cellData.getValue().locationProperty());
         feeCol.setCellValueFactory(cellData -> cellData.getValue().feeProperty().asObject());
-        availabilityCol.setCellValueFactory(cellData -> cellData.getValue().availabilityProperty());
+
 
         // Load sample data (remove when using real database)
         doctorsTable.setItems(sampleDoctors);

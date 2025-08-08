@@ -17,6 +17,8 @@ public class BookDiagnosticTestController {
     @FXML private TableColumn<DiagnosticTest, String> nameCol;
     @FXML private TableColumn<DiagnosticTest, String> hospitalCol;
     @FXML private TableColumn<DiagnosticTest, Double> feeCol;
+    @FXML private TableColumn<DiagnosticTest,String> timeslotcol;
+    @FXML private TableColumn<DiagnosticTest,String> instructioncol;
     @FXML private ListView<String> selectedTestsList;
     @FXML private Label totalLabel;
     @FXML private DatePicker testDatePicker;

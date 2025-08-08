@@ -8,101 +8,106 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="controllers.AdminHandleController"
-      spacing="15" alignment="TOP_LEFT"
-      style="-fx-padding: 20;">
+      style="-fx-padding: 20;" spacing="30">
 
-    <Label text="Search a Doctor"
-           style="-fx-font-size: 16; -fx-font-weight: bold;" />
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="30" alignment="TOP_LEFT" style="-fx-padding: 20;">
 
-    <GridPane hgap="10" vgap="10">
-        <columnConstraints>
-            <ColumnConstraints halignment="right" prefWidth="200"/>
-            <ColumnConstraints halignment="left"  prefWidth="200"/>
-        </columnConstraints>
+                <!-- Doctor Section -->
+                <VBox spacing="15">
+                    <Label text="Search a Doctor" style="-fx-font-size: 16; -fx-font-weight: bold;" />
 
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints halignment="right" prefWidth="200"/>
+                            <ColumnConstraints halignment="left"  prefWidth="200"/>
+                        </columnConstraints>
 
-        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="doctornamefield" promptText="e.g: john smith"
-                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="doctornamefield" promptText="e.g: john smith"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label text="Specialization" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="specializationfield" promptText="e.g: Medicine"
-                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        <Label text="Specialization" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="specializationfield" promptText="e.g: Medicine"
+                                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <Label text="Hospital:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="hospitalfield" promptText="e.g: Evercare"
-                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        <Label text="Hospital:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="hospitalfield" promptText="e.g: Evercare"
+                                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-        <Label text="City:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <TextField fx:id="cityfield" promptText="e.g: Chittagong"
-                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                        <Label text="City:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="cityfield" promptText="e.g: Chittagong"
+                                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
+                        <Button text="Search" onAction="#handlesearch"
+                                GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                GridPane.halignment="RIGHT"/>
+                    </GridPane>
 
-        <Button text="Search" onAction="#handlesearch"
-                GridPane.rowIndex="4" GridPane.columnIndex="1"
-                GridPane.halignment="RIGHT"/>
-    </GridPane>
+                    <TableView fx:id="tableView" prefHeight="400" prefWidth="800" editable="true" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
+                            <TableColumn fx:id="colSpecialization" text="Specialization" prefWidth="150"/>
+                            <TableColumn fx:id="colqualification" text="Qualification" prefWidth="150"/>
+                            <TableColumn fx:id="colhospital" text="Hospital" prefWidth="150"/>
+                            <TableColumn fx:id="colcity" text="City" prefWidth="100"/>
+                            <TableColumn fx:id="colfee" text="Fee" prefWidth="100"/>
+                            <TableColumn fx:id="colcontactnumber" text="Contact no" prefWidth="150"/>
+                            <TableColumn fx:id="colemailad" text="Email" prefWidth="200"/>
+                        </columns>
+                    </TableView>
 
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Remove Selected" onAction="#onRemoveSelected"/>
+                    </HBox>
+                </VBox>
 
-    <!-- TableView -->
-    <TableView fx:id="tableView" prefHeight="400" prefWidth="800" editable="true">
-        <columns>
-            <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
-            <TableColumn fx:id="colSpecialization" text="Specialization" prefWidth="150"/>
-            <TableColumn fx:id="colqualification" text="Qualification" prefWidth="150"/>
-            <TableColumn fx:id="colhospital" text="Hospital" prefWidth="150"/>
-            <TableColumn fx:id="colcity" text="City" prefWidth="100"/>
-            <TableColumn fx:id="colfee" text="Fee" prefWidth="100"/>
-            <TableColumn fx:id="colcontactnumber" text="Contact no" prefWidth="150"/>
-            <TableColumn fx:id="colemailad" text="Contact no" prefWidth="200"/>
-        </columns>
-    </TableView>
+                <Separator/>
 
+                <!-- Assistant Section -->
+                <VBox spacing="15">
+                    <Label text="Search an Assistant" style="-fx-font-size: 16; -fx-font-weight: bold;" />
 
-    <HBox spacing="10">
-        <Button text="Remove Selected" alignment="BOTTOM_RIGHT" onAction="#onRemoveSelectedassistant"/>
-    </HBox>
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints halignment="right" prefWidth="200"/>
+                            <ColumnConstraints halignment="left"  prefWidth="200"/>
+                        </columnConstraints>
 
-    <GridPane hgap="10" vgap="10">
-        <columnConstraints>
-            <ColumnConstraints halignment="right" prefWidth="200"/>
-            <ColumnConstraints halignment="left"  prefWidth="200"/>
-        </columnConstraints>
+                        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="assistantnamefield" promptText="e.g: john smith"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
+                        <Label text="Doctor's Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="assistantdoctornamefield" promptText="e.g: Michael Scott"
+                                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="assistantnamefield" promptText="e.g: john smith"
-                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <Label text="Contact no:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="contactnofield" promptText="Optional"
+                                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-        <Label text="Doctor's Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="assistantdoctornamefield" promptText="e.g: Michael Scott"
-                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        <Button text="Search" onAction="#handlesearchassistant"
+                                GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                GridPane.halignment="RIGHT"/>
+                    </GridPane>
 
-        <Label text="Contact no:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="contactnofield" promptText="Optional"
-                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <TableView fx:id="tableViewforassistant" prefHeight="400" prefWidth="800" editable="true" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colNameassistant" text="Name" prefWidth="150"/>
+                            <TableColumn fx:id="colDoctorname" text="Doctor's Name" prefWidth="150"/>
+                            <TableColumn fx:id="colcontactno" text="Contact no" prefWidth="150"/>
+                            <TableColumn fx:id="colemail" text="Email" prefWidth="150"/>
+                        </columns>
+                    </TableView>
 
-        <Button text="Search" onAction="#handlesearchassistant"
-                GridPane.rowIndex="4" GridPane.columnIndex="1"
-                GridPane.halignment="RIGHT"/>
-    </GridPane>
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Remove Selected" onAction="#onRemoveSelectedassistant"/>
+                    </HBox>
+                </VBox>
 
-    <TableView fx:id="tableViewforassistant" prefHeight="400" prefWidth="800" editable="true">
-        <columns>
-            <TableColumn fx:id="colNameassistant" text="Name" prefWidth="150"/>
-            <TableColumn fx:id="colDoctorname" text="Doctor's Name" prefWidth="150"/>
-            <TableColumn fx:id="colcontactno" text="Contact no" prefWidth="150"/>
-            <TableColumn fx:id="colemail" text="Email" prefWidth="150"/>
-        </columns>
-    </TableView>
-
-    <HBox spacing="10">
-        <Button text="Remove Selected" alignment="BOTTOM_RIGHT" onAction="#onRemoveSelectedassistant"/>
-    </HBox>
+            </VBox>
+        </content>
+    </ScrollPane>
 
 </VBox>
-
-
-
-
-

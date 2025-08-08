@@ -49,8 +49,8 @@ public class AdminHandleController {
         colName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         colSpecialization.setCellValueFactory(cellData -> cellData.getValue().specializationProperty());
         colqualification.setCellValueFactory(cellData -> cellData.getValue().qualificationproperty());
-        colhospital.setCellValueFactory(cellData -> cellData.getValue().cityproperty());
-        colcity.setCellValueFactory(cellData -> cellData.getValue().availabilityProperty());
+        colhospital.setCellValueFactory(cellData -> cellData.getValue().hospitalproperty());
+        colcity.setCellValueFactory(cellData -> cellData.getValue().cityproperty());
         colfee.setCellValueFactory(cellData -> cellData.getValue().feeProperty().asObject());
         colcontactnumber.setCellValueFactory(cellData -> cellData.getValue().contactnoproperty());
         colemailad.setCellValueFactory(cellData -> cellData.getValue().emailadproperty());

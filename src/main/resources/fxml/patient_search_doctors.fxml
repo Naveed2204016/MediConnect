@@ -28,11 +28,20 @@
                 <RowConstraints prefHeight="30"/>
             </rowConstraints>
 
-            <Label text="Specialization:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField fx:id="specializationField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-            <Label text="Location:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <TextField fx:id="locationField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="namefield" promptText="Enter a name" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Specialization:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="specializationField" promptText="Enter a specialization" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Hospital:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="hospitalfield" promptText="Optional" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="City:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="cityField" promptText="Optional" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+
         </GridPane>
 
         <!-- Search Button -->
@@ -43,9 +52,14 @@
             <columns>
                 <TableColumn fx:id="nameCol" text="Name" prefWidth="150"/>
                 <TableColumn fx:id="specializationCol" text="Specialization" prefWidth="200"/>
-                <TableColumn fx:id="locationCol" text="Location" prefWidth="150"/>
+                <TableColumn fx:id="qualificationCol" text="Qualification" prefWidth="200"/>
+                <TableColumn fx:id="hospitalCol" text="Hospital" prefWidth="150"/>
+                <TableColumn fx:id="cityCol" text="City" prefWidth="150"/>
+                <TableColumn fx:id="stCol" text="Start time" prefWidth="150"/>
+                <TableColumn fx:id="edCol" text="End time" prefWidth="150"/>
                 <TableColumn fx:id="feeCol" text="Fee" prefWidth="100"/>
-                <TableColumn fx:id="availabilityCol" text="Availability" prefWidth="150"/>
+                <TableColumn fx:id="contactCol" text="Contact no" prefWidth="100"/>
+                <TableColumn fx:id="emailCol" text="Email" prefWidth="150"/>
                 <TableColumn fx:id="actionCol" text="Action" prefWidth="100"/>
             </columns>
         </TableView>

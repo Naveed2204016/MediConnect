@@ -37,7 +37,8 @@
             <TableColumn text="Test" prefWidth="150" fx:id="nameCol"/>
             <TableColumn text="Hospital" prefWidth="150" fx:id="hospitalCol"/>
             <TableColumn text="Fee" prefWidth="100" fx:id="feeCol"/>
-            <TableColumn text="Action" prefWidth="100"/>
+            <TableColumn text="Time Slot" prefWidth="150" fx:id="timeslotcol"/>
+            <TableColumn text="Instructions" prefWidth="150" fx:id="instructioncol"/>
         </columns>
     </TableView>
 
