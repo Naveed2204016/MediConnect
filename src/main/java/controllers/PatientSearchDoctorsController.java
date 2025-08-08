@@ -19,8 +19,8 @@ public class PatientSearchDoctorsController {
 
     // Sample data - remove this when you connect to real database
     private ObservableList<Doctor> sampleDoctors = FXCollections.observableArrayList(
-            new Doctor("Dr. Smith", "Cardiology", "Dhanmondi", 1500.0, "Mon-Fri 9AM-5PM"),
-            new Doctor("Dr. Johnson", "Neurology", "Gulshan", 2000.0, "Tue-Sat 10AM-6PM")
+            new Doctor("Dr. Smith", "Cardiology", "mbbs","United", 1500.0, "Mon-Fri 9AM-5PM"),
+            new Doctor("Dr. Johnson", "Neurology", "mbbs", "cmoshmc",2000.0, "Tue-Sat 10AM-6PM")
     );
 
     @FXML

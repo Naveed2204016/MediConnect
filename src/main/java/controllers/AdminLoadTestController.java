@@ -1,6 +1,7 @@
 package controllers;
 
 //import com.sun.jdi.connect.spi.Connection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,7 +39,7 @@ public class AdminLoadTestController {
     private Connection conn;
 
     @FXML
-    private void handleadd() {
+    private void handleadd(ActionEvent e) {
 
     }
 
