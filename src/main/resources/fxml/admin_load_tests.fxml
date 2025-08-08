@@ -47,4 +47,30 @@
                 GridPane.rowIndex="5" GridPane.columnIndex="1"
                 GridPane.halignment="RIGHT"/>
     </GridPane>
+
+        <!-- Search Bar -->
+        <HBox spacing="10">
+            <Label text="Search a Test:"/>
+            <TextField fx:id="testnamefield" promptText="Enter test name"/>
+            <TextField fx:id="hospitalnamefield" promptText="Enter hospital name"/>
+            <Button text="Search" onAction="#onSearch"/>
+        </HBox>
+
+        <!-- TableView -->
+        <TableView fx:id="tableView" prefHeight="400" prefWidth="800" editable="true">
+            <columns>
+                <TableColumn fx:id="colTestName" text="Test Name" prefWidth="150"/>
+                <TableColumn fx:id="colHospital" text="Hospital" prefWidth="150"/>
+                <TableColumn fx:id="colFee" text="Fee" prefWidth="100"/>
+                <TableColumn fx:id="colTimeSlot" text="Time Slot" prefWidth="150"/>
+                <TableColumn fx:id="colInstructions" text="Instructions" prefWidth="250"/>
+            </columns>
+        </TableView>
+
+        <!-- Action Buttons -->
+        <HBox spacing="10">
+            <Button text="Remove Selected" onAction="#onRemoveSelected"/>
+            <Button text="Update Selected" onAction="#onUpdateSelected"/>
+        </HBox>
+
 </VBox>
