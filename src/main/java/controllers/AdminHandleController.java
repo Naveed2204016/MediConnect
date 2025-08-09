@@ -17,6 +17,7 @@ import models.Doctor;
 import models.Test;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
@@ -39,8 +40,8 @@ public class AdminHandleController {
     @FXML private TextField cityfield;
 
     private ObservableList<Doctor> sampleDoctors = FXCollections.observableArrayList(
-            new Doctor("Dr. Smith", "Cardiology", "mbbs","United", "chittagong",1500.0, "01617793505","john@example.com"),
-            new Doctor("Dr. Johnson", "Neurology", "mbbs", "cmoshmc","dhaka",2000.0, "01845022838","mahi@bh.com")
+            new Doctor("Dr. Smith", "Cardiology", "mbbs","United", "chittagong", LocalTime.NOON,LocalTime.MIDNIGHT,1500.0, "01617793505","john@example.com"),
+            new Doctor("Dr. Johnson", "Neurology", "mbbs", "cmoshmc","dhaka",LocalTime.now(),LocalTime.NOON,2000.0, "01845022838","mahi@bh.com")
     );
 
     @FXML
