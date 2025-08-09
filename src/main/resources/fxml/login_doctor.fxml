@@ -5,34 +5,50 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controllers.LoginController"
             stylesheets="@../css/style.css"
             prefWidth="1000" prefHeight="700">
 
-    <VBox alignment="CENTER" spacing="20.0"
-          AnchorPane.topAnchor="40.0"
-          AnchorPane.leftAnchor="0.0"
-          AnchorPane.rightAnchor="0.0">
-
-        <Label text="Doctor Login" styleClass="title-label"/>
-
-        <!-- Group inputs inside a centered box -->
-        <VBox spacing="15.0" alignment="CENTER" maxWidth="300">
-
-            <VBox spacing="5" alignment="CENTER">
-                <Label text="User ID" styleClass="input-label"/>
-                <TextField fx:id="userIdField" promptText="Enter User ID" maxWidth="280"/>
-            </VBox>
-
-            <VBox spacing="5" alignment="CENTER">
-                <Label text="Password" styleClass="input-label"/>
-                <PasswordField fx:id="passwordField" promptText="Enter Password" maxWidth="280"/>
-            </VBox>
-
-            <Button text="Login" onAction="#handleLogin" styleClass="form-button" maxWidth="150"/>
-            <Button text="Back to Welcome" onAction="#handleBack" styleClass="form-button" maxWidth="150"/>
-            <Label fx:id="errorLabel" textFill="red" styleClass="error-text"/>
+    <!-- Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" spacing="10" prefWidth="220" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+            <Label text="MediConnect" styleClass="sidebar-title"/>
+            <Button text="About Mediconnect" styleClass="nav-button"/>
+            <Button text="Terms and Condition" styleClass="nav-button"/>
+            <Button text="Contact Us" styleClass="nav-button"/>
+            <Region VBox.vgrow="ALWAYS"/>
         </VBox>
-    </VBox>
-</AnchorPane>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <padding>
+                <Insets top="30" bottom="30" left="40" right="40"/>
+            </padding>
+            <Label text="Doctor Login" styleClass="title-label"/>
+            <VBox spacing="15.0" alignment="CENTER" maxWidth="300">
+                <VBox spacing="5" alignment="CENTER">
+                    <Label text="User ID" styleClass="input-label"/>
+                    <TextField fx:id="userIdField" promptText="Enter User ID" maxWidth="280"/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER">
+                    <Label text="Password" styleClass="input-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter Password" maxWidth="280"/>
+                </VBox>
+                <HBox spacing="15" alignment="CENTER">
+                    <Button fx:id="backButton" text="←" onAction="#handleBack"
+                            styleClass="back-button"
+                            prefWidth="40" prefHeight="40"/>
+                    <Button text="Login" onAction="#handleLogin"
+                            styleClass="form-button" maxWidth="150"/>
+                </HBox>
+                <Label fx:id="errorLabel" textFill="red" styleClass="error-text"/>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
