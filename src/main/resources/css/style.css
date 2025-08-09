@@ -111,3 +111,57 @@
 .status-message {
     -fx-text-fill: #7f8c8d;
 }
+
+
+.table-view {
+    -fx-background-color: #f4f8fb;
+    -fx-border-color: #1976d2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-table-cell-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, #1976d2, 4, 0.1, 0, 2);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #1565c0;
+    -fx-background-radius: 8 8 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: #1565c0;
+    -fx-size: 36px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #1565c0;
+}
+
+.table-view .filler {
+    -fx-background-color: #1565c0;
+    -fx-size: 36px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #1565c0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+
+.table-row-cell:filled:selected, .table-row-cell:filled:hover {
+    -fx-background-color: #1976d2; /* darker blue for selection */
+    -fx-text-fill: white;           /* white text for contrast */
+}
+
+.table-row-cell:filled:selected .text, .table-row-cell:filled:hover .text {
+    -fx-fill: white;                /* ensures text nodes are white */
+}
+
+
+.table-row-cell:odd {
+    -fx-background-color: #eaf1fb;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #f4f8fb;
+}

@@ -48,7 +48,7 @@
         <Button text="Search" onAction="#handleSearch" prefWidth="100"/>
 
         <!-- Results Table -->
-        <TableView fx:id="doctorsTable" prefHeight="300">
+        <TableView fx:id="doctorsTable" prefHeight="300" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="nameCol" text="Name" prefWidth="150"/>
                 <TableColumn fx:id="specializationCol" text="Specialization" prefWidth="200"/>
