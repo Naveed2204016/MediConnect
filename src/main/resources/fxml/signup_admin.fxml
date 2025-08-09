@@ -8,7 +8,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controllers.AdminSignupController"
             stylesheets="@../css/style.css"
-            prefWidth="500" prefHeight="420">
+            prefWidth="1000" prefHeight="700">
 
     <!-- Back Button (top-left) -->
     <Button fx:id="backButton" text="←" onAction="#handleBack"

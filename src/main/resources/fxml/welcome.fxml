@@ -10,7 +10,7 @@
       xmlns="http://javafx.com/javafx"
       fx:controller="controllers.WelcomeController"
       stylesheets="@../css/style.css"
-      prefWidth="600" prefHeight="400">
+      prefWidth="1000" prefHeight="700">
 
     <padding>
         <Insets top="30" bottom="30" left="40" right="40"/>

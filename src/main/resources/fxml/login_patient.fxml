@@ -8,7 +8,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controllers.LoginController"
             stylesheets="@../css/style.css"
-            prefWidth="762" prefHeight="400">
+            prefWidth="1000" prefHeight="700">
 
     <VBox alignment="CENTER" spacing="20.0"
           AnchorPane.topAnchor="40.0"
