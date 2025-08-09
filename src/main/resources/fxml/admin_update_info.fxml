@@ -16,7 +16,7 @@
     </padding>
 
     <Label text="Update Your Information"
-           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #6a0dad;"/>
+           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #5bbcff;"/>
 
     <GridPane hgap="10" vgap="10">
         <columnConstraints>
@@ -39,7 +39,7 @@
 
     <HBox spacing="20" alignment="CENTER">
         <Button text="Save Changes" onAction="#handleSave"
-                style="-fx-background-color: #6a0dad; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                style="-fx-background-color: #5bbcff; -fx-text-fill: white; -fx-font-weight: bold;"/>
         <Button text="Cancel" onAction="#handleCancel"
                 style="-fx-background-color: #e63946; -fx-text-fill: white;"/>
     </HBox>

@@ -2,6 +2,9 @@ package models;
 
 import javafx.beans.property.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Doctor {
     private  StringProperty name;
     private  StringProperty specialization;
@@ -13,6 +16,8 @@ public class Doctor {
     private StringProperty city;
     private StringProperty contactno;
     private StringProperty emailad;
+    private  ObjectProperty<LocalTime> starttime = new SimpleObjectProperty<>();
+    private  ObjectProperty<LocalTime> endtime = new SimpleObjectProperty<>();
 
     public Doctor(String name, String specialization,String qualification, String location,
                   double fee, String availability) {
@@ -25,7 +30,7 @@ public class Doctor {
     }
 
 
-    public Doctor(String name, String specialization,String qualification, String hospital,String city,Double fee,
+    public Doctor(String name, String specialization,String qualification, String hospital,String city,LocalTime st,LocalTime ed,Double fee,
                   String contactno,String emailad) {
         this.name = new SimpleStringProperty(name);
         this.specialization = new SimpleStringProperty(specialization);
@@ -35,6 +40,8 @@ public class Doctor {
         this.fee = new SimpleDoubleProperty(fee);
         this.contactno = new SimpleStringProperty(contactno);
         this.emailad=new SimpleStringProperty(emailad);
+        this.starttime.set(st);
+        this.endtime.set(ed);
     }
 
     // Getters
@@ -56,4 +63,11 @@ public class Doctor {
     public StringProperty contactnoproperty() {return contactno; }
     public StringProperty emailadproperty() {return emailad; }
 
+    public ObjectProperty<LocalTime> stproperty() {
+        return starttime;
+    }
+
+    public ObjectProperty<LocalTime> edproperty() {
+        return endtime;
+    }
 }

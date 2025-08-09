@@ -1,50 +1,9 @@
+/* Labels */
 .title-label {
     -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-text-fill: #4B0082; /* dark purple */
-}
-
-.input-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #333;
-    -fx-font-weight: bold;
-}
-
-.form-button {
-    -fx-background-color: #6a0dad; /* purple */
-    -fx-text-fill: white;
-    -fx-padding: 8 16 8 16;
-    -fx-font-size: 14px;
-    -fx-background-radius: 10;
-    -fx-cursor: hand;
-}
-
-.form-button:hover {
-    -fx-background-color: #5c00b3;
-}
-
-.error-text {
-    -fx-font-size: 12px;
-    -fx-text-fill: red;
-}
-
-.back-button {
-    -fx-background-color: #e63946;
-    -fx-text-fill: white;
-    -fx-font-size: 18px;
-    -fx-background-radius: 20;
-    -fx-cursor: hand;
-    -fx-font-weight: bold;
-}
-
-.back-button:hover {
-    -fx-background-color: #c5303c;
-}
-
-.title-label {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #6a0dad;
+    -fx-text-fill: #5bbcff; /* mid light blue */
+    -fx-padding: 10;
 }
 
 .section-label {
@@ -54,22 +13,49 @@
     -fx-padding: 0 0 5 0;
 }
 
-.back-button {
-    -fx-background-color: #6c757d;
+.input-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* Buttons */
+.button, .form-button {
+    -fx-background-color: #5bbcff; /* mid light blue */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.button:hover, .form-button:hover {
+    -fx-background-color: #399be0; /* darker blue for hover */
+}
+
+/* Back and Logout Buttons */
+.back-button, .logout-button {
+    -fx-background-color: #e63946; /* red */
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-background-radius: 10;
     -fx-padding: 6 12 6 12;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
 }
 
-.logout-button {
-    -fx-background-color: #e63946;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 10;
-    -fx-padding: 6 12 6 12;
+.back-button:hover, .logout-button:hover {
+    -fx-background-color: #c5303c; /* darker red for hover */
 }
 
+/* Error Text */
+.error-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+}
+
+/* Card */
 .card {
     -fx-background-color: white;
     -fx-background-radius: 10;
@@ -79,47 +65,12 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 2, 2);
 }
 
-.title-label {
-    -fx-font-size: 22px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #6a0dad;
-    -fx-padding: 10;
-}
-
+/* Text Field */
 .text-field {
     -fx-pref-width: 200px;
 }
 
-.button {
-    -fx-background-color: #6a0dad;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 6;
-    -fx-cursor: hand;
-}
-
-.button:hover {
-    -fx-background-color: #4e008f;
-}
-
-.title-label {
-    -fx-font-size: 22px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #6a0dad;
-}
-
-.button {
-    -fx-background-color: #6a0dad;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-padding: 8 16 8 16;
-    -fx-background-radius: 8;
-}
-
-.button:hover {
-    -fx-background-color: #4e008f;
-}
-
+/* Sidebar */
 .sidebar {
     -fx-background-color: #2c3e50;
 }
@@ -143,11 +94,7 @@
     -fx-background-color: #34495e;
 }
 
-.logout-button {
-    -fx-background-color: #e74c3c;
-    -fx-text-fill: white;
-}
-
+/* Content and Status */
 .content-pane {
     -fx-background-color: #f5f5f5;
 }

@@ -5,30 +5,43 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Pos?>
 
-<VBox alignment="CENTER" spacing="20.0"
-      xmlns:fx="http://javafx.com/fxml"
-      xmlns="http://javafx.com/javafx"
-      fx:controller="controllers.WelcomeController"
-      stylesheets="@../css/style.css"
-      prefWidth="600" prefHeight="400">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="controllers.WelcomeController"
+            stylesheets="@../css/style.css"
+            prefWidth="1000" prefHeight="700">
 
-    <padding>
-        <Insets top="30" bottom="30" left="40" right="40"/>
-    </padding>
+    <!-- Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" spacing="10" prefWidth="220" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+            <Label text="MediConnect" styleClass="sidebar-title"/>
+            <Button text="About Mediconnect" styleClass="nav-button"/>
+            <Button text="Terms and Condition" styleClass="nav-button"/>
+            <Button text="Contact Us" styleClass="nav-button"/>
+            <Region VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </left>
 
-    <Label text="Welcome to MediConnect" styleClass="title-label" />
-
-    <HBox spacing="15" alignment="CENTER">
-        <RadioButton fx:id="patientRadio" text="Patient" toggleGroup="$roleToggleGroup" />
-        <RadioButton fx:id="doctorRadio" text="Doctor" toggleGroup="$roleToggleGroup" />
-        <RadioButton fx:id="assistantRadio" text="Assistant" toggleGroup="$roleToggleGroup" />
-        <RadioButton fx:id="adminRadio" text="Admin" toggleGroup="$roleToggleGroup" />
-    </HBox>
-
-    <HBox spacing="20" alignment="CENTER">
-        <Button fx:id="loginButton" text="Login" styleClass="form-button" onAction="#onLoginButtonClick"/>
-        <Button fx:id="signupButton" text="Sign Up" styleClass="form-button" onAction="#onSignupButtonClick"/>
-    </HBox>
-
-</VBox>
-
+    <!-- Main Content Area -->
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <padding>
+                <Insets top="30" bottom="30" left="40" right="40"/>
+            </padding>
+            <Label text="Welcome to MediConnect" styleClass="title-label" />
+            <HBox spacing="15" alignment="CENTER">
+                <RadioButton fx:id="patientRadio" text="Patient" toggleGroup="$roleToggleGroup" />
+                <RadioButton fx:id="doctorRadio" text="Doctor" toggleGroup="$roleToggleGroup" />
+                <RadioButton fx:id="assistantRadio" text="Assistant" toggleGroup="$roleToggleGroup" />
+                <RadioButton fx:id="adminRadio" text="Admin" toggleGroup="$roleToggleGroup" />
+            </HBox>
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="loginButton" text="Login" styleClass="form-button" onAction="#onLoginButtonClick"/>
+                <Button fx:id="signupButton" text="Sign Up" styleClass="form-button" onAction="#onSignupButtonClick"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
