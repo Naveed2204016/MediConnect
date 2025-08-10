@@ -6,9 +6,54 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.PatientNotifications"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.PatientNotificationController"
+      style="-fx-padding: 20;" spacing="30">
 
-</AnchorPane>
+
+    <VBox alignment="TOP_CENTER" spacing="20"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <Label text="Confirm or Cancel Your Emergency Appointments" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="notificationTable" layoutX="20" layoutY="20" prefWidth="560" prefHeight="360">
+        <columns>
+            <TableColumn fx:id="notificationColumn" text="Notification Box" prefWidth="560"
+                         style="-fx-alignment: CENTER;">
+            </TableColumn>
+        </columns>
+    </TableView>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Cancel" onAction="#handleCancel"
+                    style="-fx-background-color: #e63946; -fx-text-fill: white;" prefWidth="140"/>
+            <Button fx:id="confirmbutton" text="Confirm Appointment" prefWidth="140"/>
+        </HBox>
+    </VBox>
+
+    <VBox alignment="TOP_CENTER" spacing="20"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <Label text="Your Recent Emergency Requests" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+        <TableView fx:id="RequestTable" layoutX="20" layoutY="20" prefWidth="560" prefHeight="360">
+            <columns>
+                <TableColumn fx:id="RequestColumn" text="Emergency Requests" prefWidth="460"
+                             style="-fx-alignment: CENTER;">
+                </TableColumn>
+                <TableColumn fx:id="StatusColumn" text="Status" prefWidth="100"
+                             style="-fx-alignment: CENTER;">
+                </TableColumn>
+            </columns>
+        </TableView>
+
+    </VBox>
+
+
+
+</VBox>
+
+
+
+
+
+
+
