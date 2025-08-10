@@ -29,7 +29,7 @@
 
     <!-- Main Content Area -->
     <center>
-        <VBox alignment="CENTER" spacing="20">
+        <VBox fx:id="centerVBox" alignment="CENTER" spacing="20">
             <padding>
                 <Insets top="30" bottom="30" left="40" right="40"/>
             </padding>
