@@ -26,11 +26,11 @@ public class AssistantCancelAppointmentController {
     @FXML
     public void initialize() {
         dname.setCellValueFactory(
-                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDoctorName()));
+                celldata->(celldata.getValue().getDoctorNameproperty()));
         hospital.setCellValueFactory(
-                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getHospital()));
+                celldata -> (celldata.getValue().getHospitalproperty()));
         appdate.setCellValueFactory(
-                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getAppointmentDate()));
+                celldata -> (celldata.getValue().getAppointmentDateproperty()));
 
         appointmentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -40,7 +40,7 @@ public class AssistantCancelAppointmentController {
     private void loadAppointments(String doctorFilter) {
         appointments.clear();
 
-        /
+
     }
 
     @FXML

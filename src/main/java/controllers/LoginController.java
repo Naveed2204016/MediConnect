@@ -69,6 +69,19 @@ public class LoginController {
                 e.printStackTrace();
             }
         }
+        else if(role.equals("assistant"))
+        {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssistantDashboard.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage stage=(Stage) userIdField.getScene().getWindow();
+                stage.setScene(scene);
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
         /*
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

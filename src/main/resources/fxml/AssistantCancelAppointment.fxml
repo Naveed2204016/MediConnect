@@ -35,10 +35,10 @@
       </HBox>
       <TableView fx:id="appointmentTable" layoutX="26.0" layoutY="163.0" prefHeight="307.0" prefWidth="556.0">
         <columns>
-          <TableColumn fx:id="appointmentIdColumn" prefWidth="134.4000244140625" text="Appointment Id" />
-          <TableColumn fx:id="patientNameColumn" prefWidth="141.60000610351562" text="Patient Name" />
-            <TableColumn fx:id="doctorNameColumn" prefWidth="138.4000244140625" text="Doctor Name" />
-            <TableColumn fx:id="appointmentDateColumn" prefWidth="141.5999755859375" text="Date" />
+           <TableColumn fx:id="pname" prefWidth="134.4000244140625" text="Patient's ID" />
+          <TableColumn fx:id="dname" prefWidth="134.4000244140625" text="Doctor's name" />
+          <TableColumn fx:id="hospital" prefWidth="141.60000610351562" text="Hospital" />
+           <TableColumn fx:id="appdate" prefWidth="138.4000244140625" text="Appointment Date" />
         </columns>
       </TableView>
       <Button layoutX="236.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleCancelAppointment" prefHeight="36.0" prefWidth="136.0" styleClass="logout-button" stylesheets="@../css/style.css" text="Cancel Appointment" />

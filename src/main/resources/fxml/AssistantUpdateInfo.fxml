@@ -13,7 +13,7 @@
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-   <Label text="Update Your Information" textFill="#9932cc">
+   <Label text="Update Your Information" textFill="#5bbcff" style="-fx-font-size: 20; -fx-font-weight: bold;">
       <font>
          <Font name="Arial Bold" size="24.0" />
       </font>
@@ -46,7 +46,10 @@
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>
-         <Button onAction="#handleSaveChanges" style="-fx-background-color: #9932cc; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 10; -fx-background-radius: 10;" text="Save Changes" />
+         <Button fx:id="savebutton"
+                 onAction="#handleSaveChanges"
+                 style="-fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 10; -fx-background-radius: 10;"
+                 text="Save Changes" />
          <Button onAction="#handleCancel" style="-fx-background-color: #e63946; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 10; -fx-background-radius: 10;" text="Cancel" />
       </HBox>
    </VBox>

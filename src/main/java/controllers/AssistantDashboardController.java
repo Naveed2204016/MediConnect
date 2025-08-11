@@ -24,7 +24,7 @@ public class AssistantDashboardController {
     @FXML
     private void loadPrimaryCheckup(ActionEvent event) {
         try {
-            Parent primaryCheckupView = FXMLLoader.load(getClass().getResource("/views/primary_checkup_view.fxml"));
+            Parent primaryCheckupView = FXMLLoader.load(getClass().getResource("/fxml/AssistantPrimaryCheckup.fxml"));
             contentArea.getChildren().setAll(primaryCheckupView);
             statusMessage.setText("Primary Checkup loaded.");
         } catch (IOException e) {
@@ -36,7 +36,7 @@ public class AssistantDashboardController {
     @FXML
     private void loadUpdateInfo(ActionEvent event) {
         try {
-            Parent updateInfoView = FXMLLoader.load(getClass().getResource("/views/update_info_view.fxml"));
+            Parent updateInfoView = FXMLLoader.load(getClass().getResource("/fxml/AssistantUpdateInfo.fxml"));
             contentArea.getChildren().setAll(updateInfoView);
             statusMessage.setText("Update Information loaded.");
         } catch (IOException e) {
@@ -49,7 +49,7 @@ public class AssistantDashboardController {
     private void emergencyRequest(ActionEvent event) {
         try {
             Parent emergencyRequestView = FXMLLoader
-                    .load(getClass().getResource("/views/emergency_requests_view.fxml"));
+                    .load(getClass().getResource("/fxml/AssistantEmergencyRequest.fxml"));
             contentArea.getChildren().setAll(emergencyRequestView);
             statusMessage.setText("Emergency Requests displayed.");
         } catch (IOException e) {
@@ -62,7 +62,7 @@ public class AssistantDashboardController {
     private void cancelAppointment(ActionEvent event) {
         try {
             Parent cancelAppointmentView = FXMLLoader
-                    .load(getClass().getResource("/views/cancel_appointment_view.fxml"));
+                    .load(getClass().getResource("/fxml/AssistantCancelAppointment.fxml"));
             contentArea.getChildren().setAll(cancelAppointmentView);
             statusMessage.setText("Cancel Appointments loaded.");
         } catch (IOException e) {
