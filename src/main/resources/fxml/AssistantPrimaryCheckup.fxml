@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="600.0" spacing="15.0" styleClass="primary-checkup-form" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PrimaryCheckupController">
+    <children>
+        <Label styleClass="form-title" text="Primary Checkup" />
+        <VBox spacing="5.0" styleClass="form-row">
+            <Label styleClass="form-label" text="Patient Name" />
+            <TextField fx:id="patientNameField" promptText="Enter patient name" />
+        </VBox>
+        <VBox spacing="5.0" styleClass="form-row">
+            <Label styleClass="form-label" text="Contact No" />
+            <TextField fx:id="contactNoField" promptText="Enter contact number" />
+        </VBox>
+        <VBox spacing="5.0" styleClass="form-row">
+            <Label styleClass="form-label" text="Weight (kg)" />
+            <TextField fx:id="weightField" promptText="Enter weight" />
+        </VBox>
+        <VBox spacing="5.0" styleClass="form-row">
+            <Label styleClass="form-label" text="Age" />
+            <TextField fx:id="ageField" promptText="Enter age" />
+        </VBox>
+        <VBox spacing="5.0" styleClass="form-row">
+            <Label styleClass="form-label" text="Blood Pressure (mmHg)" />
+            <TextField fx:id="bloodPressureField" promptText="Enter blood pressure" />
+        </VBox>
+        <Button mnemonicParsing="false" onAction="#handleAddPatient" styleClass="add-button" text="Add">
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </Button>
+    </children>
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+</VBox>
