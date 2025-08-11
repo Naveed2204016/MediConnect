@@ -1,0 +1,79 @@
+package controllers;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
+import java.io.IOException;
+
+public class AssistantDashboardController {
+
+    @FXML
+    private StackPane contentArea;
+
+    @FXML
+    private Label statusMessage;
+
+    @FXML
+    public void initialize() {
+
+    }
+
+    @FXML
+    private void loadPrimaryCheckup(ActionEvent event) {
+        try {
+            Parent primaryCheckupView = FXMLLoader.load(getClass().getResource("/views/primary_checkup_view.fxml"));
+            contentArea.getChildren().setAll(primaryCheckupView);
+            statusMessage.setText("Primary Checkup loaded.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            statusMessage.setText("Error loading view.");
+        }
+    }
+
+    @FXML
+    private void loadUpdateInfo(ActionEvent event) {
+        try {
+            Parent updateInfoView = FXMLLoader.load(getClass().getResource("/views/update_info_view.fxml"));
+            contentArea.getChildren().setAll(updateInfoView);
+            statusMessage.setText("Update Information loaded.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            statusMessage.setText("Error loading view.");
+        }
+    }
+
+    @FXML
+    private void emergencyRequest(ActionEvent event) {
+        try {
+            Parent emergencyRequestView = FXMLLoader
+                    .load(getClass().getResource("/views/emergency_requests_view.fxml"));
+            contentArea.getChildren().setAll(emergencyRequestView);
+            statusMessage.setText("Emergency Requests displayed.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            statusMessage.setText("Error loading view.");
+        }
+    }
+
+    @FXML
+    private void cancelAppointment(ActionEvent event) {
+        try {
+            Parent cancelAppointmentView = FXMLLoader
+                    .load(getClass().getResource("/views/cancel_appointment_view.fxml"));
+            contentArea.getChildren().setAll(cancelAppointmentView);
+            statusMessage.setText("Cancel Appointments loaded.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            statusMessage.setText("Error loading view.");
+        }
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+        System.out.println("Assistant is logging out.");
+        statusMessage.setText("Logged out successfully.");
+    }
+}
