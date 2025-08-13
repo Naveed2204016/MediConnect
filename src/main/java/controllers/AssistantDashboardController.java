@@ -18,7 +18,14 @@ public class AssistantDashboardController {
 
     @FXML
     public void initialize() {
-
+        try {
+            Parent primaryCheckupView = FXMLLoader.load(getClass().getResource("/fxml/AssistantPrimaryCheckup.fxml"));
+            contentArea.getChildren().setAll(primaryCheckupView);
+            //statusMessage.setText("Primary Checkup loaded.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            statusMessage.setText("Error loading view.");
+        }
     }
 
     @FXML
@@ -26,7 +33,7 @@ public class AssistantDashboardController {
         try {
             Parent primaryCheckupView = FXMLLoader.load(getClass().getResource("/fxml/AssistantPrimaryCheckup.fxml"));
             contentArea.getChildren().setAll(primaryCheckupView);
-            statusMessage.setText("Primary Checkup loaded.");
+            //statusMessage.setText("Primary Checkup loaded.");
         } catch (IOException e) {
             e.printStackTrace();
             statusMessage.setText("Error loading view.");
@@ -38,7 +45,7 @@ public class AssistantDashboardController {
         try {
             Parent updateInfoView = FXMLLoader.load(getClass().getResource("/fxml/AssistantUpdateInfo.fxml"));
             contentArea.getChildren().setAll(updateInfoView);
-            statusMessage.setText("Update Information loaded.");
+            //statusMessage.setText("Update Information loaded.");
         } catch (IOException e) {
             e.printStackTrace();
             statusMessage.setText("Error loading view.");
@@ -51,7 +58,7 @@ public class AssistantDashboardController {
             Parent emergencyRequestView = FXMLLoader
                     .load(getClass().getResource("/fxml/AssistantEmergencyRequest.fxml"));
             contentArea.getChildren().setAll(emergencyRequestView);
-            statusMessage.setText("Emergency Requests displayed.");
+            //statusMessage.setText("Emergency Requests displayed.");
         } catch (IOException e) {
             e.printStackTrace();
             statusMessage.setText("Error loading view.");
@@ -64,7 +71,7 @@ public class AssistantDashboardController {
             Parent cancelAppointmentView = FXMLLoader
                     .load(getClass().getResource("/fxml/AssistantCancelAppointment.fxml"));
             contentArea.getChildren().setAll(cancelAppointmentView);
-            statusMessage.setText("Cancel Appointments loaded.");
+            //statusMessage.setText("Cancel Appointments loaded.");
         } catch (IOException e) {
             e.printStackTrace();
             statusMessage.setText("Error loading view.");
