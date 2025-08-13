@@ -61,8 +61,7 @@ public class Doctors_Dashboard_controller {
             loadPage("/fxml/doctorprimarycheckup.fxml");
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
+        }}
 
 
 
