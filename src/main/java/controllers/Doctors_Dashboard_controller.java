@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,6 +25,17 @@ public class Doctors_Dashboard_controller {
     }
 
     @FXML
+    private void dr_search_patients() throws IOException {
+        try {
+            loadPage("/fxml/Doctors_patient_details.fxml");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
 
     private void dr_patient_details() throws IOException
     {
@@ -42,6 +54,17 @@ public class Doctors_Dashboard_controller {
     private void cancel_appointment() throws IOException{
         loadPage("/fxml/Cancel_appointment.fxml");
     }
+
+    @FXML
+    private void loadcheckup() throws IOException{
+        try {
+            loadPage("/fxml/doctorprimarycheckup.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void loadPage(String path) throws IOException {
         Pane pane = FXMLLoader.load(getClass().getResource(path));

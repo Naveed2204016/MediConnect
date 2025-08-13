@@ -17,10 +17,11 @@
          </padding>
          <children>
             <Label prefHeight="54.0" prefWidth="194.0" styleClass="sidebar-title" text="Doctor's Dashboard" />
-            <Button mnemonicParsing="false" styleClass="nav-button" text="Notification" />
+            <Button mnemonicParsing="false" onAction="#dr_search_patients" styleClass="nav-button" text="Patient Record" />
             <Button mnemonicParsing="false" onAction="#loadUpdateInfo" styleClass="nav-button" text="Update Information" />
             <Button mnemonicParsing="false" onAction="#emergency_request" styleClass="nav-button" text="Emergency Requests" />
             <Button mnemonicParsing="false" onAction="#cancel_appointment" styleClass="nav-button" text="Cancel  Appointment" />
+            <Button mnemonicParsing="false" onAction="#loadcheckup" styleClass="nav-button" text="Primary Checkup" />
             <Region prefHeight="421.0" prefWidth="182.0" />
             <Button mnemonicParsing="false" styleClass="logout-button" text="Logout" textFill="#bf2b2b" />
          </children>
