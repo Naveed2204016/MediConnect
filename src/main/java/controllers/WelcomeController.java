@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -37,6 +38,8 @@ public class WelcomeController {
         // Insert image at the top of VBox
         centerVBox.getChildren().add(0, bannerImageView);
     }*/
+
+
 
     @FXML
     private void onLoginButtonClick() throws IOException {
