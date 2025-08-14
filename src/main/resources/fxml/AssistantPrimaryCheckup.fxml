@@ -8,7 +8,7 @@
 
 <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="600.0" spacing="15.0" styleClass="primary-checkup-form" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AssistantPrimaryCheckupController">
     <children>
-        <Label styleClass="form-title" text="Primary Checkup" />
+        <Label text="Primary Checkup" textFill="#5bbcff" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
         <VBox spacing="5.0" styleClass="form-row">
             <Label styleClass="form-label" text="Patient Name" />
             <TextField fx:id="patientNameField" promptText="Enter patient name" />
