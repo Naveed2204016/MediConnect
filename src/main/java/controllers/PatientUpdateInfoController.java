@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import models.Patient;
 import java.time.LocalDate;
+import java.sql.*;
 
 public class PatientUpdateInfoController {
 
@@ -14,41 +15,68 @@ public class PatientUpdateInfoController {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private Label statusLabel;
-
+    private int userId;
     private Patient currentPatient;
+    private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
+    private static final String username="root";
+    private static final String password="backend#8";
 
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+        loaddata();
+    }
     @FXML
-    public void initialize() {
-        // In a real app, you would load this from database
-        currentPatient = new Patient();
-        currentPatient.setName("John Doe");
-        currentPatient.setDob(LocalDate.of(1990, 5, 15));
-        currentPatient.setContactNumber("1234567890");
-        currentPatient.setEmail("john@example.com");
-
-
+    public void loaddata() {
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        try
+        {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            String query = "SELECT * FROM Patient WHERE patient_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,userId);
+            System.out.println("Fetching patient info for user ID: " + userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                currentPatient = new Patient();
+                currentPatient.setName(resultSet.getString("name"));
+                currentPatient.setDob(resultSet.getDate("date_of_birth").toLocalDate());
+                currentPatient.setContactNumber(resultSet.getString("contact_number"));
+                currentPatient.setEmail(resultSet.getString("email"));
+                currentPatient.setPassword(resultSet.getString("password"));
+            } else {
+                statusLabel.setText("User not found");
+                return;
+            }
+        } catch (SQLException e) {
+            statusLabel.setText("Database error: " + e.getMessage());
+            return;
+        }
         nameField.setText(currentPatient.getName());
         dobPicker.setValue(currentPatient.getDob());
         contactField.setText(currentPatient.getContactNumber());
         emailField.setText(currentPatient.getEmail());
     }
 
+
     @FXML
     private void handleSave() {
-        // Simple validation
         if (nameField.getText().isEmpty() ||
                 emailField.getText().isEmpty() ||
                 contactField.getText().isEmpty()) {
             statusLabel.setText("Please fill all required fields");
             return;
         }
-
         if (!passwordField.getText().equals(confirmPasswordField.getText())) {
             statusLabel.setText("Passwords don't match");
             return;
         }
 
-        // Update patient object
         currentPatient.setName(nameField.getText());
         currentPatient.setDob(dobPicker.getValue());
         currentPatient.setContactNumber(contactField.getText());
@@ -59,7 +87,7 @@ public class PatientUpdateInfoController {
         }
 
         statusLabel.setText("Information updated successfully!");
-        // In real app: Save to database here
+
     }
 
     @FXML

@@ -47,6 +47,7 @@ public class PatientSearchDoctorsController {
     // In PatientSearchDoctorsController.java
 
     @FXML private Pane popupLayer;
+    private int userId;
 
     private double dragOffsetX, dragOffsetY;
 
@@ -81,7 +82,9 @@ public class PatientSearchDoctorsController {
             new Doctor("Dr. Johnson", "Neurology", "mbbs", "cmoshmc","dhaka",LocalTime.now(),LocalTime.NOON,2000.0, "01845022838","mahi@bh.com")
     );
 
-
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     @FXML
     public void initialize() {
         // Set up table columns

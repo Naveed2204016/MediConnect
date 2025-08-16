@@ -15,6 +15,7 @@ public class CancelAppointmentController {
     @FXML private TableColumn<Appointment, String> dname;
     @FXML private TableColumn<Appointment, String> hospital;
     @FXML private TableColumn<Appointment, String> appdate;
+    private int userId;
 
     private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
@@ -27,6 +28,10 @@ public class CancelAppointmentController {
         appointmentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         loadAppointments(null);
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     private void loadAppointments(String doctorFilter) {

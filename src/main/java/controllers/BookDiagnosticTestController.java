@@ -27,6 +27,7 @@ public class BookDiagnosticTestController {
     private List<DiagnosticTest> selectedTests = new ArrayList<>();
     private double totalAmount = 0.0;
     private ObservableList<DiagnosticTest> testData = FXCollections.observableArrayList();
+    private int userId;
 
     @FXML
     public void initialize() {
@@ -66,7 +67,9 @@ public class BookDiagnosticTestController {
         testsTable.getColumns().add(actionCol);
         testsTable.setItems(testData);
     }
-
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     @FXML
     private void handleSearch() {
         String testName = testNameField.getText().trim();

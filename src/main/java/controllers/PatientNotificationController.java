@@ -25,6 +25,7 @@ public class PatientNotificationController {
     private TableColumn<RequestItem, String> RequestColumn;
     @FXML
     private TableColumn<RequestItem, String> StatusColumn;
+    private int userId;
 
     // Sample data
     private ObservableList<NotificationItem> sampleNotifications =
@@ -49,6 +50,11 @@ public class PatientNotificationController {
         RequestColumn.setCellValueFactory(cellData -> cellData.getValue().requestProperty());
         StatusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
         RequestTable.setItems(sampleRequests);
+    }
+
+    public void setUserId(int userId)
+    {
+        this.userId = userId;
     }
 
     @FXML

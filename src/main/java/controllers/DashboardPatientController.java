@@ -11,16 +11,22 @@ import java.io.IOException;
 
 public class DashboardPatientController {
 
-    @FXML private StackPane contentArea; // This must match the fx:id in FXML
+    @FXML private StackPane contentArea;
+    private int userID;
 
     @FXML
     public void initialize() {
         try {
-            loadSearchDoctors(); // Load default page
+            loadSearchDoctors();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle error appropriately
         }
+    }
+
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
+        System.out.println("User ID set in DashboardPatientController: " + userID);
     }
 
     @FXML
@@ -49,7 +55,24 @@ public class DashboardPatientController {
     }
 
     private void loadPage(String path) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource(path));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource(path));
+        Pane pane = loader.load();
+        if (path.equals("/fxml/patient_search_doctors.fxml")) {
+            PatientSearchDoctorsController controller = loader.getController();
+            controller.setUserId(userID);
+        } else if (path.equals("/fxml/patient_update_info.fxml")) {
+            PatientUpdateInfoController controller = loader.getController();
+            controller.setUserId(userID);
+        } else if (path.equals("/fxml/patient_cancel_appointment.fxml")) {
+            CancelAppointmentController controller = loader.getController();
+            controller.setUserId(userID);
+        } else if (path.equals("/fxml/patient_book_test.fxml")) {
+            BookDiagnosticTestController controller = loader.getController();
+            controller.setUserId(userID);
+        } else if (path.equals("/fxml/patient_notifications.fxml")) {
+            PatientNotificationController controller = loader.getController();
+            controller.setUserId(userID);
+        }
         contentArea.getChildren().setAll(pane);
     }
 

@@ -19,6 +19,7 @@ public class PatientSignupController {
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
     @FXML private Button backButton;
+    private int userId;
     private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
     private static final String username="root";
     private static final String password="backend#8";
@@ -56,8 +57,20 @@ public class PatientSignupController {
                 System.out.println("Error..");
             }
             try {
+                String query2="SELECT patient_id FROM Patient ORDER BY patient_id DESC LIMIT 1";
+                preparedStatement= connection.prepareStatement(query2);
+                ResultSet resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()) {
+                    userId = resultSet.getInt("patient_id");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/patient_dashboard.fxml"));
                 Scene scene = new Scene(loader.load());
+                DashboardPatientController dashboardPatientController = loader.getController();
+                dashboardPatientController.setUserID(userId);
                 Stage stage = (Stage) backButton.getScene().getWindow();
                 stage.setScene(scene);
             }catch (IOException e)
@@ -65,14 +78,9 @@ public class PatientSignupController {
                 e.printStackTrace();
             }
         }
-        catch(SQLException e)
-        {
+        catch(SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        // TEMP: For now, just print the value;
-
-        // TODO: Validate and insert into database
     }
 
     @FXML
