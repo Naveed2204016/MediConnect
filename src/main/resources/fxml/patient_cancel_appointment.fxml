@@ -21,15 +21,17 @@
         <Label text="Search an appointment" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <TextField fx:id="DoctorName" promptText="Doctor Name"
                    GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="DoctorContactNumber" promptText="Contact Number"
+                   GridPane.rowIndex="2" GridPane.columnIndex="0"/>
         <Button text="Search" onAction="#handleSearch"
-                GridPane.rowIndex="2" GridPane.columnIndex="0"
+                GridPane.rowIndex="3" GridPane.columnIndex="0"
                 GridPane.halignment="RIGHT"/>
     </GridPane>
 
     <TableView fx:id="appointmentTable" prefHeight="200">
         <columns>
             <TableColumn text="Doctor Name" prefWidth="150" fx:id="dname"/>
-            <TableColumn text="Hospital" prefWidth="150" fx:id="hospital"/>
+            <TableColumn text="Contact Number" prefWidth="150" fx:id="contactNumber"/>
             <TableColumn text="Appointment Date" prefWidth="150" fx:id="appdate"/>
         </columns>
     </TableView>

@@ -2,6 +2,8 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import models.Patient;
 import java.time.LocalDate;
 import java.sql.*;
@@ -68,7 +70,7 @@ public class PatientUpdateInfoController {
     private void handleSave() {
         if (nameField.getText().isEmpty() ||
                 emailField.getText().isEmpty() ||
-                contactField.getText().isEmpty()) {
+                contactField.getText().isEmpty() || dobPicker.getValue()==null) {
             statusLabel.setText("Please fill all required fields");
             return;
         }
@@ -76,29 +78,61 @@ public class PatientUpdateInfoController {
             statusLabel.setText("Passwords don't match");
             return;
         }
-
         currentPatient.setName(nameField.getText());
         currentPatient.setDob(dobPicker.getValue());
         currentPatient.setContactNumber(contactField.getText());
         currentPatient.setEmail(emailField.getText());
-
         if (!passwordField.getText().isEmpty()) {
             currentPatient.setPassword(passwordField.getText());
         }
-
-        statusLabel.setText("Information updated successfully!");
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            String query = "UPDATE Patient SET name=?, date_of_birth=?, contact_number=?, email=?, password=? WHERE patient_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, currentPatient.getName());
+            preparedStatement.setDate(2, Date.valueOf(currentPatient.getDob()));
+            preparedStatement.setString(3, currentPatient.getContactNumber());
+            preparedStatement.setString(4, currentPatient.getEmail());
+            preparedStatement.setString(5, currentPatient.getPassword());
+            preparedStatement.setInt(6, userId);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                showAlert("Information updated successfully");
+               // statusLabel.setText("Information updated successfully");
+            } else {
+                showAlert("Update failed");
+               // statusLabel.setText("Update failed");
+            }
+        } catch (SQLException e) {
+            statusLabel.setText("Database error: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            statusLabel.setText("Driver not found: " + e.getMessage());
+        }
 
     }
 
     @FXML
     private void handleCancel() {
-        // Reset form to original values
+
         nameField.setText(currentPatient.getName());
         dobPicker.setValue(currentPatient.getDob());
         contactField.setText(currentPatient.getContactNumber());
         emailField.setText(currentPatient.getEmail());
         passwordField.clear();
         confirmPasswordField.clear();
-        statusLabel.setText("");
+
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Use WARNING type for yellow/red icon
+        alert.setHeaderText("Update Status");
+        alert.setContentText(message);
+
+        // Optional: Style alert text (can also style with CSS file
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setStyle("-fx-font-size: 14px; -fx-font-family: 'Segoe UI';");
+
+        alert.showAndWait();
     }
 }

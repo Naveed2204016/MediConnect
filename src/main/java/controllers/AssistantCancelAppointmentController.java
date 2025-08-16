@@ -25,12 +25,7 @@ public class AssistantCancelAppointmentController {
 
     @FXML
     public void initialize() {
-        dname.setCellValueFactory(
-                celldata->(celldata.getValue().getDoctorNameproperty()));
-        hospital.setCellValueFactory(
-                celldata -> (celldata.getValue().getHospitalproperty()));
-        appdate.setCellValueFactory(
-                celldata -> (celldata.getValue().getAppointmentDateproperty()));
+
 
         appointmentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
