@@ -2,28 +2,58 @@ package models;
 
 import javafx.beans.property.*;
 
-public class DiagnosticTest {
-    private final IntegerProperty testId = new SimpleIntegerProperty();
-    private final StringProperty name = new SimpleStringProperty();
-    private final StringProperty hospital = new SimpleStringProperty();
-    private final DoubleProperty fee = new SimpleDoubleProperty();
+import java.sql.Time;
 
-    public DiagnosticTest(int testId, String name, String hospital, double fee) {
-        this.testId.set(testId);
-        this.name.set(name);
-        this.hospital.set(hospital);
-        this.fee.set(fee);
+public class DiagnosticTest {
+    private int testid;
+    private String name;
+    private String hospital_name;
+    private double fee;
+    private String instruction;
+    private Time test_time_slot;
+    public DiagnosticTest(int testid, String name, String hospital_name, double fee, String instruction, Time test_time_slot) {
+        this.testid = testid;
+        this.name = name;
+        this.hospital_name = hospital_name;
+        this.fee = fee;
+        this.instruction = instruction;
+        this.test_time_slot = test_time_slot;
     }
 
-    // Property getters
-    public IntegerProperty testIdProperty() { return testId; }
-    public StringProperty nameProperty() { return name; }
-    public StringProperty hospitalProperty() { return hospital; }
-    public DoubleProperty feeProperty() { return fee; }
-
-    // Regular getters
-    public int getTestId() { return testId.get(); }
-    public String getName() { return name.get(); }
-    public String getHospital() { return hospital.get(); }
-    public double getFee() { return fee.get(); }
+    public int getTestid() {
+        return testid;
+    }
+    public void setTestid(int testid) {
+        this.testid = testid;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getHospital_name() {
+        return hospital_name;
+    }
+    public void setHospital_name(String hospital_name) {
+        this.hospital_name = hospital_name;
+    }
+    public double getFee() {
+        return fee;
+    }
+    public void setFee(double fee) {
+        this.fee = fee;
+    }
+    public String getInstruction() {
+        return instruction;
+    }
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
+    }
+    public Time getTest_time_slot() {
+        return test_time_slot;
+    }
+    public void setTest_time_slot(Time test_time_slot) {
+        this.test_time_slot = test_time_slot;
+    }
 }
