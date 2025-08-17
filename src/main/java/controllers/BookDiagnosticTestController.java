@@ -25,6 +25,8 @@ public class BookDiagnosticTestController {
     @FXML private Label totalLabel;
     @FXML private DatePicker testDatePicker;
     @FXML private Button paymentButton;
+    @FXML private TextField deliverymodefield;
+    @FXML private TextField amount;
     private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
     private static final String username="root";
     private static final String password="backend#8";
@@ -173,32 +175,82 @@ public class BookDiagnosticTestController {
 
     @FXML
     private void handlePayment() {
-        // Validate date
-       /* if (testDatePicker.getValue() == null ||
+       if (testDatePicker.getValue() == null ||
                 testDatePicker.getValue().isBefore(LocalDate.now())) {
             showAlert("Invalid Date", "Please select today or a future date");
             return;
-        }
+       }
 
-        // Validate selection
         if (selectedTests.isEmpty()) {
             showAlert("No Tests Selected", "Please select at least one test");
             return;
         }
 
-        // Process payment (simulated)
+        if( deliverymodefield.getText().isEmpty() || amount.getText().isEmpty()) {
+            showAlert("Input Required", "Please enter delivery mode and amount");
+            return;
+        }
+        String text = amount.getText().trim();
+
+        if (text.isEmpty()) {
+            showAlert("Invalid Input", "Amount cannot be empty.");
+            return;
+        }
+
+        try {
+            double amt = Double.parseDouble(text);
+
+            if (amt < 100) {
+                showAlert("Invalid Amount", "Amount should be greater than or equal to 100 $");
+                return;
+            }
+
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "Please enter a valid number.");
+            return;
+        }
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            String query="INSERT INTO TestBooking (t_id,p_id,booking_date,test_date,result_delivery_date,result_delivery_mode,due_amount) VALUES (?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            for(DiagnosticTest test: selectedTests) {
+                preparedStatement.setInt(1, test.getTestid());
+                preparedStatement.setInt(2, userId);
+                preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
+                preparedStatement.setDate(4, Date.valueOf(testDatePicker.getValue()));
+                preparedStatement.setDate(5, Date.valueOf(testDatePicker.getValue().plusDays(7))); // Assuming results are delivered in 7 days
+                preparedStatement.setString(6, deliverymodefield.getText().trim());
+                preparedStatement.setDouble(7,totalAmount- Double.parseDouble(amount.getText().trim()));
+                preparedStatement.addBatch();
+                System.out.println(test.getTestid()+" "+userId);
+            }
+            int[] results = preparedStatement.executeBatch();
+            for(Integer result:results)
+            {
+                System.out.println(result);
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(("Database Error"+"An error occurred while processing your request: " + e.getMessage()));
+            return;
+        }
+
         showAlert("Success", String.format(
-                "Booked %d tests for %s\nTotal: $%.2f",
+                "Booked %d tests for %s\nDue Amount: $%.2f",
                 selectedTests.size(),
                 testDatePicker.getValue().toString(),
-                totalAmount
-        ));*/
+                totalAmount- Double.parseDouble(amount.getText().trim()
+        )));
 
         resetForm();
     }
 
     private void updatePaymentButton() {
-        paymentButton.setText(String.format("Proceed to Payment ($%.2f)", totalAmount));
+        //paymentButton.setText(String.format("Proceed to Payment ($%.2f)", totalAmount));
         totalLabel.setText(String.format("Total: $%.2f", totalAmount));
     }
 
