@@ -8,173 +8,292 @@ import javafx.collections.FXCollections;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Doctor;
+import db.DBConnection;
+import models.doctor1;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.sql.*;
+import java.time.format.DateTimeFormatter;
 
 public class PatientSearchDoctorsController {
 
+    @FXML private TextField nameField;
+    @FXML private TextField hospitalField;
+    @FXML private TextField cityField;
     @FXML private TextField specializationField;
-    @FXML private TextField locationField;
-    @FXML private TableView<Doctor> doctorsTable;
-    @FXML private TableColumn<Doctor, String> nameCol;
-    @FXML private TableColumn<Doctor, String> specializationCol;
-    @FXML private TableColumn<Doctor, String> qualificationCol;
-    @FXML private TableColumn<Doctor, String> hospitalCol;
-    @FXML private TableColumn<Doctor, String> cityCol;
-    @FXML private TableColumn<Doctor, LocalTime> stCol;
-    @FXML private TableColumn<Doctor, LocalTime> edCol;
-    @FXML private TableColumn<Doctor, String> contactCol;
-    @FXML private TableColumn<Doctor, String> emailCol;
-    @FXML private TableColumn<Doctor, String> locationCol;
-    @FXML private TableColumn<Doctor, Double> feeCol;
-    @FXML private TableColumn<Doctor, String> availabilityCol;
-    @FXML
-    private VBox appointmentBox;
-    @FXML
-    private VBox emergencyBox;
-    @FXML
-    private Button normalAppointmentBtn;
-    @FXML
-    private Button emergencyRequestBtn;
-    @FXML
-    private TextField symptomsField;
-    @FXML
-    private Button submitEmergencyBtn;
-
-    @FXML private Button closeAppointmentBtn;
-    @FXML private Button closeEmergencyBtn;
-
-    // In PatientSearchDoctorsController.java
-
-    @FXML private Pane popupLayer;
+    @FXML private TableView<doctor1> doctorsTable;
+    @FXML private TableColumn<doctor1, String> nameCol;
+    @FXML private TableColumn<doctor1, String> specializationCol;
+    @FXML private TableColumn<doctor1, String> qualificationCol;
+    @FXML private TableColumn<doctor1, String> hospitalCol;
+    @FXML private TableColumn<doctor1, String> cityCol;
+    @FXML private TableColumn<doctor1, String> stCol;
+    @FXML private TableColumn<doctor1, String> edCol;
+    @FXML private TableColumn<doctor1, String> contactCol;
+    @FXML private TableColumn<doctor1, String> emailCol;
+    @FXML private TableColumn<doctor1, Double> feeCol;
     private int userId;
 
-    private double dragOffsetX, dragOffsetY;
+    ObservableList<doctor1> doctors= FXCollections.observableArrayList();
 
-    private void makeDraggable(Node node) {
-        node.setOnMousePressed(event -> {
-            dragOffsetX = event.getSceneX() - node.getLayoutX();
-            dragOffsetY = event.getSceneY() - node.getLayoutY();
-        });
-        node.setOnMouseDragged(event -> {
-            node.setLayoutX(event.getSceneX() - dragOffsetX);
-            node.setLayoutY(event.getSceneY() - dragOffsetY);
-        });
-    }
-
-    private void centerPopup(VBox popup) {
-        popupLayer.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
-            popup.setLayoutX((newVal.getWidth() - popup.getPrefWidth()) / 2);
-            popup.setLayoutY((newVal.getHeight() - popup.getHeight()) / 2);
-        });
-    }
-
-
-    // Sample data - remove this when you connect to real database
-    private ObservableList<Doctor> sampleDoctors = FXCollections.observableArrayList(
-            new Doctor("Dr. Smith", "Cardiology", "mbbs","United", 1500.0, "Mon-Fri 9AM-5PM"),
-            new Doctor("Dr. Johnson", "Neurology", "mbbs", "cmoshmc",2000.0, "Tue-Sat 10AM-6PM")
-    );
-
-
-    private ObservableList<Doctor> sampleDoctors1= FXCollections.observableArrayList(
-            new Doctor("Dr. Smith", "Cardiology", "mbbs","United", "chittagong", LocalTime.NOON,LocalTime.MIDNIGHT,1500.0, "01617793505","john@example.com"),
-            new Doctor("Dr. Johnson", "Neurology", "mbbs", "cmoshmc","dhaka",LocalTime.now(),LocalTime.NOON,2000.0, "01845022838","mahi@bh.com")
-    );
 
     public void setUserId(int userId) {
         this.userId = userId;
+        loadDoctorsData();
     }
     @FXML
     public void initialize() {
         // Set up table columns
-        nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        specializationCol.setCellValueFactory(cellData -> cellData.getValue().specializationProperty());
-        qualificationCol.setCellValueFactory(cellData -> cellData.getValue().qualificationproperty());
-        hospitalCol.setCellValueFactory(cellData -> cellData.getValue().hospitalproperty());
-        cityCol.setCellValueFactory(cellData -> cellData.getValue().cityproperty());
-        stCol.setCellValueFactory(cellData -> cellData.getValue().stproperty());
-        edCol.setCellValueFactory(cellData -> cellData.getValue().edproperty());
-        contactCol.setCellValueFactory(cellData -> cellData.getValue().contactnoproperty());
-        emailCol.setCellValueFactory(cellData -> cellData.getValue().emailadproperty());
-        feeCol.setCellValueFactory(cellData -> cellData.getValue().feeProperty().asObject());
+        nameCol.setCellValueFactory(Data -> new javafx.beans.property.SimpleStringProperty(Data.getValue().getName()));
+        specializationCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getSpecialization()));
+        qualificationCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getQualification()));
+        hospitalCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getHospital()));
+        cityCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getCity()));
+        stCol.setCellValueFactory(data -> {
+             java.sql.Time time = data.getValue().getStartTime(); // assuming returns TIME
+             String formattedTime = (time != null)
+                ? time.toLocalTime().format(DateTimeFormatter.ofPattern("hh:mm a"))
+                : "";
+        return new javafx.beans.property.SimpleStringProperty(formattedTime);
+    });
+        edCol.setCellValueFactory(data-> {
+            java.sql.Time time = data.getValue().getEndTime(); // assuming returns TIME
+            String formattedTime = (time != null)
+                ? time.toLocalTime().format(DateTimeFormatter.ofPattern("hh:mm a"))
+                : "";
+            return new javafx.beans.property.SimpleStringProperty(formattedTime);
+        });
+        contactCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getContact_number()));
+        emailCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getEmail()));
+        feeCol.setCellValueFactory(Data->new javafx.beans.property.SimpleDoubleProperty(Data.getValue().getFees()).asObject());
 
 
-        // Load sample data (remove when using real database)
-        doctorsTable.setItems(sampleDoctors1);
-        makeDraggable(appointmentBox);
-        makeDraggable(emergencyBox);
-        centerPopup(appointmentBox);
-        centerPopup(emergencyBox);
-        doctorsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
-            if (newSel != null) {
-                appointmentBox.setVisible(true);
-                appointmentBox.setManaged(true);
-                emergencyBox.setVisible(false);
-                emergencyBox.setManaged(false);
-            } else {
-                appointmentBox.setVisible(false);
-                appointmentBox.setManaged(false);
-                emergencyBox.setVisible(false);
-                emergencyBox.setManaged(false);
+        TableColumn<doctor1, Void> actionCol = new TableColumn<>("Action");
+        actionCol.setPrefWidth(120);
+        actionCol.setCellFactory(param -> new TableCell<>() {
+            private final Button bookButton = new Button("Book");
+
+            {
+                bookButton.setOnAction(event -> {
+                    doctor1 doctor = getTableView().getItems().get(getIndex());
+                    handleBookingOptions(doctor);
+                });
+                bookButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(bookButton);
+                }
             }
         });
-
-        emergencyRequestBtn.setOnAction(e -> {
-            emergencyBox.setVisible(true);
-            emergencyBox.setManaged(true);
-        });
-
-        submitEmergencyBtn.setOnAction(e -> {
-            // Handle emergency submission logic here
-            emergencyBox.setVisible(false);
-            emergencyBox.setManaged(false);
-            appointmentBox.setVisible(false);
-            appointmentBox.setManaged(false);
-            symptomsField.clear();
-        });
-
-        normalAppointmentBtn.setOnAction(e -> {
-            // Handle normal appointment logic here
-            appointmentBox.setVisible(false);
-            appointmentBox.setManaged(false);
-        });
-
-        closeAppointmentBtn.setOnAction(e -> {
-            appointmentBox.setVisible(false);
-            appointmentBox.setManaged(false);
-            doctorsTable.getSelectionModel().clearSelection();
-        });
-        closeEmergencyBtn.setOnAction(e -> {
-            emergencyBox.setVisible(false);
-            emergencyBox.setManaged(false);
-        });
-
+        doctorsTable.getColumns().add(actionCol);
 
     }
 
-    @FXML
-    private void handleSearch() {
-        // Placeholder for search functionality
-        System.out.println("Search clicked - Specialization: " + specializationField.getText()
-                + ", Location: " + locationField.getText());
-    }
+    public void loadDoctorsData(){
+        doctors.clear();
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DBConnection.getConnection();
+            String Query="SELECT * FROM (Doctor as d,Location as l) WHERE d.doctor_id=l.d_id";
+            PreparedStatement pmt= connection.prepareStatement(Query);
+            ResultSet rs = pmt.executeQuery();
+            while(rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String name = rs.getString("name");
+                String specialization = rs.getString("specialization");
+                String qualification = rs.getString("qualification");
+                String hospital = rs.getString("hospital");
+                String city = rs.getString("city");
+                Time startTime = rs.getTime("start_time");
+                Time endTime = rs.getTime("End_time");
+                double fees = rs.getDouble("fees");
+                String contact_number = rs.getString("contact_number");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                int capaity_per_day = rs.getInt("capacity_per_day");
+                int emergency_slots_per_day = rs.getInt("emergency_slots_per_day");
+                doctor1 doc = new doctor1(doctorId, name, specialization, qualification, hospital, city, startTime, endTime, fees, contact_number, email, capaity_per_day, emergency_slots_per_day, password);
+                doctors.add(doc);
+            }
 
-    @FXML
-    private void handleBook() {
-        Doctor selectedDoctor = doctorsTable.getSelectionModel().getSelectedItem();
-        if (selectedDoctor != null) {
-            System.out.println("Booking appointment with: " + selectedDoctor.getName());
-        } else {
-            showAlert("No Selection", "Please select a doctor first.");
+            doctorsTable.setItems(doctors);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     @FXML
-    private void handleEmergency() {
-        System.out.println("Emergency request initiated");
-        showAlert("Emergency Request", "Emergency request has been sent to the nearest available doctor.");
+    private void handleSearch() {
+        String name1= nameField.getText().trim();
+        String specialization1 = specializationField.getText().trim();
+        String hospital1 = hospitalField.getText().trim();
+        String city1 = cityField.getText().trim();
+        doctors.clear();
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DBConnection.getConnection();
+            String Query="SELECT * FROM (Doctor as d,Location as l) WHERE d.doctor_id=l.d_id AND d.name=? AND d.specialization=? AND l.hospital=? AND l.city=?";
+            PreparedStatement pmt= connection.prepareStatement(Query);
+            pmt.setString(1, name1);
+            pmt.setString(2, specialization1);
+            pmt.setString(3, hospital1);
+            pmt.setString(4, city1);
+
+            ResultSet rs = pmt.executeQuery();
+            while(rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String name = rs.getString("name");
+                String specialization = rs.getString("specialization");
+                String qualification = rs.getString("qualification");
+                String hospital = rs.getString("hospital");
+                String city = rs.getString("city");
+                Time startTime = rs.getTime("start_time");
+                Time endTime = rs.getTime("End_time");
+                double fees = rs.getDouble("fees");
+                String contact_number = rs.getString("contact_number");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                int capaity_per_day = rs.getInt("capacity_per_day");
+                int emergency_slots_per_day = rs.getInt("emergency_slots_per_day");
+                doctor1 doc = new doctor1(doctorId, name, specialization, qualification, hospital, city, startTime, endTime, fees, contact_number, email, capaity_per_day, emergency_slots_per_day, password);
+                doctors.add(doc);
+            }
+            doctorsTable.setItems(doctors);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    private void handleBookingOptions(doctor1 doctor) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Book Appointment");
+        alert.setHeaderText("Choose booking type for " + doctor.getName());
+        ButtonType normal = new ButtonType("Normal Appointment");
+        ButtonType emergency = new ButtonType("Emergency Request");
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(normal, emergency, cancel);
+
+        alert.showAndWait().ifPresent(choice -> {
+            if (choice == normal) {
+                suggestNormalAppointment(doctor);
+            } else if (choice == emergency) {
+                handleEmergencyRequest(doctor);
+            }
+        });
+    }
+
+    private void suggestNormalAppointment(doctor1 doctor) {
+        // Example query (pseudo-code)
+        // SELECT COUNT(*) FROM Appointment WHERE doctor_id=? AND appointment_date=?
+        int d_id=doctor.getDoctorId();
+        int capacity=0;
+        int bookedCount=0;
+        int toadd=0;
+        LocalDate tentativeDate=LocalDate.now();// If < capacity → suggest that date, otherwise move to next date.
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DBConnection.getConnection();
+            String Query="SELECT capacity_per_day FROM Doctor WHERE doctor_id=?";
+            PreparedStatement pmt= connection.prepareStatement(Query);
+            pmt.setInt(1, d_id);
+            ResultSet rs = pmt.executeQuery();
+            if(rs.next())
+            {
+                capacity = rs.getInt("capacity_per_day");
+            }
+            pmt.close();
+            String CountQuery="SELECT COUNT(*) FROM appointment WHERE d_id=? AND Status=? AND appointment_date>?";
+            pmt= connection.prepareStatement(CountQuery);
+            pmt.setInt(1, d_id);
+            pmt.setString(2, "Confirmed"); // Assuming 'Confirmed' is the status
+            pmt.setDate(3, Date.valueOf(LocalDate.now()));
+            ResultSet countRs = pmt.executeQuery();
+            if(countRs.next()) {
+                bookedCount = countRs.getInt(1);
+            }
+            pmt.close();
+            toadd=(bookedCount/capacity);
+            tentativeDate = LocalDate.now().plusDays(toadd+1);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        final LocalDate tentativeDateFinal = tentativeDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formatted = tentativeDate.format(formatter);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Tentative Appointment");
+        alert.setHeaderText("Doctor " + doctor.getName());
+        alert.setContentText("Next available slot: " + formatted + "\nDo you want to confirm?");
+
+        ButtonType confirm = new ButtonType("Confirm");
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(confirm, cancel);
+
+        alert.showAndWait().ifPresent(choice -> {
+            if (choice == confirm) {
+                // Insert into Appointment table
+                try{
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection connection = DBConnection.getConnection();
+                    String query="SELECT assistant_id FROM Assistant WHERE d_id=?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setInt(1, d_id);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    int assistantId = 0;
+                    if (resultSet.next()) {
+                        assistantId = resultSet.getInt("assistant_id");
+                    }
+                    preparedStatement.close();
+                    String insertquery="INSERT INTO Appointment (d_id,p_id,a_id,appointment_date,Status) VALUES (?,?,?,?,?)";
+                    preparedStatement = connection.prepareStatement(insertquery);
+                    preparedStatement.setInt(1, d_id);
+                    preparedStatement.setInt(2, userId);
+                    preparedStatement.setInt(3, assistantId);
+                    preparedStatement.setDate(4, Date.valueOf(tentativeDateFinal));
+                    preparedStatement.setString(5, "Confirmed");
+                    int cnt = preparedStatement.executeUpdate();
+                    if(cnt>0) {
+                        showAlert("Appointment Confirmed", "Your appointment with Dr. " + doctor.getName() + " is confirmed for " + formatted);
+                    } else {
+                        showAlert("Error", "Failed to confirm the appointment. Please try again.");
+                    }
+                    preparedStatement.close();
+                    connection.close();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }catch (SQLException e)
+                {
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void handleEmergencyRequest(doctor1 doctor) {
+        // Insert into EmergencyAppointment table or mark as high priority
+        showAlert("Emergency Request", "Your emergency request has been sent for " + doctor.getName());
+    }
+
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

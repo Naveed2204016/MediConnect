@@ -30,13 +30,13 @@
 
 
             <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField fx:id="namefield" promptText="Enter a name" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <TextField fx:id="nameField" promptText="Enter a name" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
             <Label text="Specialization:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
             <TextField fx:id="specializationField" promptText="Enter a specialization" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
             <Label text="Hospital:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <TextField fx:id="hospitalfield" promptText="Optional" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <TextField fx:id="hospitalField" promptText="Optional" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
             <Label text="City:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
             <TextField fx:id="cityField" promptText="Optional" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
@@ -60,37 +60,9 @@
                 <TableColumn fx:id="feeCol" text="Fee" prefWidth="100"/>
                 <TableColumn fx:id="contactCol" text="Contact no" prefWidth="100"/>
                 <TableColumn fx:id="emailCol" text="Email" prefWidth="150"/>
-                <TableColumn fx:id="actionCol" text="Action" prefWidth="100"/>
             </columns>
         </TableView>
         <!-- Selected Doctor Info -->
     </VBox>
 
-    <Pane fx:id="popupLayer" pickOnBounds="false">
-        <!-- Appointment Popup -->
-        <VBox fx:id="appointmentBox" visible="false" managed="false" spacing="10"
-              StackPane.alignment="CENTER"
-              prefWidth="350"
-              style="-fx-background-color: #f0f0f0; -fx-padding: 16; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, gray, 8, 0.3, 0, 0);">
-            <HBox alignment="TOP_RIGHT">
-                <Button fx:id="closeAppointmentBtn" text="✖" style="-fx-background-color: transparent; -fx-text-fill: red; -fx-font-size: 16;"/>
-            </HBox>
-            <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="normalAppointmentBtn" text="Normal Appointment" prefWidth="140"/>
-                <Button fx:id="emergencyRequestBtn" text="Request for Emergency" prefWidth="140"/>
-            </HBox>
-        </VBox>
-        <!-- Emergency Popup -->
-        <VBox fx:id="emergencyBox" visible="false" managed="false" spacing="10"
-              StackPane.alignment="CENTER"
-              prefWidth="350"
-              style="-fx-background-color:  #f0f0f0; -fx-padding: 16; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, gray, 8, 0.3, 0, 0);">
-            <HBox alignment="TOP_RIGHT">
-                <Button fx:id="closeEmergencyBtn" text="✖" style="-fx-background-color: transparent; -fx-text-fill: red; -fx-font-size: 16;"/>
-            </HBox>
-            <TextField fx:id="symptomsField" promptText="Enter symptoms"/>
-            <Button fx:id="submitEmergencyBtn" text="Submit" maxWidth="Infinity"/>
-        </VBox>
-
-    </Pane>
 </AnchorPane>

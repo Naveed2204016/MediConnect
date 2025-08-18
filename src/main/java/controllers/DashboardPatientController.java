@@ -15,18 +15,22 @@ public class DashboardPatientController {
     private int userID;
 
     @FXML
-    public void initialize() {
+    /*public void initialize() {
         try {
             loadSearchDoctors();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void setUserID(int userID)
     {
         this.userID = userID;
-        System.out.println("User ID set in DashboardPatientController: " + userID);
+        try {
+            loadSearchDoctors();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -62,6 +66,7 @@ public class DashboardPatientController {
             controller.setUserId(userID);
         } else if (path.equals("/fxml/patient_update_info.fxml")) {
             PatientUpdateInfoController controller = loader.getController();
+            System.out.println("ki hoise re bhai");
             controller.setUserId(userID);
         } else if (path.equals("/fxml/patient_cancel_appointment.fxml")) {
             CancelAppointmentController controller = loader.getController();
