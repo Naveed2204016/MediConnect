@@ -1,5 +1,6 @@
 package controllers;
 
+import db.DBConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
@@ -27,9 +28,9 @@ public class BookDiagnosticTestController {
     @FXML private Button paymentButton;
     @FXML private TextField deliverymodefield;
     @FXML private TextField amount;
-    private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
-    private static final String username="root";
-    private static final String password="backend#8";
+   // private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
+   // private static final String username="root";
+    //private static final String password="backend#8";
 
     private List<DiagnosticTest> selectedTests = new ArrayList<>();
     private double totalAmount = 0.0;
@@ -96,7 +97,7 @@ public class BookDiagnosticTestController {
         testData.clear();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
             String query = "SELECT * FROM Test LIMIT 5";
             PreparedStatement pmt = connection.prepareStatement(query);
             ResultSet resultSet = pmt.executeQuery();
@@ -135,7 +136,7 @@ public class BookDiagnosticTestController {
         testData.clear();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
             String query = "SELECT * FROM Test WHERE name=? and hospital_name=?";
             PreparedStatement pmt = connection.prepareStatement(query);
             pmt.setString(1, testName);
@@ -213,7 +214,7 @@ public class BookDiagnosticTestController {
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = DBConnection.getConnection(); // DriverManager.getConnection(url, username, password);
             String query="INSERT INTO TestBooking (t_id,p_id,booking_date,test_date,result_delivery_date,result_delivery_mode,due_amount) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             for(DiagnosticTest test: selectedTests) {

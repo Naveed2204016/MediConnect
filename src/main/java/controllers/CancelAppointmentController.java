@@ -1,5 +1,6 @@
 package controllers;
 
+import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,9 +20,9 @@ public class CancelAppointmentController {
     @FXML private TableColumn<Appointment, String> contactNumber;
     @FXML private TableColumn<Appointment, String> appdate;
     private int userId;
-    private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
-    private static final String username="root";
-    private static final String password="backend#8";
+    //private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
+   // private static final String username="root";
+   // private static final String password="backend#8";
 
     private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
@@ -54,7 +55,7 @@ public class CancelAppointmentController {
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection=DriverManager.getConnection(url,username,password);
+            Connection connection= DBConnection.getConnection(); //DriverManager.getConnection(url,username,password);
             String query="SELECT a.appointment_id, d.name AS doctor_name, d.contact_number, a.appointment_date " +
                          "FROM Appointment a JOIN Doctor d ON a.d_id = d.doctor_id " +
                          "WHERE a.p_id = ? AND a.Status=? "+
@@ -94,7 +95,7 @@ public class CancelAppointmentController {
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection=DriverManager.getConnection(url,username,password);
+            Connection connection=DBConnection.getConnection(); //DriverManager.getConnection(url,username,password);
             String query="SELECT a.appointment_id, d.name AS doctor_name, d.contact_number, a.appointment_date " +
                     "FROM Appointment a JOIN Doctor d ON a.d_id = d.doctor_id " +
                     "WHERE a.p_id = ? AND a.Status=? AND d.name=? AND d.contact_number=?"+
@@ -139,7 +140,7 @@ public class CancelAppointmentController {
         }
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
             String query = "UPDATE Appointment SET Status=? WHERE appointment_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             for (Appointment appointment : selectedItems) {

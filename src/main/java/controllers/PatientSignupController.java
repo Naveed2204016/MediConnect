@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
+import db.DBConnection;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -20,9 +20,9 @@ public class PatientSignupController {
     @FXML private Label errorLabel;
     @FXML private Button backButton;
     private int userId;
-    private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
-    private static final String username="root";
-    private static final String password="backend#8";
+    //private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
+    //private static final String username="root";
+    //private static final String password="backend#8";
     @FXML
     private void handleSignup() {
         String name = nameField.getText().trim();
@@ -39,7 +39,7 @@ public class PatientSignupController {
 
         try
         {
-            Connection connection= DriverManager.getConnection(url,username,password);
+            Connection connection=DBConnection.getConnection();// DriverManager.getConnection(url,username,password);
             String query="INSERT INTO patient(name,date_of_birth,contact_number,email,password) VALUES(?,?,?,?,?)";
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             preparedStatement.setString(1,name);

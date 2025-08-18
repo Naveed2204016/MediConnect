@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import models.Patient;
 import java.time.LocalDate;
 import java.sql.*;
+import db.DBConnection;
 
 public class PatientUpdateInfoController {
 
@@ -19,9 +20,9 @@ public class PatientUpdateInfoController {
     @FXML private Label statusLabel;
     private int userId;
     private Patient currentPatient;
-    private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
-    private static final String username="root";
-    private static final String password="backend#8";
+    //private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
+    //private static final String username="root";
+    //private static final String password="backend#8";
 
 
     public void setUserId(int userId) {
@@ -38,7 +39,7 @@ public class PatientUpdateInfoController {
         }
         try
         {
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
             String query = "SELECT * FROM Patient WHERE patient_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,userId);
@@ -87,7 +88,7 @@ public class PatientUpdateInfoController {
         }
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection =DBConnection.getConnection(); // DriverManager.getConnection(url, username, password);
             String query = "UPDATE Patient SET name=?, date_of_birth=?, contact_number=?, email=?, password=? WHERE patient_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, currentPatient.getName());

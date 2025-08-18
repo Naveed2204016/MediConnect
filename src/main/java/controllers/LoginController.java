@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import db.DBConnection;
 
 import javax.lang.model.type.NullType;
 import java.io.IOException;
@@ -15,9 +16,9 @@ public class LoginController {
 
     @FXML private TextField userIdField;
     @FXML private PasswordField passwordField;
-    private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
-    private static final String username="root";
-    private static final String password="backend#8";
+    //private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
+    //private static final String username="root";
+    //private static final String password="backend#8";
 
     private String role;
 
@@ -39,7 +40,7 @@ public class LoginController {
         if(role.equals("patient"))
         {
             try {
-                Connection connection = DriverManager.getConnection(url, username, password);
+                Connection connection = DBConnection.getConnection();// DriverManager.getConnection(url, username, password);
                 String query = "SELECT password FROM Patient WHERE patient_id=?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1, Integer.parseInt(userId));
