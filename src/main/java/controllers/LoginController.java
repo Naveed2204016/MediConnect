@@ -6,18 +6,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import db.DBConnection;
 
 import javax.lang.model.type.NullType;
 import java.io.IOException;
-//import java.sql.*;
+import java.sql.*;
 
 public class LoginController {
 
     @FXML private TextField userIdField;
     @FXML private PasswordField passwordField;
-   // private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
-   // private static final String username="root";
-   // private static final String password="backend#8";
+    //private static final String url="jdbc:mysql://127.0.0.1:3306/mediconnect";
+    //private static final String username="root";
+    //private static final String password="backend#8";
 
     private String role;
 
@@ -30,16 +31,38 @@ public class LoginController {
     private void handleLogin() {
         String userId = userIdField.getText().trim();
         String password1 = passwordField.getText().trim();
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
         if(role.equals("patient"))
         {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/patient_dashboard.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage=(Stage) userIdField.getScene().getWindow();
-                stage.setScene(scene);
-            }
-            catch(IOException e)
-            {
+                Connection connection = DBConnection.getConnection();// DriverManager.getConnection(url, username, password);
+                String query = "SELECT password FROM Patient WHERE patient_id=?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, Integer.parseInt(userId));
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    String str = resultSet.getString("password");
+                    if (str.equals(password1)) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/patient_dashboard.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        DashboardPatientController dashboardPatientController=loader.getController();
+                        dashboardPatientController.setUserID(Integer.parseInt(userId));
+                        Stage stage = (Stage) userIdField.getScene().getWindow();
+                        stage.setScene(scene);
+                    } else {
+                        showAlert("Incorrect Password!");
+                    }
+                } else {
+                    showAlert("User id not found!");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -82,71 +105,9 @@ public class LoginController {
                 e.printStackTrace();
             }
         }
-        /*
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try
-        {
-            Connection connection= DriverManager.getConnection(url,username,password);
-            String query="";
-            if(role.equals("patient"))
-            {
-                query="SELECT password FROM patient WHERE patient_id=?";
-            }
-            else if(role.equals("admin"))
-            {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    Stage stage=(Stage) userIdField.getScene().getWindow();
-                    stage.setScene(scene);
-                }
-                catch(IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            PreparedStatement preparedStatement= connection.prepareStatement(query);
-            preparedStatement.setInt(1,Integer.parseInt(userId));
-            ResultSet resultSet=preparedStatement.executeQuery();
-            if(resultSet.next()) {
-                String str = resultSet.getString("password");
-                System.out.println(str);
-                if (str.equals(password1)) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/patient_dashboard.fxml"));
-                        Scene scene = new Scene(loader.load());
-                        Stage stage=(Stage) userIdField.getScene().getWindow();
-                        stage.setScene(scene);
-                    }
-                    catch(IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                } else {
-                    showAlert("Incorrect Password!");
-                }
-            }
-            else
-            {
-                showAlert("User id not found!");
-            }
-        }
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-        }*/
-
-        // Placeholder logic for now
         System.out.println("Attempted login for role: " + role);
         System.out.println("User ID: " + userId);
         System.out.println("Password: " + password1);
-
-        // Later you'll query the database based on the role
     }
 
     private void showAlert(String message) {

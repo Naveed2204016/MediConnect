@@ -35,4 +35,7 @@ public class AssistantPrimaryCheckupController {
         // Add logic to save data to a database or other storage.
         System.out.println("Patient " + patientName + " added successfully!");
     }
+
+    public void handleCancel(ActionEvent actionEvent) {
+    }
 }

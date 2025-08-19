@@ -53,8 +53,12 @@
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Test Date:"/>
         <DatePicker fx:id="testDatePicker"/>
+        <Label text="Delivery mode"/>
+        <TextField fx:id="deliverymodefield" promptText="Email"/>
+        <Label text="Select Amount"/>
+        <TextField fx:id="amount" promptText="100.00"/>
     </HBox>
 
     <!-- Payment Button -->
-    <Button text="Proceed to Payment ($0.00)" fx:id="paymentButton" onAction="#handlePayment"/>
+    <Button text="Proceed to Payment" fx:id="paymentButton" onAction="#handlePayment"/>
 </VBox>
