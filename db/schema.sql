@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+﻿-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mediconnect
 -- ------------------------------------------------------
--- Server version	8.0.42
+-- Server version	8.0.40
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -96,7 +96,7 @@ CREATE TABLE `doctor` (
   `emergency_slots_per_day` int DEFAULT NULL,
   `password` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`doctor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,7 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'mahbub','medicine','FCPS',800.00,'01768876682','mahbub@gmail.com',50,3,'sos');
+INSERT INTO `doctor` VALUES (1,'mahbub','medicine','FCPS',800.00,'01768876682','mahbub@gmail.com',50,3,'doc123'),(2,'Dr. Jan','Neurology','MBBS, DM',600.00,'01987654321','jan@gmail.com',25,5,'doc456'),(3,'Dr. Ayesha Rahman','Cardiology','MBBS, MD',1000.00,'01812345678','ayesha.@gmail.com',45,15,'cardio789'),(4,'Dr. Tanvir Alam','Orthopedics','MBBS, MS',750.00,'01922334455','tanvir.@yahoo.com',38,10,'ortho321'),(5,'Dr. Nusrat Jahan','Dermatology','MBBS, DDVL',500.00,'01733445566','nusrat.@gmail.com',34,7,'derma555'),(6,'Dr. Imran Hossain','Pediatrics','MBBS, DCH',650.00,'01899887766','imran.n@hotmail.com',40,12,'peds111'),(7,'Dr. Farhana Akter','Gynecology','MBBS, FCPS',900.00,'01611223344','farhanr@gmail.com',42,14,'gyn999'),(8,'Dr. Salman Kabir','Psychiatry','MBBS, MPhil',550.00,'01599887722','salman@gmail.com',37,8,'psych333'),(9,'Dr. Rafiq Chowdhury','ENT','MBBS, DLO',700.00,'01955667788','rafiq@gmail.com',48,18,'ent777'),(10,'Dr. Sharmeen Sultana','Ophthalmology','MBBS, MS',720.00,'01788990011','sharmeen@gmail.com',36,9,'eye888');
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-18  6:41:49
+-- Dump completed on 2025-08-21  2:37:05
