@@ -15,7 +15,7 @@ public class DBConnection {
         if (connection == null || connection.isClosed()) {
             try {
                 Properties props = new Properties();
-                props.load(new FileInputStream("config/config.properties"));
+                props.load(new FileInputStream("config/config.example.properties"));
 
                 String url = props.getProperty("db.url");
                 String user = props.getProperty("db.user");

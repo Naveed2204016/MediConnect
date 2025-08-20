@@ -81,16 +81,32 @@ public class LoginController {
         }
         else if(role.equals("doctor"))
         {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Doctors_dashboard.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage=(Stage) userIdField.getScene().getWindow();
-                stage.setScene(scene);
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
+                try {
+                    Connection connection1 = DBConnection.getConnection();
+                    String query = "SELECT password FROM Doctor WHERE doctor_id=?";
+                    PreparedStatement preparedStatement1 = connection1.prepareStatement(query);
+                    preparedStatement1.setInt(1, Integer.parseInt(userId));
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+                    if (resultSet1.next()) {
+                        String str = resultSet1.getString("password");
+                        if (str.equals(password1)) {
+                            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/Doctors_dashboard.fxml"));
+                            Scene scene = new Scene(loader1.load());
+                            Doctors_Dashboard_controller dashboardDoctorController=loader1.getController();
+                            dashboardDoctorController.setUserID(Integer.parseInt(userId));
+                            Stage stage1 = (Stage) userIdField.getScene().getWindow();
+                            stage1.setScene(scene);
+                        } else {
+                            showAlert("Incorrect Password!");
+                        }
+                    } else {
+                        showAlert("User id not found!");
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
         else if(role.equals("assistant"))
         {

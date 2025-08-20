@@ -13,16 +13,18 @@ import java.io.IOException;
 public class Doctors_Dashboard_controller {
 
     @FXML private StackPane contentArea; // This must match the fx:id in FXML
+    private int userID;
 
-    @FXML
-    public void initialize() {
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
         try {
-            dr_patient_details(); // Load default page
+            dr_patient_details();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle error appropriately
         }
     }
+
 
     @FXML
     private void dr_search_patients() throws IOException {
