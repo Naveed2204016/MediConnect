@@ -152,7 +152,7 @@ CREATE TABLE `patient` (
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (2,'Naveed','2004-05-09','01617793506','u2204016@student.cuet.ac.bd','abcd'),(3,'arka','2003-08-06','0183344711','arka@gmail.com','sos'),(4,'Rahat','2003-09-24','01619945703','rahat@gmail.com','meow');
+INSERT INTO `patient` VALUES (2,'Naveed','2004-05-09','01617793506','u2204016@student.cuet.ac.bd','abcd'),(3,'arka','2003-08-06','0183344711','arka@gmail.com','sos'),(4,'Rahat','2003-09-24','01619945703','rahat@gmail.com','meow'),(5,'Aziz','2003-08-06','019','a@gmail.com','kdb');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-18  6:41:49
+-- Dump completed on 2025-08-20 13:48:43
