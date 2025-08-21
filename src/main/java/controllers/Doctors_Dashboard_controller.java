@@ -66,12 +66,28 @@ public class Doctors_Dashboard_controller {
         }}
 
 
-
     private void loadPage(String path) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource(path));
-        contentArea.getChildren().setAll(pane);
+        FXMLLoader loader=new FXMLLoader(getClass().getResource(path));
+        Pane pane = loader.load();
+        if (path.equals("/fxml/Doctors_update_info.fxml")) {
+            Doctors_update_infoController controller = loader.getController();
+            controller.setUserId(userID);
+        }
+//         else if (path.equals("/fxml/Doctors_patient_details.fxml")) {
+//           doctor_patient_detailscontroller controller = loader.getController();
+//            controller.setUserId(userID);}
+//         else if (path.equals("/fxml/Cancel_appointment.fxml")) {
+//           Cancel_DR_CONTROLLER controller = loader.getController();
+//            controller.setUserId(userID);
+//        } else if (path.equals("/fxml/Emergency_Request_Doctor.fxml")) {
+//           emergency_req_dr_controller controller = loader.getController();
+//            controller.setUserId(userID);
+//        } else if (path.equals("/fxml/doctorprimarycheckup.fxml")) {
+//           primary_checkup_dr_controller controller = loader.getController();
+//            controller.setUserId(userID);
+//        }
+       contentArea.getChildren().setAll(pane);
     }
-
     @FXML
     private void logout()
     {
