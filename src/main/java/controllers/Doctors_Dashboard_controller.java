@@ -73,9 +73,9 @@ public class Doctors_Dashboard_controller {
             Doctors_update_infoController controller = loader.getController();
             controller.setUserId(userID);
         }
-//         else if (path.equals("/fxml/Doctors_patient_details.fxml")) {
-//           doctor_patient_detailscontroller controller = loader.getController();
-//            controller.setUserId(userID);}
+    else if (path.equals("/fxml/Doctors_patient_details.fxml")) {
+           doctor_patient_detailscontroller controller = loader.getController();
+            controller.setUserId(userID);}
       else if (path.equals("/fxml/Cancel_appointment.fxml")) {
         Cancel_DR_CONTROLLER controller = loader.getController();
             controller.setUserId(userID);}

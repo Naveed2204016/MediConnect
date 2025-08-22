@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.doctor_patient_detailscontroller">
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="666.0" prefWidth="729.0">
          <top>
@@ -20,12 +19,12 @@
          <bottom>
             <VBox prefHeight="435.0" prefWidth="332.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView prefHeight="421.0" prefWidth="798.0">
+                  <TableView fx:id="patientc" prefHeight="421.0" prefWidth="798.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Pateient Id" />
-                        <TableColumn prefWidth="117.59998321533203" text="Pateint contact" />
-                        <TableColumn prefWidth="112.0" text="Pateint Details" />
-                        <TableColumn prefWidth="152.0" text="Past Visit" />
+                        <TableColumn fx:id="patname" prefWidth="112.0" text="patient name" />
+                        <TableColumn fx:id="patemail" prefWidth="117.59996795654297" text="Patient Email" />
+                        <TableColumn fx:id="pastvisit" prefWidth="288.0000305175781" text="Past Visit" />
+                        <TableColumn fx:id="patcontact" prefWidth="117.59998321533203" text="Pateint contact" />
                      </columns>
                   </TableView>
                </children>
@@ -34,9 +33,9 @@
          <center>
             <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="798.0" styleClass="input-label" BorderPane.alignment="CENTER">
                <children>
-                  <Label contentDisplay="RIGHT" prefHeight="44.0" prefWidth="138.0" text=" Search a Patient Id" />
-                  <TextField alignment="CENTER" prefHeight="38.0" prefWidth="184.0" />
-                  <Button mnemonicParsing="false" text="Search" />
+                  <Label contentDisplay="RIGHT" prefHeight="44.0" prefWidth="138.0" text="Search a Patient Name" />
+                  <TextField fx:id="patient_id" alignment="CENTER" prefHeight="38.0" prefWidth="184.0" />
+                  <Button fx:id="searchd" mnemonicParsing="false" onAction="#searchp" text="Search" />
                </children>
             </HBox>
          </center>
