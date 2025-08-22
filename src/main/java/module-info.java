@@ -17,8 +17,9 @@ module com.example.mediconnect {
         requires java.sql;
         requires java.compiler;
         requires jdk.jdi;
+    requires mysql.connector.j;
 
-        opens controllers to javafx.fxml; // For FXML to access controllers
+    opens controllers to javafx.fxml; // For FXML to access controllers
         opens models to javafx.base;      // For PropertyValueFactory reflection access
 
         exports mediconnect; // Main application package

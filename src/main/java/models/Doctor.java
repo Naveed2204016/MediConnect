@@ -3,6 +3,7 @@ package models;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
 
+import java.sql.Time;
 import java.time.LocalTime;
 
 public class Doctor {
@@ -80,7 +81,26 @@ public class Doctor {
         this.patientslot = 0;
         this.emergencyslot = 0;
     }
+    public static class DoctorLocation {
+        private final StringProperty startTime;
+        private final StringProperty endTime;
+        private final StringProperty hospital;
+        private final StringProperty city;
 
+        public DoctorLocation(String city, String startTime, String endTime, String hospital) {
+            this.startTime = new SimpleStringProperty(startTime);
+            this.city = new SimpleStringProperty(city);
+            this.endTime = new SimpleStringProperty(endTime);
+            this.hospital = new SimpleStringProperty(hospital);
+        }
+
+        // You need getters for PropertyValueFactory
+        public String getStartTime() { return startTime.get(); }
+        public String getEndTime() { return endTime.get(); }
+        public String getHospital() { return hospital.get(); }
+        public String getCity() { return city.get(); }
+
+}
     // Getters and setters
     public String getName() { return name.get(); }
     public void setName(String name) { this.name.set(name); }
@@ -112,7 +132,6 @@ public int getEmergencyslot() { return emergencyslot; }
 
     public String getHospital() { return hospital.get(); }
     public void setHospital(String hospital) { this.hospital.set(hospital); }
-    public StringProperty hospitalProperty() { return hospital; }
 
     public String getCity() { return city.get(); }
     public void setCity(String city) { this.city.set(city); }
@@ -133,6 +152,11 @@ public int getEmergencyslot() { return emergencyslot; }
     public LocalTime getStarttime() { return starttime.get(); }
     public void setStarttime(LocalTime starttime) { this.starttime.set(starttime);
     }
+
+    public LocalTime getEndtime() {
+        return endtime.get();
+    }
+    public void setEndtime(LocalTime endtime) { this.endtime.set(endtime); }
 
     public ObservableValue<String> qualificationproperty() {
     return qualification;
