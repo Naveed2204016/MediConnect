@@ -53,4 +53,5 @@ private String HospitalName;
     }
     public  String getPatientName() { return this.patientName;}
     public String getHospitalName() { return this.HospitalName;}
+
 }
