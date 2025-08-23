@@ -6,16 +6,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import models.Appointment;
 import models.Patient;
 
 import java.sql.*;
 
 public class doctor_patient_detailscontroller {
 
+    public TextField details;
+    public Button adddetails;
     @FXML
     private TableView<Patient> patientc;
 
@@ -27,7 +27,8 @@ public class doctor_patient_detailscontroller {
 
     @FXML
     private TableColumn<Patient, String> patcontact;
-
+    @FXML
+    private TableColumn<Patient, String> pastvisit;
     @FXML
     private TextField patient_id;
 
@@ -50,7 +51,7 @@ public class doctor_patient_detailscontroller {
         patname.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
         patemail.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEmail()));
         patcontact.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getContactNumber()));
-
+pastvisit.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPastvisit()));
         // Load data
 
     }
@@ -74,12 +75,12 @@ public class doctor_patient_detailscontroller {
                 String name = rs.getString("patient_name");
                 String email = rs.getString("email");
                 String contact = rs.getString("contact_number");
-
+                String past = rs.getString("details");
                 Patient p = new Patient();
                 p.setName(name);
                 p.setEmail(email);
                 p.setContactNumber(contact);
-
+                p.setPastvisit(past);
                 patient2.add(p);
             }
 
@@ -117,6 +118,7 @@ public class doctor_patient_detailscontroller {
                 String name = rs.getString("patient_name");
                 String email = rs.getString("email");
                 String contact = rs.getString("contact_number");
+                String details = rs.getString("details");
 
                 Patient p = new Patient();
                 p.setName(name);
@@ -134,5 +136,43 @@ public class doctor_patient_detailscontroller {
             e.printStackTrace();
         }
     }
+
+    public void adddetails(ActionEvent actionEvent) {
+        ObservableList<Patient> selectedItems = patientc.getSelectionModel().getSelectedItems();
+        int y=selectedItems.getFirst().getpid();
+        if (selectedItems.isEmpty()) {
+            showAlert("No Selection", "Please select one or more appointments to cancel.");
+            return;
+        }
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
+            String query = "UPDATE patient SET details=? WHERE patient_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            for (Patient  P : selectedItems) {
+                preparedStatement.setString(1, details.getText());
+                preparedStatement.setInt(2, y);
+                preparedStatement.executeUpdate();
+            }
+            connection.close();
+            showAlert("Success", "Selected appointments have been cancelled successfully.");
+            loadpatientData(); // Refresh the appointment list
+        } catch (ClassNotFoundException e) {
+            showAlert("Error", "Database driver not found: " + e.getMessage());
+        } catch (SQLException e) {
+            showAlert("Error", "Database error: " + e.getMessage());
+        }
+
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
 }
 
