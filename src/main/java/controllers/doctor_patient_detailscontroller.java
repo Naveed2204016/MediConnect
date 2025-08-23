@@ -1,178 +1,175 @@
 package controllers;
 
 import db.DBConnection;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import models.Appointment;
-import models.Patient;
+import models.record1;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 public class doctor_patient_detailscontroller {
 
-    public TextField details;
-    public Button adddetails;
     @FXML
-    private TableView<Patient> patientc;
+    private TableView<record1> patientc;
+    @FXML
+    private TableColumn<record1, String> patname;
+    @FXML
+    private TableColumn<record1, LocalDate> visit_date;
+    @FXML
+    private TableColumn<record1, String> diagnosis;
+    @FXML
+    private TableColumn<record1, String> treatment;
+    @FXML
+    private TableColumn<record1, String> notes;
+    @FXML
+    private TableColumn<record1, String> prescribed_test;
 
     @FXML
-    private TableColumn<Patient, String> patname;
+    private TextField details; // input field for updates
 
-    @FXML
-    private TableColumn<Patient, String> patemail;
+    private ObservableList<record1> record2 = FXCollections.observableArrayList();
 
-    @FXML
-    private TableColumn<Patient, String> patcontact;
-    @FXML
-    private TableColumn<Patient, String> pastvisit;
-    @FXML
-    private TextField patient_id;
-
-    @FXML
-    private Button searchd;
-
-    private int userId;
-
-    private ObservableList<Patient> patient2 = FXCollections.observableArrayList();
-
-    public void setUserId(int userID) {
-        this.userId = userID;
-        loadpatientData();
+    private int doctorId; // set this from login/session
+    public void setUserId(int userId) {
+        this.doctorId = userId;
+        loadpatientData(userId); // load patient records for this doctor
     }
-
-    @FXML
     public void initialize() {
-        // Set up TableView columns
+        // Bind columns to record1 properties
+        patname.setCellValueFactory(data -> data.getValue().patientnameProperty());
+        visit_date.setCellValueFactory(data -> data.getValue().visitDateProperty());
+        diagnosis.setCellValueFactory(data -> data.getValue().diagnosisProperty());
+        treatment.setCellValueFactory(data -> data.getValue().treatmentProperty());
+        notes.setCellValueFactory(data -> data.getValue().notesProperty());
+        prescribed_test.setCellValueFactory(data -> data.getValue().prescribedTestProperty());
 
-        patname.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
-        patemail.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEmail()));
-        patcontact.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getContactNumber()));
-pastvisit.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPastvisit()));
-        // Load data
+        // Enable multiple row selection
+        patientc.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        // Set the observable list
+        patientc.setItems(record2);
     }
+    // ------------------ Load Patient Data ------------------
+    public void loadpatientData(int userId) {
+        this.doctorId = userId;
+        record2.clear();
 
-    public void loadpatientData() {
-        patient2.clear();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DBConnection.getConnection();
+        String query = "SELECT r.p_id, p.name AS patient_name, visit_date, diagnosis, treatment, notes, prescribed_test " +
+                "FROM record r JOIN patient p ON r.p_id = p.patient_id " +
+                "WHERE r.d_id = ? " +
+                "ORDER BY r.visit_date";
 
-            String query = "SELECT a.appointment_id, p.name AS patient_name, p.contact_number, p.email " +
-                    "FROM appointment a JOIN patient p ON a.p_id = p.patient_id " +
-                    "WHERE a.d_id = ? " +
-                    "ORDER BY a.appointment_date";
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement pmt = connection.prepareStatement(query)) {
 
-            PreparedStatement pmt = connection.prepareStatement(query);
             pmt.setInt(1, userId);
             ResultSet rs = pmt.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("p_id");
                 String name = rs.getString("patient_name");
-                String email = rs.getString("email");
-                String contact = rs.getString("contact_number");
-                String past = rs.getString("details");
-                Patient p = new Patient();
-                p.setName(name);
-                p.setEmail(email);
-                p.setContactNumber(contact);
-                p.setPastvisit(past);
-                patient2.add(p);
+                LocalDate visit = rs.getDate("visit_date").toLocalDate();
+                String diag = rs.getString("diagnosis");
+                String treat = rs.getString("treatment");
+                String note = rs.getString("notes");
+                String test = rs.getString("prescribed_test");
+
+                record1 r = new record1(id, visit, diag, treat, note, test, name);
+                record2.add(r);
             }
 
-            patientc.setItems(patient2);
+            patientc.setItems(record2);
 
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Error loading patients: " + e.getMessage());
-        }
-    }
-
-    public void searchp(ActionEvent actionEvent) {
-        String searchText = patient_id.getText().trim();
-        if (searchText.isEmpty()) {
-            loadpatientData();
-            return;
-        }
-
-        try {
-           String pid = (searchText);
-
-            ObservableList<Patient> filteredList = FXCollections.observableArrayList();
-
-            Connection connection = DBConnection.getConnection();
-            String query = "SELECT a.appointment_id, p.patient_id, p.name AS patient_name, p.contact_number, p.email " +
-                    "FROM appointment a JOIN patient p ON a.p_id = p.patient_id " +
-                    "WHERE a.d_id = ? AND p.name= ? " +
-                    "ORDER BY a.appointment_date";
-
-            PreparedStatement pmt = connection.prepareStatement(query);
-            pmt.setInt(1, userId);
-            pmt.setString(2, pid);
-            ResultSet rs = pmt.executeQuery();
-
-            while (rs.next()) {
-                String name = rs.getString("patient_name");
-                String email = rs.getString("email");
-                String contact = rs.getString("contact_number");
-                String details = rs.getString("details");
-
-                Patient p = new Patient();
-                p.setName(name);
-                p.setEmail(email);
-                p.setContactNumber(contact);
-
-                filteredList.add(p);
-            }
-
-            patientc.setItems(filteredList);
-
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid patient ID.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            showAlert("Database Error", e.getMessage());
         }
     }
 
-    public void adddetails(ActionEvent actionEvent) {
-        ObservableList<Patient> selectedItems = patientc.getSelectionModel().getSelectedItems();
-        int y=selectedItems.getFirst().getpid();
-        if (selectedItems.isEmpty()) {
-            showAlert("No Selection", "Please select one or more appointments to cancel.");
+    // ------------------ Update Methods ------------------
+    @FXML
+    private void updateName(ActionEvent e) {
+        updateField("patient", "name", details.getText(), false);
+    }
+
+    @FXML
+    private void updateDate(ActionEvent e) {
+        LocalDate visitDate;
+        try {
+            visitDate = LocalDate.parse(details.getText()); // yyyy-MM-dd
+        } catch (DateTimeParseException ex) {
+            showAlert("Invalid Input", "Enter date as yyyy-MM-dd.");
             return;
         }
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
-            String query = "UPDATE patient SET details=? WHERE patient_id=?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            for (Patient  P : selectedItems) {
-                preparedStatement.setString(1, details.getText());
-                preparedStatement.setInt(2, y);
+        updateField("record", "visit_date", java.sql.Date.valueOf(visitDate), true);
+    }
+
+    @FXML
+    private void updateDiagnosis(ActionEvent e) {
+        updateField("record", "diagnosis", details.getText(), false);
+    }
+
+    @FXML
+    private void updateTreatment(ActionEvent e) {
+        updateField("record", "treatment", details.getText(), false);
+    }
+
+    @FXML
+    private void updateNotes(ActionEvent e) {
+        updateField("record", "notes", details.getText(), false);
+    }
+
+    @FXML
+    private void updateTest(ActionEvent e) {
+        updateField("record", "prescribed_test", details.getText(), false);
+    }
+
+    // ------------------ Generic Update Helper ------------------
+    private void updateField(String table, String column, Object newValue, boolean isDate) {
+        ObservableList<record1> selectedItems = patientc.getSelectionModel().getSelectedItems();
+        if (selectedItems.isEmpty()) {
+            showAlert("No Selection", "Please select a patient first.");
+            return;
+        }
+
+        String query = "UPDATE " + table + " SET " + column + "=? WHERE patient_id=?";
+
+        // special case → record table uses p_id instead of patient_id
+        if (table.equals("record")) {
+            query = "UPDATE record SET " + column + "=? WHERE p_id=?";
+        }
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            for (record1 P : selectedItems) {
+                if (isDate) {
+                    preparedStatement.setDate(1, (Date) newValue);
+                } else {
+                    preparedStatement.setString(1, newValue.toString());
+                }
+                preparedStatement.setInt(2, P.getPId());
                 preparedStatement.executeUpdate();
             }
-            connection.close();
-            showAlert("Success", "Selected appointments have been cancelled successfully.");
-            loadpatientData(); // Refresh the appointment list
-        } catch (ClassNotFoundException e) {
-            showAlert("Error", "Database driver not found: " + e.getMessage());
-        } catch (SQLException e) {
-            showAlert("Error", "Database error: " + e.getMessage());
-        }
 
+            showAlert("Success", "Updated " + column + " successfully.");
+            loadpatientData(doctorId); // refresh table
+
+        } catch (SQLException e) {
+            showAlert("Database Error", e.getMessage());
+        }
     }
 
+    // ------------------ Alert Helper ------------------
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
-        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
 }
-
