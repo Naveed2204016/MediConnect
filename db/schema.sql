@@ -133,7 +133,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (1,'parkview','Chittagong','18:00:00','21:00:00'),(2,'bellview','chittagong','17:00:00','21:00:00'),(3,'evercare','chittagong','19:00:00','22:00:00'),(4,'labaid','dhaka','11:00:00','15:00:00'),(5,'parkview','chittagong','12:00:00','16:00:00'),(6,'labaid','dhaka','11:00:00','15:00:00'),(7,'apollo','dhaka','15:00:00','18:30:00'),(8,'chevron','chittagong','18:00:00','21:30:00'),(9,'chevron','chittagong','19:00:00','22:00:00'),(10,'labaid','dhaka','11:00:00','15:00:00');
+INSERT INTO `location` VALUES (1,'parkview','chittagong','18:00:00','21:00:00'),(2,'bellview','chittagong','17:00:00','21:00:00'),(3,'evercare','chittagong','19:00:00','22:00:00'),(4,'labaid','dhaka','11:00:00','15:00:00'),(5,'parkview','chittagong','12:00:00','16:00:00'),(6,'labaid','dhaka','11:00:00','15:00:00'),(7,'apollo','dhaka','15:00:00','18:30:00'),(8,'chevron','chittagong','18:00:00','21:30:00'),(9,'chevron','chittagong','19:00:00','22:00:00'),(10,'labaid','dhaka','11:00:00','15:00:00');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-26 23:44:14
+-- Dump completed on 2025-08-27  6:38:35
