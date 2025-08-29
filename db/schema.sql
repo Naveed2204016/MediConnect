@@ -36,7 +36,7 @@ CREATE TABLE `appointment` (
   CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`),
   CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`),
   CONSTRAINT `appointment_ibfk_3` FOREIGN KEY (`a_id`) REFERENCES `assistant` (`assistant_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,1,2,1,'2025-10-03','confirmed'),(4,1,3,1,'2025-08-19','Confirmed');
+INSERT INTO `appointment` VALUES (1,1,2,1,'2025-10-03','confirmed'),(4,1,3,1,'2025-08-19','Confirmed'),(6,6,2,6,'2025-08-30','Confirmed');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `assistant` (
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`assistant_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `assistant` (
 
 LOCK TABLES `assistant` WRITE;
 /*!40000 ALTER TABLE `assistant` DISABLE KEYS */;
-INSERT INTO `assistant` VALUES (1,1,'faizul','01930309821','faizul@gmail.com','yes');
+INSERT INTO `assistant` VALUES (1,1,'faizul','01930309821','faizul@gmail.com','yes'),(2,2,'sadia akter','01711223344','sadia.akter@gmail.com','pass2'),(3,3,'rakib hossain','01822334455','rakib.hossain@yahoo.com','pass3'),(4,4,'nishat jahan','01933445566','nishat.jahan@gmail.com','pass4'),(5,5,'tamim rahman','01644556677','tamim.rahman@hotmail.com','pass5'),(6,6,'moushumi akter','01755667788','moushumi.akter@gmail.com','pass6'),(7,7,'kamrul islam','01566778899','kamrul.islam@yahoo.com','pass7'),(8,8,'shamima sultana','01377889900','shamima.sultana@gmail.com','pass8'),(9,9,'fahim chowdhury','01888990011','fahim.chowdhury@gmail.com','pass9'),(10,10,'sumaiya rahman','01999001122','sumaiya.rahman@yahoo.com','pass10');
 /*!40000 ALTER TABLE `assistant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,6 +107,43 @@ LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
 INSERT INTO `doctor` VALUES (1,'Dr. Mahbub','medicine','FCPS',1000.00,'01768876682','mahbub@gmail.com',50,3,'doc123'),(2,'Dr. Jan','Neurology','MBBS, DM',600.00,'01987654321','jan@gmail.com',25,5,'doc456'),(3,'Dr. Ayesha Rahman','Cardiology','MBBS, MD',1000.00,'01812345678','ayesha.@gmail.com',45,15,'cardio789'),(4,'Dr. Tanvir Alam','Orthopedics','MBBS, MS',750.00,'01922334455','tanvir.@yahoo.com',38,10,'ortho321'),(5,'Dr. Nusrat Jahan','Dermatology','MBBS, DDVL',500.00,'01733445566','nusrat.@gmail.com',34,7,'derma555'),(6,'Dr. Imran Hossain','Pediatrics','MBBS, DCH',650.00,'01899887766','imran.n@hotmail.com',40,12,'peds111'),(7,'Dr. Farhana Akter','Gynecology','MBBS, FCPS',900.00,'01611223344','farhanr@gmail.com',42,14,'gyn999'),(8,'Dr. Salman Kabir','Psychiatry','MBBS, MPhil',550.00,'01599887722','salman@gmail.com',37,8,'psych333'),(9,'Dr. Rafiq Chowdhury','ENT','MBBS, DLO',700.00,'01955667788','rafiq@gmail.com',48,18,'ent777'),(10,'Dr. Sharmeen Sultana','Ophthalmology','MBBS, MS',720.00,'01788990011','sharmeen@gmail.com',36,9,'eye888');
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `emergency_request`
+--
+
+DROP TABLE IF EXISTS `emergency_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `emergency_request` (
+  `request_id` int NOT NULL AUTO_INCREMENT,
+  `p_id` int NOT NULL,
+  `a_id` int NOT NULL,
+  `d_id` int NOT NULL,
+  `symptoms` varchar(500) DEFAULT NULL,
+  `request_date` date DEFAULT NULL,
+  `tentative_date` date DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `response_seen` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`request_id`),
+  KEY `p_id` (`p_id`),
+  KEY `d_id` (`d_id`),
+  KEY `a_id` (`a_id`),
+  CONSTRAINT `emergency_request_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `emergency_request_ibfk_2` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `emergency_request_ibfk_3` FOREIGN KEY (`a_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `emergency_request`
+--
+
+LOCK TABLES `emergency_request` WRITE;
+/*!40000 ALTER TABLE `emergency_request` DISABLE KEYS */;
+INSERT INTO `emergency_request` VALUES (1,2,10,10,'Continous itching in the eyes','2025-08-29',NULL,'Pending','Not Seen');
+/*!40000 ALTER TABLE `emergency_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -236,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-27  6:38:35
+-- Dump completed on 2025-08-29 10:24:08

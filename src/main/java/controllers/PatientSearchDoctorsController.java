@@ -372,9 +372,107 @@ public class PatientSearchDoctorsController {
         });
     }
 
+
+
+
     private void handleEmergencyRequest(doctor1 doctor) {
-        // Insert into EmergencyAppointment table or mark as high priority
-        showAlert("Emergency Request", "Your emergency request has been sent for " + doctor.getName());
+        final int[] assistantId = {0};
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection= DBConnection.getConnection();
+            String query="SELECT assistant_id FROM Assistant WHERE d_id=?";
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            preparedStatement.setInt(1,doctor.getDoctorId());
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                assistantId[0]=resultSet.getInt("assistant_id");
+            }
+            preparedStatement.close();
+            connection.close();
+        }
+        catch(ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+
+
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Emergency Request");
+        dialog.setHeaderText("Enter your symptoms for " + doctor.getName());
+
+        ButtonType submitButton = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(submitButton, cancelButton);
+
+        TextArea symptomsField = new TextArea();
+        symptomsField.setPromptText("Enter your symptoms");
+        symptomsField.setWrapText(true);
+        symptomsField.setPrefRowCount(6);   // makes it large enough
+        symptomsField.setPrefColumnCount(30);
+
+        VBox content = new VBox(10);
+        content.getChildren().add(symptomsField);
+        dialog.getDialogPane().setContent(content);
+
+        // Return the symptoms when submitted
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == submitButton) {
+                return symptomsField.getText();
+            }
+            return null;
+        });
+
+        dialog.showAndWait().ifPresent(symptoms -> {
+            if (symptoms != null && !symptoms.trim().isEmpty()) {
+                // call your future DB method here
+                instoDatabase(doctor,assistantId[0],symptoms);
+
+            } else {
+                showAlert("Error", "Symptoms cannot be empty.");
+            }
+        });
+
+
+    }
+
+    public void instoDatabase(doctor1 doctor,int a_id,String symptoms)
+    {
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DBConnection.getConnection();
+            String query="INSERT INTO Emergency_request (p_id,a_id,d_id,symptoms,request_date,tentative_date,status,response_seen) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            preparedStatement.setInt(1,userId);
+            preparedStatement.setInt(2,a_id);
+            preparedStatement.setInt(3,doctor.getDoctorId());
+            preparedStatement.setString(4,symptoms);
+            preparedStatement.setDate(5, Date.valueOf(LocalDate.now()));
+            preparedStatement.setDate(6, null);
+            preparedStatement.setString(7,"Pending");
+            preparedStatement.setString(8,"Not Seen");
+            int cnt=preparedStatement.executeUpdate();
+            if(cnt>0) {
+                showAlert("Emergency Request", "Your emergency request has been sent for " + doctor.getName());
+            }
+            else
+            {
+                showAlert("Error", "Failed to send the emergency request. Please try again.");
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
 
