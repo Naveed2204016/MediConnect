@@ -39,6 +39,11 @@ public class AdminHandleController {
     @FXML private TextField hospitalfield;
     @FXML private TextField cityfield;
 
+    private int userID;
+    public void setUserId(int userID)
+    {
+        this.userID = userID;
+    }
     private ObservableList<Doctor> sampleDoctors = FXCollections.observableArrayList(
             new Doctor("Dr. Smith", "Cardiology", "mbbs","United", "chittagong", LocalTime.NOON,LocalTime.MIDNIGHT,1500.0, "01617793505","john@example.com"),
             new Doctor("Dr. Johnson", "Neurology", "mbbs", "cmoshmc","dhaka",LocalTime.now(),LocalTime.NOON,2000.0, "01845022838","mahi@bh.com")
