@@ -79,10 +79,11 @@ public class Doctors_Dashboard_controller {
       else if (path.equals("/fxml/Cancel_appointment.fxml")) {
         Cancel_DR_CONTROLLER controller = loader.getController();
             controller.setUserId(userID);}
-//         else if (path.equals("/fxml/Emergency_Request_Doctor.fxml")) {
-//           emergency_req_dr_controller controller = loader.getController();
-//            controller.setUserId(userID);
-//        } else if (path.equals("/fxml/doctorprimarycheckup.fxml")) {
+      else if (path.equals("/fxml/Emergency_Request_Doctor.fxml")) {
+           doctor_emergency_requestcontroller controller = loader.getController();
+            controller.setUserId(userID);
+    }
+      //else if (path.equals("/fxml/doctorprimarycheckup.fxml")) {
 //           primary_checkup_dr_controller controller = loader.getController();
 //            controller.setUserId(userID);
 //        }

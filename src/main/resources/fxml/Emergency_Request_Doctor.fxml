@@ -22,17 +22,20 @@
 
       <BorderPane layoutX="4.0" layoutY="76.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="534.0" prefWidth="554.0">
          <left>
-            <TableView fx:id="emergency_req" prefHeight="466.0" prefWidth="327.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="emergency_req" prefHeight="454.0" prefWidth="558.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="patient_id" prefWidth="93.6" text="Patient Id" />
                   <TableColumn fx:id="details" prefWidth="75.0" text="Details" />
                   <TableColumn fx:id="contact" prefWidth="151.2" text="Contact" />
+                  <TableColumn fx:id="request_date" prefWidth="75.0" text="Request Date" />
+                  <TableColumn fx:id="tentative_date" prefWidth="75.0" text="Tentitive Date" />
+                  <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
                </columns>
             </TableView>
          </left>
 
          <right>
-            <HBox alignment="CENTER" depthTest="DISABLE" nodeOrientation="RIGHT_TO_LEFT" prefHeight="454.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" depthTest="DISABLE" nodeOrientation="RIGHT_TO_LEFT" prefHeight="372.0" prefWidth="167.0" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" onAction="#reject_req" prefHeight="36.0" prefWidth="105.0" styleClass="logout-button" stylesheets="@../css/style.css" text="Reject" />
                   <Button mnemonicParsing="false" onAction="#accept_req" prefHeight="36.0" prefWidth="100.0" stylesheets="@../css/style.css" text="Accept" />
