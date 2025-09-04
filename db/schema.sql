@@ -158,7 +158,7 @@ CREATE TABLE `emergency_request` (
   CONSTRAINT `emergency_request_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `emergency_request_ibfk_2` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `emergency_request_ibfk_3` FOREIGN KEY (`a_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +167,7 @@ CREATE TABLE `emergency_request` (
 
 LOCK TABLES `emergency_request` WRITE;
 /*!40000 ALTER TABLE `emergency_request` DISABLE KEYS */;
-INSERT INTO `emergency_request` VALUES (1,2,10,10,'Continous itching in the eyes','2025-08-29',NULL,'Pending','Not Seen');
+INSERT INTO `emergency_request` VALUES (1,2,10,10,'Continous itching in the eyes','2025-08-29',NULL,'Pending','Not Seen'),(2,2,3,3,'sudden chest pain','2025-09-04',NULL,'Pending','Not Seen');
 /*!40000 ALTER TABLE `emergency_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-04  0:59:47
+-- Dump completed on 2025-09-04  2:28:35
