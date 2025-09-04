@@ -22,11 +22,11 @@
         </columnConstraints>
 
         <Label text="Test Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="testNameField" promptText="e.g. Blood Test"
+        <TextField fx:id="testNameField1" promptText="e.g. Blood Test"
                    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
         <Label text="Hospital:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="hospitalField" promptText="e.g. EverCare"
+        <TextField fx:id="hospitalField1" promptText="e.g. EverCare"
                    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
         <Label text="Fee:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
@@ -34,7 +34,7 @@
                    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
         <Label text="Time Slot:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <TextField fx:id="timeSlotField" promptText="e.g. 10:00 AM - 12:00 PM"
+        <TextField fx:id="timeSlotField" promptText="10:00 AM"
                    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
         <Label text="Instructions:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
@@ -53,24 +53,23 @@
             <Label text="Search a Test:"/>
             <TextField fx:id="testnamefield" promptText="Enter test name"/>
             <TextField fx:id="hospitalnamefield" promptText="Enter hospital name"/>
-            <Button text="Search" onAction="#onSearch"/>
+            <Button text="Search" onAction="#handleSearch"/>
         </HBox>
 
         <!-- TableView -->
-        <TableView fx:id="tableView" prefHeight="400" prefWidth="800" editable="true">
+        <TableView fx:id="testsTable" prefHeight="400" prefWidth="800" editable="true">
             <columns>
-                <TableColumn fx:id="colTestName" text="Test Name" prefWidth="150"/>
-                <TableColumn fx:id="colHospital" text="Hospital" prefWidth="150"/>
-                <TableColumn fx:id="colFee" text="Fee" prefWidth="100"/>
-                <TableColumn fx:id="colTimeSlot" text="Time Slot" prefWidth="150"/>
-                <TableColumn fx:id="colInstructions" text="Instructions" prefWidth="250"/>
+                <TableColumn fx:id="nameCol" text="Test Name" prefWidth="150"/>
+                <TableColumn fx:id="hospitalCol" text="Hospital" prefWidth="150"/>
+                <TableColumn fx:id="feeCol" text="Fee" prefWidth="100"/>
+                <TableColumn fx:id="timeslotcol" text="Time Slot" prefWidth="150"/>
+                <TableColumn fx:id="instructioncol" text="Instructions" prefWidth="250"/>
             </columns>
         </TableView>
 
         <!-- Action Buttons -->
         <HBox spacing="10">
-            <Button text="Remove Selected" onAction="#onRemoveSelected"/>
-            <Button text="Update Selected" onAction="#onUpdateSelected"/>
+            <Button text="Update Selected" onAction="#handleUpdateSelected"/>
         </HBox>
 
 </VBox>

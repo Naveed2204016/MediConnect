@@ -11,10 +11,11 @@ import java.io.IOException;
 
 public class DashboardAdminController {
 
-    @FXML private StackPane contentArea; // This must match the fx:id in FXML
+    @FXML private StackPane contentArea;
+    private int userID;// This must match the fx:id in FXML
 
-    @FXML
-    public void initialize() {
+    public void setUserID(int userId) {
+        this.userID = userId;
         try {
             loadtests(); // Load default page
         } catch (IOException e) {
@@ -22,6 +23,15 @@ public class DashboardAdminController {
             // Handle error appropriately
         }
     }
+    /*@FXML
+     public void initialize() {
+        try {
+            loadtests(); // Load default page
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle error appropriately
+        }
+    }*/
 
     @FXML
 
@@ -40,7 +50,19 @@ public class DashboardAdminController {
     }
 
     private void loadPage(String path) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource(path));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource(path));
+        Pane pane= loader.load();
+
+        if (path.equals("/fxml/admin_load_tests.fxml")) {
+            AdminLoadTestController controller = loader.getController();
+            controller.setUserId(userID);
+        } else if (path.equals("/fxml/admin_update_info.fxml")) {
+            AdminUpdateInfoController controller = loader.getController();
+            controller.setUserId(userID);
+        } else if (path.equals("/fxml/admin_handle_doctors.fxml")) {
+            AdminHandleController controller = loader.getController();
+            controller.setUserId(userID);
+        }
         contentArea.getChildren().setAll(pane);
     }
 

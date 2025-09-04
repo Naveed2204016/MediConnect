@@ -69,12 +69,38 @@ public class LoginController {
         else if(role.equals("admin"))
         {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage=(Stage) userIdField.getScene().getWindow();
-                stage.setScene(scene);
+                Connection conncection=DBConnection.getConnection();
+                String query="SELECT password FROM Admin WHERE admin_id=?";
+                PreparedStatement preparedStatement=conncection.prepareStatement(query);
+                preparedStatement.setInt(1,Integer.parseInt(userId));
+                ResultSet resultSet=preparedStatement.executeQuery();
+                if(resultSet.next())
+                {
+                    String str=resultSet.getString("password");
+                    if(str.equals(password1)) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        DashboardAdminController dashboardAdminController=loader.getController();
+                        dashboardAdminController.setUserID(Integer.parseInt(userId));
+                        Stage stage=(Stage) userIdField.getScene().getWindow();
+                        stage.setScene(scene);
+                    }
+                    else
+                    {
+                        showAlert("Incorrect Password!");
+                        return;
+                    }
+                }
+                else
+                {
+                    showAlert("User id not found!");
+                    return;
+                }
             }
-            catch(IOException e)
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+            catch (IOException e)
             {
                 e.printStackTrace();
             }
