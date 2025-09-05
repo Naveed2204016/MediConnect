@@ -21,6 +21,8 @@ module com.example.mediconnect {
     requires transitive javafx.graphics;
     requires transitive javafx.base;
 
+
+
     opens controllers to javafx.fxml; // For FXML to access controllers
         opens models to javafx.base;      // For PropertyValueFactory reflection access
 

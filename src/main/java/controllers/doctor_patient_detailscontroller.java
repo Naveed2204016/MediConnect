@@ -11,10 +11,13 @@ import models.record1;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Optional;
 
 public class doctor_patient_detailscontroller {
 
+    public TextField patd;
+    public TextField patient_name;
+    public TextField Pname;
+    public TextField Pid;
     @FXML
     private TableView<record1> patientc;
     @FXML
@@ -34,12 +37,13 @@ public class doctor_patient_detailscontroller {
     private TextField details; // input field for updates
 
     private ObservableList<record1> record2 = FXCollections.observableArrayList();
-
     private int doctorId; // set this from login/session
+
     public void setUserId(int userId) {
         this.doctorId = userId;
         loadpatientData(userId); // load patient records for this doctor
     }
+
     public void initialize() {
         // Bind columns to record1 properties
         patname.setCellValueFactory(data -> data.getValue().patientnameProperty());
@@ -55,12 +59,14 @@ public class doctor_patient_detailscontroller {
         // Set the observable list
         patientc.setItems(record2);
     }
+
     // ------------------ Load Patient Data ------------------
     public void loadpatientData(int userId) {
         this.doctorId = userId;
         record2.clear();
 
-        String query = "SELECT r.p_id, p.name AS patient_name, visit_date, diagnosis, treatment, notes, prescribed_test " +
+        String query = "SELECT r.record_id, r.p_id, r.d_id, p.name AS patient_name, " +
+                "r.visit_date, r.diagnosis, r.treatment, r.notes, r.prescribed_test " +
                 "FROM record r JOIN patient p ON r.p_id = p.patient_id " +
                 "WHERE r.d_id = ? " +
                 "ORDER BY r.visit_date";
@@ -72,7 +78,9 @@ public class doctor_patient_detailscontroller {
             ResultSet rs = pmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("p_id");
+                int recordId = rs.getInt("record_id");
+                int pId = rs.getInt("p_id");
+                int dId = rs.getInt("d_id");
                 String name = rs.getString("patient_name");
                 LocalDate visit = rs.getDate("visit_date").toLocalDate();
                 String diag = rs.getString("diagnosis");
@@ -80,7 +88,8 @@ public class doctor_patient_detailscontroller {
                 String note = rs.getString("notes");
                 String test = rs.getString("prescribed_test");
 
-                record1 r = new record1(id, visit, diag, treat, note, test, name);
+                // Use full constructor
+                record1 r = new record1(recordId, pId, dId, visit, diag, treat, note, test, name);
                 record2.add(r);
             }
 
@@ -137,12 +146,7 @@ public class doctor_patient_detailscontroller {
             return;
         }
 
-        String query = "UPDATE " + table + " SET " + column + "=? WHERE patient_id=?";
-
-        // special case → record table uses p_id instead of patient_id
-        if (table.equals("record")) {
-            query = "UPDATE record SET " + column + "=? WHERE p_id=?";
-        }
+        String query = "UPDATE record SET " + column + "=? WHERE p_id=? AND record_id=?";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -154,6 +158,7 @@ public class doctor_patient_detailscontroller {
                     preparedStatement.setString(1, newValue.toString());
                 }
                 preparedStatement.setInt(2, P.getPId());
+                preparedStatement.setInt(3, P.getRecordId());
                 preparedStatement.executeUpdate();
             }
 
@@ -171,5 +176,87 @@ public class doctor_patient_detailscontroller {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    // ------------------ Add New Record ------------------
+    public void addnew(ActionEvent actionEvent) {
+        String patientId = Pid.getText();
+        String patientName = Pname.getText();
+
+        if (patientId.isEmpty() || patientName.isEmpty()) {
+            showAlert("Input Error", "Please enter both Patient ID and Name.");
+            return;
+        }
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DBConnection.getConnection();
+
+            String query = "INSERT INTO record(p_id, d_id, visit_date) VALUES (?, ?, CURRENT_TIMESTAMP)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, Integer.parseInt(patientId));
+            preparedStatement.setInt(2, doctorId);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                showAlert("Success", "New record added successfully.");
+                loadpatientData(doctorId);
+            }
+
+            preparedStatement.close();
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            showAlert("Error", "Database driver not found: " + e.getMessage());
+        } catch (SQLException e) {
+            showAlert("Database Error", e.getMessage());
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Patient ID must be a number.");
+        }
+    }
+
+    // ------------------ Search ------------------
+    public void searchd(ActionEvent actionEvent) {
+        String patientname = patient_name.getText();
+        int pid = Integer.parseInt(patd.getText());
+        record2.clear();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DBConnection.getConnection();
+
+            String query = "SELECT r.record_id, r.d_id, p.name, r.p_id, r.visit_date, r.diagnosis, " +
+                    "r.treatment, r.notes, r.prescribed_test " +
+                    "FROM patient AS p, record AS r " +
+                    "WHERE p.patient_id = r.p_id AND p.name = ? AND r.p_id = ? AND r.d_id = ?";
+
+            PreparedStatement pmt = connection.prepareStatement(query);
+            pmt.setString(1, patientname);
+            pmt.setInt(2, pid);
+            pmt.setInt(3, doctorId);
+
+            ResultSet rs = pmt.executeQuery();
+            while (rs.next()) {
+                int recordId = rs.getInt("record_id");
+                int dId = rs.getInt("d_id");
+                String name = rs.getString("name");
+                LocalDate visitDate = rs.getDate("visit_date").toLocalDate();
+                String diag = rs.getString("diagnosis");
+                String treatment = rs.getString("treatment");
+                String notes = rs.getString("notes");
+                String prescribed_test = rs.getString("prescribed_test");
+
+                record1 re = new record1(recordId, pid, dId, visitDate, diag, treatment, notes, prescribed_test, name);
+                record2.add(re);
+            }
+
+            patientc.setItems(record2);
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

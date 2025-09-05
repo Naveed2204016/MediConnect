@@ -38,13 +38,11 @@ public class AssistantEmergencyRequestController {
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contact"));
 
         // Load some dummy data for demonstration
-       /* emergencyRequests.add(new EmergencyRequest("P001", "Chest Pain", "123-456-7890"));
-        emergencyRequests.add(new EmergencyRequest("P002", "Severe Headache", "987-654-3210"));
-        emergencyRequests.add(new EmergencyRequest("P003", "Accident Injury", "555-123-4567"));
+//        emergencyRequests.add(new EmergencyRequest("P001", "Chest Pain", "123-456-7890"));
+//        emergencyRequests.add(new EmergencyRequest("P002", "Severe Headache", "987-654-3210"));
+//        emergencyRequests.add(new EmergencyRequest("P003", "Accident Injury", "555-123-4567"));
 
         // Set the data to the TableView
-
-        */
         emergencyTable.setItems(emergencyRequests);
     }
 

@@ -9,17 +9,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="500.0" prefWidth="732.0" spacing="10" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.doctor_patient_detailscontroller">
+<VBox prefHeight="628.0" prefWidth="772.0" spacing="10" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.doctor_patient_detailscontroller">
 
    <!-- Search Bar -->
-   <HBox alignment="CENTER_LEFT" spacing="10">
-      <Label text="Search a Patient Name or ID:" />
-      <TextField fx:id="patient_id" prefWidth="200" />
-      <Button  text="Search" />
+   <HBox alignment="CENTER_LEFT" prefHeight="152.0" prefWidth="772.0" spacing="10">
+      <Label text="Search a Patient Name" />
+      <TextField fx:id="patient_name" prefWidth="200" />
+      <Label text="Search  Patient Id" />
+      <TextField fx:id="patd" />
+      <Button onAction="#searchd" prefHeight="26.0" prefWidth="148.0" text="Search" />
    </HBox>
 
    <!-- Table -->
-   <TableView fx:id="patientc" prefHeight="309.0" prefWidth="730.0">
+   <TableView fx:id="patientc" prefHeight="223.0" prefWidth="772.0">
       <columns>
          <TableColumn fx:id="patname" prefWidth="112.0" text="Patient Name" />
          <TableColumn fx:id="visit_date" prefWidth="117.6" text="Visit Date" />
@@ -46,9 +48,13 @@
    </HBox>
 
    <!-- Second Row of Update Buttons -->
-   <HBox alignment="CENTER" spacing="10">
+   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="772.0" spacing="10">
       <Button fx:id="updateTreatmentBtn" onAction="#updateTreatment" text="Update Treatment" />
       <Button fx:id="updateNotesBtn" onAction="#updateNotes" text="Update Notes" />
       <Button fx:id="updateTestBtn" onAction="#updateTest" text="Update Test" />
    </HBox>
+   <Label prefHeight="18.0" prefWidth="170.0" text="ADD PATIENT" />
+   <TextField fx:id="Pname" promptText="Patient Name" />
+   <TextField fx:id="Pid" promptText="Patient ID" />
+   <Button mnemonicParsing="false" onAction="#addnew" prefHeight="36.0" prefWidth="238.0" stylesheets="@../css/style.css" text="ADD" />
 </VBox>

@@ -92,19 +92,19 @@
          <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
       </rowConstraints>
     </GridPane>
-    <TableView fx:id="locationTable" prefHeight="350.0" prefWidth="591.0" styleClass="table-view">
-        <columns>
-            <TableColumn fx:id="hospitalCol" prefWidth="185.60000038146973" text="Hospital" />
-            <TableColumn fx:id="cityCol" prefWidth="155.199951171875" text="City" />
-            <TableColumn fx:id="stCol" prefWidth="111.2000732421875" text="Start time" />
-            <TableColumn fx:id="edCol" prefWidth="150" text="End time" />
-        </columns>
-    </TableView>
+<!--    <TableView fx:id="locationTable" prefHeight="350.0" prefWidth="591.0" styleClass="table-view">-->
+<!--        <columns>-->
+<!--            <TableColumn fx:id="hospitalCol" prefWidth="185.60000038146973" text="Hospital" />-->
+<!--            <TableColumn fx:id="cityCol" prefWidth="155.199951171875" text="City" />-->
+<!--            <TableColumn fx:id="stCol" prefWidth="111.2000732421875" text="Start time" />-->
+<!--            <TableColumn fx:id="edCol" prefWidth="150" text="End time" />-->
+<!--        </columns>-->
+<!--    </TableView>-->
 
-    <HBox alignment="CENTER" prefHeight="38.0" prefWidth="572.0" spacing="10">
-        <Button fx:id="addLocationBtn" onAction="#addlocation" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #5bbcff; -fx-text-fill: white;" text="Add Location" />
-        <Button fx:id="removeLocationBtn" onAction="#removelocation" style="-fx-background-color: #e63946; -fx-text-fill: white;" text="Remove Selected" />
-    </HBox>
+<!--    <HBox alignment="CENTER" prefHeight="38.0" prefWidth="572.0" spacing="10">-->
+<!--        <Button fx:id="addLocationBtn" onAction="#addlocation" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #5bbcff; -fx-text-fill: white;" text="Add Location" />-->
+<!--        <Button fx:id="removeLocationBtn" onAction="#removelocation" style="-fx-background-color: #e63946; -fx-text-fill: white;" text="Remove Selected" />-->
+<!--    </HBox>-->
 
     <!-- Save / Cancel -->
     <HBox alignment="CENTER" spacing="20">

@@ -22,14 +22,15 @@
 
       <BorderPane layoutX="4.0" layoutY="76.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="534.0" prefWidth="554.0">
          <left>
-            <TableView fx:id="emergency_req" prefHeight="454.0" prefWidth="558.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="emergency_req" prefHeight="454.0" prefWidth="686.0" BorderPane.alignment="CENTER">
                <columns>
+                  <TableColumn fx:id="request_id" prefWidth="75.0" text="Request Id" />
                   <TableColumn fx:id="patient_id" prefWidth="93.6" text="Patient Id" />
                   <TableColumn fx:id="details" prefWidth="75.0" text="Details" />
                   <TableColumn fx:id="contact" prefWidth="151.2" text="Contact" />
-                  <TableColumn fx:id="request_date" prefWidth="75.0" text="Request Date" />
-                  <TableColumn fx:id="tentative_date" prefWidth="75.0" text="Tentitive Date" />
-                  <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+                  <TableColumn fx:id="request_date" prefWidth="113.5999755859375" text="Request Date" />
+                  <TableColumn fx:id="tentative_date" prefWidth="88.79998779296875" text="Tentitive Date" />
+                  <TableColumn fx:id="status" prefWidth="82.4000244140625" text="Status" />
                </columns>
             </TableView>
          </left>

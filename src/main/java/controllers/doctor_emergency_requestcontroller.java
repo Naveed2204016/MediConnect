@@ -14,12 +14,17 @@ import models.Appointment;
 import models.EmergencyRequest;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class doctor_emergency_requestcontroller {
 
+
     @FXML
     private TableView<EmergencyRequest> emergency_req;
+    @FXML
+    public TableColumn <EmergencyRequest,String> request_id;
+
 
     @FXML
     private TableColumn<EmergencyRequest, String> patient_id;
@@ -50,13 +55,15 @@ public class doctor_emergency_requestcontroller {
 
     @FXML
     public void initialize() {
-        // Map table columns to EmergencyRequest getters
+
         patient_id.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPatientId()));
         details.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDetails()));
         contact.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getContact()));
         status.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStatus()));
         request_date.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getRequestDate()));
         tentative_date.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getTentativeDate()));
+        request_id.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getRequest_id()));
 
         emergency_req.setItems(emergencyRequests1);
     }
@@ -64,10 +71,10 @@ public class doctor_emergency_requestcontroller {
     private void loadPatientData() {
         emergencyRequests1.clear();
 
-        String query = "SELECT e.p_id, e.symptoms, e.request_date, e.tentative_date, e.status, p.contact_number " +
+        String query = "SELECT e.request_id,e.p_id, e.symptoms, e.request_date, e.tentative_date, e.status, p.contact_number " +
                 "FROM emergency_request AS e " +
                 "JOIN patient AS p ON e.p_id = p.patient_id " +
-                "WHERE e.d_id = ?";
+                "WHERE e.d_id = ? and e.status='pending'";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -76,11 +83,10 @@ public class doctor_emergency_requestcontroller {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                String request_id = rs.getString("request_id");
                 String patientId = rs.getString("p_id");
                 String symptoms = rs.getString("symptoms");
                 String contactNum = rs.getString("contact_number");
-
-                // Use getTimestamp to match LocalDateTime column type
                 Timestamp requestTs = rs.getTimestamp("request_date");
                 Timestamp tentativeTs = rs.getTimestamp("tentative_date");
 
@@ -90,6 +96,7 @@ public class doctor_emergency_requestcontroller {
                 String statusVal = rs.getString("status");
 
                 EmergencyRequest request = new EmergencyRequest(
+                        request_id,
                         patientId, symptoms, contactNum,
                         requestDate, tentativeDate, statusVal
                 );
@@ -113,14 +120,16 @@ public class doctor_emergency_requestcontroller {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DBConnection.getConnection();
-            String query = "UPDATE emergency_request SET status=? WHERE p_id=?";
+            String query = "UPDATE emergency_request SET status=?,response_seen=?, WHERE request_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             for (EmergencyRequest r : selectedItems) {
-                preparedStatement.setString(1, "Cancelled");
-                preparedStatement.setInt(2, Integer.parseInt(r.getPatientId())); // convert patientId to int
+                preparedStatement.setString(1, "rejected");
+                preparedStatement.setString(2,"seen");
+                preparedStatement.setInt(3, Integer.parseInt(r.getRequest_id()));
                 preparedStatement.executeUpdate();
             }
+
             connection.close();
             showAlert("Success", "Selected appointments have been cancelled successfully.");
             loadPatientData(); // Refresh the table
@@ -159,59 +168,60 @@ public class doctor_emergency_requestcontroller {
             return;
         }
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DBConnection.getConnection();
+        try (Connection connection = DBConnection.getConnection()) {
 
-            // Prepare statements
-            String updateQuery = "UPDATE emergency_request SET status=?, tentative_date=? WHERE p_id=?";
+
+            String updateQuery = "UPDATE emergency_request SET status=?,response_seen=?, tentative_date=? WHERE request_id=?";
             PreparedStatement updateStmt = connection.prepareStatement(updateQuery);
 
-            String countQuery = "SELECT COUNT(*) AS total_requests FROM emergency_request WHERE d_id=? AND status='ACCEPTED'";
+            String countQuery = "SELECT COUNT(*) AS total_requests FROM emergency_request WHERE d_id=? AND status='confirmed' AND tentative_date>?";
             PreparedStatement countStmt = connection.prepareStatement(countQuery);
 
             String slotQuery = "SELECT emergency_slots_per_day FROM doctor WHERE doctor_id=?";
             PreparedStatement slotStmt = connection.prepareStatement(slotQuery);
-/* ami selected item er tentive date ar status change korbo tar jnno select korlam and req number and emrgncy slot er basis e tatitve date ber korbo
-   er jnnp count statemnt ta run kre emrgncy reqst and slot gulo ber kore tetative date ber krsi then add kore dsi slcted
-   item e
-   */
+
             for (EmergencyRequest r : selectedItems) {
-                int doctorId = this.doctorId;
-                countStmt.setInt(1, doctorId);
+
+                countStmt.setInt(1,doctorId);
+                countStmt.setDate(2, Date.valueOf(LocalDate.now()));
                 ResultSet rsCount = countStmt.executeQuery();
-                int totalRequests = 0;
-                if (rsCount.next()) totalRequests = rsCount.getInt("total_requests");
+                int requestcount = 0;
+                if (rsCount.next()) {
+                    requestcount = rsCount.getInt("total_requests");
+                }
 
 
                 slotStmt.setInt(1, doctorId);
                 ResultSet rsSlot = slotStmt.executeQuery();
                 int slotsPerDay = 1;
-                if (rsSlot.next()) slotsPerDay = rsSlot.getInt("emergency_slots_per_day");
+                if (rsSlot.next()) {
+                    slotsPerDay = rsSlot.getInt("emergency_slots_per_day");
+                }
 
-                int daysToAdd = totalRequests / slotsPerDay;
-                LocalDateTime tentativeDate = r.getRequestDate().plusDays(daysToAdd);
+
+                int daysToAdd = (requestcount / slotsPerDay);
+                LocalDateTime tentativeDate = LocalDateTime.now().plusDays(daysToAdd+1);
 
 
-                updateStmt.setString(1, "ACCEPTED");
-                updateStmt.setDate(2, java.sql.Date.valueOf(tentativeDate.toLocalDate()));
-                updateStmt.setInt(3, Integer.parseInt(r.getPatientId()));
+                updateStmt.setString(1, "proposed");
+                updateStmt.setString(2,"seen");
+                updateStmt.setTimestamp(3, Timestamp.valueOf(tentativeDate));
+
+                updateStmt.setInt(4, Integer.parseInt(r.getRequest_id()));
                 updateStmt.executeUpdate();
 
-
-                r.setStatus("ACCEPTED");
+                r.setStatus("proposed");
                 r.setTentativeDate(tentativeDate);
             }
 
-            connection.close();
             emergency_req.refresh();
             showAlert("Success", "Selected requests have been accepted.");
-        } catch (ClassNotFoundException e) {
-            showAlert("Error", "Database driver not found: " + e.getMessage());
+
         } catch (SQLException e) {
             showAlert("Error", "Database error: " + e.getMessage());
         }
     }
+
 
 
 }
