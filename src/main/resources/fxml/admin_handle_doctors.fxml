@@ -45,16 +45,18 @@
                                 GridPane.halignment="RIGHT"/>
                     </GridPane>
 
-                    <TableView fx:id="tableView" prefHeight="400" prefWidth="800" editable="true" VBox.vgrow="ALWAYS">
+                    <TableView fx:id="doctorsTable" prefHeight="400" prefWidth="800" editable="true" VBox.vgrow="ALWAYS">
                         <columns>
-                            <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
-                            <TableColumn fx:id="colSpecialization" text="Specialization" prefWidth="150"/>
-                            <TableColumn fx:id="colqualification" text="Qualification" prefWidth="150"/>
-                            <TableColumn fx:id="colhospital" text="Hospital" prefWidth="150"/>
-                            <TableColumn fx:id="colcity" text="City" prefWidth="100"/>
-                            <TableColumn fx:id="colfee" text="Fee" prefWidth="100"/>
-                            <TableColumn fx:id="colcontactnumber" text="Contact no" prefWidth="150"/>
-                            <TableColumn fx:id="colemailad" text="Email" prefWidth="200"/>
+                            <TableColumn fx:id="nameCol" text="Name" prefWidth="150"/>
+                            <TableColumn fx:id="specializationCol" text="Specialization" prefWidth="200"/>
+                            <TableColumn fx:id="qualificationCol" text="Qualification" prefWidth="200"/>
+                            <TableColumn fx:id="hospitalCol" text="Hospital" prefWidth="150"/>
+                            <TableColumn fx:id="cityCol" text="City" prefWidth="150"/>
+                            <TableColumn fx:id="stCol" text="Start time" prefWidth="150"/>
+                            <TableColumn fx:id="edCol" text="End time" prefWidth="150"/>
+                            <TableColumn fx:id="feeCol" text="Fee" prefWidth="100"/>
+                            <TableColumn fx:id="contactCol" text="Contact no" prefWidth="100"/>
+                            <TableColumn fx:id="emailCol" text="Email" prefWidth="150"/>
                         </columns>
                     </TableView>
 

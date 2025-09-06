@@ -88,7 +88,9 @@ CREATE TABLE `assistant` (
   `contact_number` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`assistant_id`)
+  PRIMARY KEY (`assistant_id`),
+  KEY `d_id` (`d_id`),
+  CONSTRAINT `assistant_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -98,7 +100,7 @@ CREATE TABLE `assistant` (
 
 LOCK TABLES `assistant` WRITE;
 /*!40000 ALTER TABLE `assistant` DISABLE KEYS */;
-INSERT INTO `assistant` VALUES (1,1,'faizul','01930309821','faizul@gmail.com','yes'),(2,2,'sadia akter','01711223344','sadia.akter@gmail.com','pass2'),(3,3,'rakib hossain','01822334455','rakib.hossain@yahoo.com','pass3'),(4,4,'nishat jahan','01933445566','nishat.jahan@gmail.com','pass4'),(5,5,'tamim rahman','01644556677','tamim.rahman@hotmail.com','pass5'),(6,6,'moushumi akter','01755667788','moushumi.akter@gmail.com','pass6'),(7,7,'kamrul islam','01566778899','kamrul.islam@yahoo.com','pass7'),(8,8,'shamima sultana','01377889900','shamima.sultana@gmail.com','pass8'),(9,9,'fahim chowdhury','01888990011','fahim.chowdhury@gmail.com','pass9'),(10,10,'sumaiya rahman','01999001122','sumaiya.rahman@yahoo.com','pass10');
+INSERT INTO `assistant` VALUES (1,1,'faizul','01930309821','faizul@gmail.com','yes'),(2,2,'sadia akter','01711223344','sadia.akter@gmail.com','pass2'),(3,3,'rakib hossain','01822334455','rakib.hossain@yahoo.com','pass3'),(4,4,'nishat jahan','01933445566','nishat.jahan@gmail.com','pass4'),(5,5,'tamim rahman','01644556677','tamim.rahman@hotmail.com','pass5'),(6,6,'moushumi akter','01755667788','moushumi.akter@gmail.com','pass6'),(7,7,'kamrul islam','01566778899','kamrul.islam@yahoo.com','pass7'),(8,8,'shamima sultana','01377889900','shamima.sultana@gmail.com','pass8'),(9,9,'fahim chowdhury','01888990011','fahim.chowdhury@gmail.com','pass9');
 /*!40000 ALTER TABLE `assistant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +132,7 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'Dr. Mahbub','medicine','FCPS',1000.00,'01768876682','mahbub@gmail.com',50,3,'doc123'),(2,'Dr. Jan','Neurology','MBBS, DM',600.00,'01987654321','jan@gmail.com',25,5,'doc456'),(3,'Dr. Ayesha Rahman','Cardiology','MBBS, MD',1000.00,'01812345678','ayesha.@gmail.com',45,15,'cardio789'),(4,'Dr. Tanvir Alam','Orthopedics','MBBS, MS',750.00,'01922334455','tanvir.@yahoo.com',38,10,'ortho321'),(5,'Dr. Nusrat Jahan','Dermatology','MBBS, DDVL',500.00,'01733445566','nusrat.@gmail.com',34,7,'derma555'),(6,'Dr. Imran Hossain','Pediatrics','MBBS, DCH',650.00,'01899887766','imran.n@hotmail.com',40,12,'peds111'),(7,'Dr. Farhana Akter','Gynecology','MBBS, FCPS',900.00,'01611223344','farhanr@gmail.com',42,14,'gyn999'),(8,'Dr. Salman Kabir','Psychiatry','MBBS, MPhil',550.00,'01599887722','salman@gmail.com',37,8,'psych333'),(9,'Dr. Rafiq Chowdhury','ENT','MBBS, DLO',700.00,'01955667788','rafiq@gmail.com',48,18,'ent777'),(10,'Dr. Sharmeen Sultana','Ophthalmology','MBBS, MS',720.00,'01788990011','sharmeen@gmail.com',36,9,'eye888');
+INSERT INTO `doctor` VALUES (1,'Dr. Mahbub','medicine','FCPS',1000.00,'01768876682','mahbub@gmail.com',50,3,'doc123'),(2,'Dr. Jan','Neurology','MBBS, DM',600.00,'01987654321','jan@gmail.com',25,5,'doc456'),(3,'Dr. Ayesha Rahman','Cardiology','MBBS, MD',1000.00,'01812345678','ayesha.@gmail.com',45,15,'cardio789'),(4,'Dr. Tanvir Alam','Orthopedics','MBBS, MS',750.00,'01922334455','tanvir.@yahoo.com',38,10,'ortho321'),(5,'Dr. Nusrat Jahan','Dermatology','MBBS, DDVL',500.00,'01733445566','nusrat.@gmail.com',34,7,'derma555'),(6,'Dr. Imran Hossain','Pediatrics','MBBS, DCH',650.00,'01899887766','imran.n@hotmail.com',40,12,'peds111'),(7,'Dr. Farhana Akter','Gynecology','MBBS, FCPS',900.00,'01611223344','farhanr@gmail.com',42,14,'gyn999'),(8,'Dr. Salman Kabir','Psychiatry','MBBS, MPhil',550.00,'01599887722','salman@gmail.com',37,8,'psych333'),(9,'Dr. Rafiq Chowdhury','ENT','MBBS, DLO',700.00,'01955667788','rafiq@gmail.com',48,18,'ent777');
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +169,7 @@ CREATE TABLE `emergency_request` (
 
 LOCK TABLES `emergency_request` WRITE;
 /*!40000 ALTER TABLE `emergency_request` DISABLE KEYS */;
-INSERT INTO `emergency_request` VALUES (1,2,10,10,'Continous itching in the eyes','2025-08-29',NULL,'Pending','Not Seen'),(2,2,3,3,'sudden chest pain','2025-09-04',NULL,'Pending','Not Seen');
+INSERT INTO `emergency_request` VALUES (2,2,3,3,'sudden chest pain','2025-09-04',NULL,'Pending','Not Seen');
 /*!40000 ALTER TABLE `emergency_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +187,7 @@ CREATE TABLE `location` (
   `start_time` time NOT NULL,
   `End_time` time NOT NULL,
   PRIMARY KEY (`d_id`,`hospital`,`city`,`start_time`,`End_time`),
-  CONSTRAINT `location_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `location_ibfk_3` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -195,7 +197,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (1,'parkview','chittagong','18:00:00','21:00:00'),(2,'bellview','chittagong','17:00:00','21:00:00'),(3,'evercare','chittagong','19:00:00','22:00:00'),(4,'labaid','dhaka','11:00:00','15:00:00'),(5,'parkview','chittagong','12:00:00','16:00:00'),(6,'labaid','dhaka','11:00:00','15:00:00'),(7,'apollo','dhaka','15:00:00','18:30:00'),(8,'chevron','chittagong','18:00:00','21:30:00'),(9,'chevron','chittagong','19:00:00','22:00:00'),(10,'labaid','dhaka','11:00:00','15:00:00');
+INSERT INTO `location` VALUES (1,'parkview','chittagong','18:00:00','21:00:00'),(2,'bellview','chittagong','17:00:00','21:00:00'),(3,'evercare','chittagong','19:00:00','22:00:00'),(4,'labaid','dhaka','11:00:00','15:00:00'),(5,'parkview','chittagong','12:00:00','16:00:00'),(6,'labaid','dhaka','11:00:00','15:00:00'),(7,'apollo','dhaka','15:00:00','18:30:00'),(8,'chevron','chittagong','18:00:00','21:30:00'),(9,'chevron','chittagong','19:00:00','22:00:00');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,6 +227,40 @@ LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
 INSERT INTO `patient` VALUES (2,'Naveed','2004-05-09','01617793506','u2204016@student.cuet.ac.bd','abcd'),(3,'arka','2003-08-06','0183344711','arka@gmail.com','sos'),(4,'Rahat','2003-09-24','01619945703','rahat@gmail.com','meow'),(5,'Aziz','2003-08-06','019','a@gmail.com','kdb'),(6,'A. Nafees','2002-08-15','01817793509','nafees@yahoo.com','anaf'),(7,'kevin','2001-09-13','01819955771','kevin@gmail.com','2n2n');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `record`
+--
+
+DROP TABLE IF EXISTS `record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `record` (
+  `record_id` int NOT NULL AUTO_INCREMENT,
+  `p_id` int NOT NULL,
+  `d_id` int NOT NULL,
+  `visit_date` date NOT NULL,
+  `diagnosis` varchar(255) DEFAULT NULL,
+  `treatment` varchar(255) DEFAULT NULL,
+  `notes` text,
+  `prescribed_test` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `fk_patient` (`p_id`),
+  KEY `fk_doctor` (`d_id`),
+  CONSTRAINT `fk_doctor` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_patient` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `record`
+--
+
+LOCK TABLES `record` WRITE;
+/*!40000 ALTER TABLE `record` DISABLE KEYS */;
+INSERT INTO `record` VALUES (1,5,1,'2025-09-01','Common Cold','Rest and hydration','Patient advised to drink plenty of fluids','CBC, CRP'),(2,2,1,'2025-09-02','Flu','Antiviral medication','Monitor temperature and hydration','CBC, Influenza Test'),(3,3,2,'2025-09-03','Migraine','Painkillers','Avoid bright lights, stress management','MRI, Blood Pressure'),(4,5,2,'2025-09-04','Stomach Ache','Antacids','Avoid spicy food','Ultrasound, CBC'),(5,2,3,'2025-09-05','Back Pain','Physiotherapy','Maintain posture','X-ray, MRI'),(6,3,1,'2025-09-06','Hypertension','Lifestyle changes and meds','Monitor blood pressure daily','BP Check, ECG'),(7,5,3,'2025-09-06','Diabetes Checkup','Diet modification','Monitor blood sugar','Fasting Blood Sugar, HbA1c');
+/*!40000 ALTER TABLE `record` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -298,4 +334,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-04  2:28:35
+-- Dump completed on 2025-09-06 11:39:50
