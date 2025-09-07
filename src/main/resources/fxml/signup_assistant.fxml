@@ -36,6 +36,8 @@
                 <TextField fx:id="contactField" promptText="Contact Number" maxWidth="280"/>
                 <TextField fx:id="emailField" promptText="Email" maxWidth="280"/>
                 <PasswordField fx:id="passwordField" promptText="Password" maxWidth="280"/>
+                <!-- Doctor ID field added -->
+                <TextField fx:id="doctorIdField" promptText="Doctor ID" maxWidth="280"/>
                 <HBox spacing="15" alignment="CENTER">
                     <Button fx:id="backButton" text="←" onAction="#handleBack"
                             styleClass="back-button"

@@ -1,10 +1,14 @@
 package controllers;
 
+import db.DBConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class AssistantUpdateInfoController {
 
@@ -19,6 +23,12 @@ public class AssistantUpdateInfoController {
     @FXML
     private PasswordField confirmPasswordField;
 
+    private int assistantId; // will be set from LoginController
+
+    public void setAssistantId(int assistantId) {
+        this.assistantId = assistantId;
+    }
+
     @FXML
     private void handleSaveChanges() {
         String fullName = fullNameField.getText();
@@ -27,29 +37,49 @@ public class AssistantUpdateInfoController {
         String newPassword = newPasswordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        // Basic validation (e.g., check if passwords match)
-        if (!newPassword.equals(confirmPassword)) {
-            showAlert("Error", "Passwords do not match.", "Please make sure your new passwords are the same.");
-            return;
+        if (!newPassword.isEmpty() || !confirmPassword.isEmpty()) {
+            if (!newPassword.equals(confirmPassword)) {
+                showAlert("Error", "Passwords do not match.", "Please make sure your new passwords are the same.");
+                return;
+            }
         }
 
-        // Dummy logic to simulate saving data
-        System.out.println("Saving changes:");
-        System.out.println("Full Name: " + fullName);
-        System.out.println("Contact No: " + contactNo);
-        System.out.println("Email: " + email);
-        System.out.println("New Password: " + newPassword);
+        try (Connection connection = DBConnection.getConnection()) {
+            String sql;
+            PreparedStatement stmt;
 
-        showAlert("Success", "Changes Saved", "Your information has been updated successfully.");
+            if (newPassword.isEmpty()) {
+                sql = "UPDATE assistant SET name = ?, contact_number = ?, email = ? WHERE assistant_id = ?";
+                stmt = connection.prepareStatement(sql);
+                stmt.setString(1, fullName);
+                stmt.setString(2, contactNo);
+                stmt.setString(3, email);
+                stmt.setInt(4, assistantId);
+            } else {
+                sql = "UPDATE assistant SET name = ?, contact_number = ?, email = ?, password = ? WHERE assistant_id = ?";
+                stmt = connection.prepareStatement(sql);
+                stmt.setString(1, fullName);
+                stmt.setString(2, contactNo);
+                stmt.setString(3, email);
+                stmt.setString(4, newPassword);
+                stmt.setInt(5, assistantId);
+            }
 
-        // Here you would add your actual logic to save the data to a database or other
-        // storage.
-        // For example: UserService.updateUser(fullName, contactNo, email, newPassword);
+            int rows = stmt.executeUpdate();
+
+            if (rows > 0) {
+                showAlert("Success", "Changes Saved", "Your information has been updated successfully.");
+            } else {
+                showAlert("Error", "Update Failed", "No assistant found with the given ID.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Database Error", "Could not update information", e.getMessage());
+        }
     }
 
     @FXML
     private void handleCancel() {
-        // Clear all fields
         fullNameField.clear();
         contactNoField.clear();
         emailField.clear();
