@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      spacing="15" alignment="TOP_CENTER"
-      style="-fx-padding: 20;">
+<VBox alignment="TOP_CENTER" spacing="15" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Cancel_DR_CONTROLLER">
 
-    <Label text="Cancel Appointment" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+    <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Cancel Appointment" />
 
     <GridPane hgap="10" vgap="10">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" prefWidth="300"/>
+            <ColumnConstraints halignment="CENTER" prefWidth="300" />
         </columnConstraints>
 
-        <Label text="Search an appointment" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="DoctorName" promptText="Doctor Name"
-                   GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <Button text="Search"
-                GridPane.rowIndex="2" GridPane.columnIndex="0"
-                GridPane.halignment="RIGHT"/>
+        <Label text="Search an appointment" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="patName" promptText="Patient Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Button onAction="#handlesearch1" text="Search" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 
-    <TableView fx:id="appointmentTable" prefHeight="200">
+    <TableView fx:id="appointmentTable1" prefHeight="200">
         <columns>
-            <TableColumn text="Doctor Name" prefWidth="150" fx:id="dname"/>
-            <TableColumn text="Hospital" prefWidth="150" fx:id="hospital"/>
-            <TableColumn text="Appointment Date" prefWidth="150" fx:id="appdate"/>
+            <TableColumn fx:id="pname" prefWidth="150" text="Patient Name" />
+            <TableColumn id="adate" fx:id="adate" prefWidth="150" text="Appointment Date" />
+         <TableColumn id="contact" fx:id="contact" prefWidth="75.0" text="contact" />
         </columns>
     </TableView>
 
-    <Button text="Confirm Cancel"/>
+    <Button onAction="#cnclbtn" text="Confirm Cancel" />
 </VBox>

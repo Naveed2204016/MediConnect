@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.DoctorSignupController"
+            fx:controller="controllers.DR_signupController"
             stylesheets="@../css/style.css"
             prefWidth="1000" prefHeight="700">
 
@@ -48,10 +48,10 @@
                 <TextField fx:id="emergencySlotsField" promptText="Emergency Slots Per Day" maxWidth="300"/>
                 <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300"/>
                 <HBox spacing="15" alignment="CENTER">
-                    <Button fx:id="backButton" text="←" onAction="#handleBack"
+                    <Button fx:id="backButton" text="←" onAction="#handleBack2"
                             styleClass="back-button"
                             prefWidth="40" prefHeight="40"/>
-                    <Button text="Sign Up" onAction="#handleSignup" styleClass="form-button" maxWidth="150"/>
+                    <Button text="Sign Up" onAction="#handleSignup2" styleClass="form-button" maxWidth="150"/>
                 </HBox>
                 <Label fx:id="errorLabel" textFill="red" styleClass="error-text"/>
             </VBox>

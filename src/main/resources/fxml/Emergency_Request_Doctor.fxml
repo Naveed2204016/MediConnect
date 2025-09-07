@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="579.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="579.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.doctor_emergency_requestcontroller">
    <children>
       <Label alignment="CENTER" layoutX="-6.0" layoutY="-2.0" prefHeight="70.0" prefWidth="614.0" styleClass="status-bar" stylesheets="@../css/style.css" textFill="#e10c0c" />
 
@@ -22,21 +22,24 @@
 
       <BorderPane layoutX="4.0" layoutY="76.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="534.0" prefWidth="554.0">
          <left>
-            <TableView prefHeight="466.0" prefWidth="327.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="emergency_req" prefHeight="454.0" prefWidth="686.0" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn prefWidth="93.6" text="Patient Id" />
-                  <TableColumn prefWidth="130.4" text="Details" />
-                  <TableColumn prefWidth="75.0" text="Contact" />
-                  <TableColumn prefWidth="151.2" text="Accept/Reject" />
+                  <TableColumn fx:id="request_id" prefWidth="75.0" text="Request Id" />
+                  <TableColumn fx:id="patient_id" prefWidth="93.6" text="Patient Id" />
+                  <TableColumn fx:id="details" prefWidth="75.0" text="Details" />
+                  <TableColumn fx:id="contact" prefWidth="151.2" text="Contact" />
+                  <TableColumn fx:id="request_date" prefWidth="113.5999755859375" text="Request Date" />
+                  <TableColumn fx:id="tentative_date" prefWidth="88.79998779296875" text="Tentitive Date" />
+                  <TableColumn fx:id="status" prefWidth="82.4000244140625" text="Status" />
                </columns>
             </TableView>
          </left>
 
          <right>
-            <HBox alignment="CENTER" depthTest="DISABLE" nodeOrientation="RIGHT_TO_LEFT" prefHeight="454.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" depthTest="DISABLE" nodeOrientation="RIGHT_TO_LEFT" prefHeight="372.0" prefWidth="167.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="105.0" styleClass="logout-button" stylesheets="@../css/style.css" text="Reject" />
-                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" stylesheets="@../css/style.css" text="Accept" />
+                  <Button mnemonicParsing="false" onAction="#reject_req" prefHeight="36.0" prefWidth="105.0" styleClass="logout-button" stylesheets="@../css/style.css" text="Reject" />
+                  <Button mnemonicParsing="false" onAction="#accept_req" prefHeight="36.0" prefWidth="100.0" stylesheets="@../css/style.css" text="Accept" />
                </children>
             </HBox>
          </right>

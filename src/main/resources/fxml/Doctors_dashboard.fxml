@@ -23,7 +23,7 @@
             <Button mnemonicParsing="false" onAction="#cancel_appointment" styleClass="nav-button" text="Cancel  Appointment" />
             <Button mnemonicParsing="false" onAction="#loadcheckup" styleClass="nav-button" text="Primary Checkup" />
             <Region prefHeight="421.0" prefWidth="182.0" />
-            <Button mnemonicParsing="false" styleClass="logout-button" text="Logout" textFill="#bf2b2b" />
+            <Button mnemonicParsing="false" onAction="#logout" styleClass="logout-button" text="Logout" textFill="#bf2b2b" />
          </children>
       </VBox>
    </left>

@@ -13,16 +13,18 @@ import java.io.IOException;
 public class Doctors_Dashboard_controller {
 
     @FXML private StackPane contentArea; // This must match the fx:id in FXML
+    private int userID;
 
-    @FXML
-    public void initialize() {
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
         try {
-            dr_patient_details(); // Load default page
+            dr_patient_details();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle error appropriately
         }
     }
+
 
     @FXML
     private void dr_search_patients() throws IOException {
@@ -61,16 +63,32 @@ public class Doctors_Dashboard_controller {
             loadPage("/fxml/doctorprimarycheckup.fxml");
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
+        }}
 
 
     private void loadPage(String path) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource(path));
-        contentArea.getChildren().setAll(pane);
+        FXMLLoader loader=new FXMLLoader(getClass().getResource(path));
+        Pane pane = loader.load();
+        if (path.equals("/fxml/Doctors_update_info.fxml")) {
+            Doctors_update_infoController controller = loader.getController();
+            controller.setUserId(userID);
+        }
+    else if (path.equals("/fxml/Doctors_patient_details.fxml")) {
+           doctor_patient_detailscontroller controller = loader.getController();
+            controller.setUserId(userID);}
+      else if (path.equals("/fxml/Cancel_appointment.fxml")) {
+        Cancel_DR_CONTROLLER controller = loader.getController();
+            controller.setUserId(userID);}
+      else if (path.equals("/fxml/Emergency_Request_Doctor.fxml")) {
+           doctor_emergency_requestcontroller controller = loader.getController();
+            controller.setUserId(userID);
     }
-
+      //else if (path.equals("/fxml/doctorprimarycheckup.fxml")) {
+//           primary_checkup_dr_controller controller = loader.getController();
+//            controller.setUserId(userID);
+//        }
+       contentArea.getChildren().setAll(pane);
+    }
     @FXML
     private void logout()
     {

@@ -42,7 +42,7 @@ public class BookDiagnosticTestController {
 
         testDatePicker.setValue(LocalDate.now().plusDays(1));
 
-        // Configure table columns
+
         nameCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getName()));
         hospitalCol.setCellValueFactory(Data->new javafx.beans.property.SimpleStringProperty(Data.getValue().getHospital_name()));
         feeCol.setCellValueFactory(Data->new javafx.beans.property.SimpleDoubleProperty(Data.getValue().getFee()).asObject());

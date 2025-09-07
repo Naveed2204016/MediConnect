@@ -15,6 +15,7 @@ public class DBConnection {
         if (connection == null || connection.isClosed()) {
             try {
                 Properties props = new Properties();
+                // Read local config.properties, not the example
                 props.load(new FileInputStream("config/config.properties"));
 
                 String url = props.getProperty("db.url");
@@ -29,3 +30,4 @@ public class DBConnection {
         return connection;
     }
 }
+

@@ -8,6 +8,8 @@ import javafx.beans.value.ObservableValue;
 import java.sql.Date;
 
 public class Appointment {
+   private String patientName;
+private String HospitalName;
     private int appointment_id;
     private String doctorName;
     private String contactNumber;
@@ -17,6 +19,13 @@ public class Appointment {
         this.doctorName = doctorName;
         this.contactNumber = contactNumber;
         this.appointmentDate = appointmentDate;
+    }
+    public Appointment(String patientName,int appointment_id,String contactNumber, Date appointmentDate) {
+        this.appointment_id = appointment_id;
+        this.contactNumber = contactNumber;
+        this.appointmentDate = appointmentDate;
+        this.patientName =patientName;
+
     }
     public int getAppointmentId() {
         return appointment_id;
@@ -42,5 +51,7 @@ public class Appointment {
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
+    public  String getPatientName() { return this.patientName;}
+    public String getHospitalName() { return this.HospitalName;}
 
 }
