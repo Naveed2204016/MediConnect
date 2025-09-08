@@ -23,7 +23,7 @@ public class AssistantUpdateInfoController {
     @FXML
     private PasswordField confirmPasswordField;
 
-    private int assistantId; // will be set from LoginController
+    private int assistantId;
 
     public void setAssistantId(int assistantId) {
         this.assistantId = assistantId;

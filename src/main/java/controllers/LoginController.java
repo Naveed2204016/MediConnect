@@ -136,14 +136,31 @@ public class LoginController {
         }
         else if(role.equals("assistant"))
         {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssistantDashboard.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage=(Stage) userIdField.getScene().getWindow();
-                stage.setScene(scene);
-            }
-            catch(IOException e)
-            {
+            try (Connection connection = DBConnection.getConnection()) {
+                String query = "SELECT password FROM assistant WHERE assistant_id=?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, Integer.parseInt(userId));
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    String dbPass = resultSet.getString("password");
+                    if (dbPass.equals(password1)) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssistantDashboard.fxml"));
+                        Scene scene = new Scene(loader.load());
+
+                        AssistantDashboardController dashboardAssistantController = loader.getController();
+                        dashboardAssistantController.setUserID(Integer.parseInt(userId));
+                        dashboardAssistantController.setAssistantId(Integer.parseInt(userId)); // dynamic assistant_id
+
+                        Stage stage = (Stage) userIdField.getScene().getWindow();
+                        stage.setScene(scene);
+                    } else {
+                        showAlert("Incorrect Password!");
+                    }
+                } else {
+                    showAlert("Assistant ID not found!");
+                }
+            } catch (SQLException | IOException e) {
                 e.printStackTrace();
             }
         }

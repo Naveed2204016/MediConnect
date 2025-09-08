@@ -230,6 +230,39 @@ INSERT INTO `patient` VALUES (2,'Naveed','2004-05-09','01617793506','u2204016@st
 UNLOCK TABLES;
 
 --
+-- Table structure for table `primary_checkup`
+--
+
+DROP TABLE IF EXISTS `primary_checkup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `primary_checkup` (
+  `patient_id` int DEFAULT NULL,
+  `doctor_id` int DEFAULT NULL,
+  `assistant_id` int DEFAULT NULL,
+  `weight` decimal(5,2) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `blood_pressure` varchar(20) DEFAULT NULL,
+  KEY `fk_patient` (`patient_id`),
+  KEY `fk_doctor` (`doctor_id`),
+  KEY `fk_assistant` (`assistant_id`),
+  CONSTRAINT `fk_assistant` FOREIGN KEY (`assistant_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `primary_checkup`
+--
+
+LOCK TABLES `primary_checkup` WRITE;
+/*!40000 ALTER TABLE `primary_checkup` DISABLE KEYS */;
+INSERT INTO `primary_checkup` VALUES (2,1,1,68.50,25,'120/80'),(2,1,2,60.00,22,'120/80'),(3,1,2,70.00,22,'120/80'),(3,1,1,70.00,22,'120/80');
+/*!40000 ALTER TABLE `primary_checkup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `record`
 --
 
@@ -246,10 +279,10 @@ CREATE TABLE `record` (
   `notes` text,
   `prescribed_test` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`record_id`),
-  KEY `fk_patient` (`p_id`),
-  KEY `fk_doctor` (`d_id`),
-  CONSTRAINT `fk_doctor` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_patient` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `p_id` (`p_id`),
+  KEY `d_id` (`d_id`),
+  CONSTRAINT `record_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `record_ibfk_2` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -278,7 +311,7 @@ CREATE TABLE `test` (
   `instructions` varchar(250) DEFAULT NULL,
   `test_time_slot` time DEFAULT NULL,
   PRIMARY KEY (`test_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,7 +320,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES (1,'Blood Test','Parkview',800.00,'Fast for 8 hours before the test','08:30:00'),(2,'MRI Scan','Evercare',5100.00,'Remove all metallic objects before test','09:00:00'),(3,'X-Ray','Chevron',1600.00,'wear loose clothing','15:15:00');
+INSERT INTO `test` VALUES (1,'Blood Test','Parkview',800.00,'Fast for 8 hours before the test','08:30:00'),(2,'MRI Scan','Evercare',5000.00,'Remove all metallic objects before test','10:00:00'),(3,'X-Ray','Chevron',1500.00,'Wear loose clothing','14:15:00');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-06 11:39:50
+-- Dump completed on 2025-09-08 23:14:27
