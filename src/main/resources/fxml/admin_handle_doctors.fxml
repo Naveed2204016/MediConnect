@@ -25,19 +25,19 @@
                         </columnConstraints>
 
                         <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                        <TextField fx:id="doctornamefield" promptText="e.g: john smith"
+                        <TextField fx:id="nameField" promptText="Optional"
                                    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
                         <Label text="Specialization" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                        <TextField fx:id="specializationfield" promptText="e.g: Medicine"
+                        <TextField fx:id="specializationField" promptText="Enter a specialization"
                                    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
                         <Label text="Hospital:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                        <TextField fx:id="hospitalfield" promptText="e.g: Evercare"
+                        <TextField fx:id="hospitalField" promptText="Optional"
                                    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
                         <Label text="City:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                        <TextField fx:id="cityfield" promptText="e.g: Chittagong"
+                        <TextField fx:id="cityField" promptText="Enter a City"
                                    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
                         <Button text="Search" onAction="#handlesearch"
@@ -60,9 +60,6 @@
                         </columns>
                     </TableView>
 
-                    <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Button text="Remove Selected" onAction="#onRemoveSelected"/>
-                    </HBox>
                 </VBox>
 
                 <Separator/>
@@ -77,35 +74,38 @@
                             <ColumnConstraints halignment="left"  prefWidth="200"/>
                         </columnConstraints>
 
-                        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                        <TextField fx:id="assistantnamefield" promptText="e.g: john smith"
+                        <Label text="Assistant ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="assistantidfield" promptText="Enter Assistant ID"
                                    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                        <Label text="Doctor's Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                        <TextField fx:id="assistantdoctornamefield" promptText="e.g: Michael Scott"
+                        <Label text="Doctor ID:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="doctoridfield" promptText="Enter Doctor ID"
                                    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                        <Label text="Contact no:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                        <TextField fx:id="contactnofield" promptText="Optional"
+                        <Label text="Name:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="namefield" promptText="Optional"
                                    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Contact no:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="contactnofield" promptText="Optional"
+                                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
                         <Button text="Search" onAction="#handlesearchassistant"
                                 GridPane.rowIndex="4" GridPane.columnIndex="1"
                                 GridPane.halignment="RIGHT"/>
                     </GridPane>
 
-                    <TableView fx:id="tableViewforassistant" prefHeight="400" prefWidth="800" editable="true" VBox.vgrow="ALWAYS">
+                    <TableView fx:id="assistanttable" prefHeight="400" prefWidth="800" editable="true" VBox.vgrow="ALWAYS">
                         <columns>
-                            <TableColumn fx:id="colNameassistant" text="Name" prefWidth="150"/>
-                            <TableColumn fx:id="colDoctorname" text="Doctor's Name" prefWidth="150"/>
-                            <TableColumn fx:id="colcontactno" text="Contact no" prefWidth="150"/>
-                            <TableColumn fx:id="colemail" text="Email" prefWidth="150"/>
+                            <TableColumn fx:id="assistantidcol" text="Assistant ID" prefWidth="150"/>
+                            <TableColumn fx:id="doctoridcol" text="Doctor ID" prefWidth="150"/>
+                            <TableColumn fx:id="namecol1" text="Name" prefWidth="150"/>
+                            <TableColumn fx:id="contactcol1" text="Contact no" prefWidth="150"/>
+                            <TableColumn fx:id="emailcol1" text="Email" prefWidth="150"/>
                         </columns>
                     </TableView>
 
-                    <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Button text="Remove Selected" onAction="#onRemoveSelectedassistant"/>
-                    </HBox>
+
                 </VBox>
 
             </VBox>

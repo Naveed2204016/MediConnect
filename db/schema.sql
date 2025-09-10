@@ -100,7 +100,7 @@ CREATE TABLE `assistant` (
 
 LOCK TABLES `assistant` WRITE;
 /*!40000 ALTER TABLE `assistant` DISABLE KEYS */;
-INSERT INTO `assistant` VALUES (1,1,'faizul','01930309821','faizul@gmail.com','yes'),(2,2,'sadia akter','01711223344','sadia.akter@gmail.com','pass2'),(3,3,'rakib hossain','01822334455','rakib.hossain@yahoo.com','pass3'),(4,4,'nishat jahan','01933445566','nishat.jahan@gmail.com','pass4'),(5,5,'tamim rahman','01644556677','tamim.rahman@hotmail.com','pass5'),(6,6,'moushumi akter','01755667788','moushumi.akter@gmail.com','pass6'),(7,7,'kamrul islam','01566778899','kamrul.islam@yahoo.com','pass7'),(8,8,'shamima sultana','01377889900','shamima.sultana@gmail.com','pass8'),(9,9,'fahim chowdhury','01888990011','fahim.chowdhury@gmail.com','pass9');
+INSERT INTO `assistant` VALUES (1,1,'faizul','01930309821','faizul@gmail.com','yes'),(2,2,'sadia akther','01819950550','sadia@gmail.com','pass2'),(3,3,'rakib hossain','01822334455','rakib.hossain@yahoo.com','pass3'),(4,4,'nishat jahan','01933445566','nishat.jahan@gmail.com','pass4'),(5,5,'tamim rahman','01644556677','tamim.rahman@hotmail.com','pass5'),(6,6,'moushumi akter','01755667788','moushumi.akter@gmail.com','pass6'),(7,7,'kamrul islam','01566778899','kamrul.islam@yahoo.com','pass7'),(8,8,'shamima sultana','01377889900','shamima.sultana@gmail.com','pass8'),(9,9,'fahim chowdhury','01888990011','fahim.chowdhury@gmail.com','pass9');
 /*!40000 ALTER TABLE `assistant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,12 +243,12 @@ CREATE TABLE `primary_checkup` (
   `weight` decimal(5,2) DEFAULT NULL,
   `age` int DEFAULT NULL,
   `blood_pressure` varchar(20) DEFAULT NULL,
-  KEY `fk_patient` (`patient_id`),
-  KEY `fk_doctor` (`doctor_id`),
-  KEY `fk_assistant` (`assistant_id`),
-  CONSTRAINT `fk_assistant` FOREIGN KEY (`assistant_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `patient_id` (`patient_id`),
+  KEY `doctor_id` (`doctor_id`),
+  KEY `assistant_id` (`assistant_id`),
+  CONSTRAINT `primary_checkup_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `primary_checkup_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `primary_checkup_ibfk_3` FOREIGN KEY (`assistant_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -258,7 +258,6 @@ CREATE TABLE `primary_checkup` (
 
 LOCK TABLES `primary_checkup` WRITE;
 /*!40000 ALTER TABLE `primary_checkup` DISABLE KEYS */;
-INSERT INTO `primary_checkup` VALUES (2,1,1,68.50,25,'120/80'),(2,1,2,60.00,22,'120/80'),(3,1,2,70.00,22,'120/80'),(3,1,1,70.00,22,'120/80');
 /*!40000 ALTER TABLE `primary_checkup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,10 +278,10 @@ CREATE TABLE `record` (
   `notes` text,
   `prescribed_test` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`record_id`),
-  KEY `p_id` (`p_id`),
-  KEY `d_id` (`d_id`),
-  CONSTRAINT `record_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `record_ibfk_2` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_patient` (`p_id`),
+  KEY `fk_doctor` (`d_id`),
+  CONSTRAINT `fk_doctor` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_patient` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -311,7 +310,7 @@ CREATE TABLE `test` (
   `instructions` varchar(250) DEFAULT NULL,
   `test_time_slot` time DEFAULT NULL,
   PRIMARY KEY (`test_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +319,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES (1,'Blood Test','Parkview',800.00,'Fast for 8 hours before the test','08:30:00'),(2,'MRI Scan','Evercare',5000.00,'Remove all metallic objects before test','10:00:00'),(3,'X-Ray','Chevron',1500.00,'Wear loose clothing','14:15:00');
+INSERT INTO `test` VALUES (1,'Blood Test','Parkview',800.00,'Fast for 8 hours before the test','08:30:00'),(2,'MRI Scan','Evercare',5100.00,'Remove all metallic objects before test','09:00:00'),(3,'X-Ray','Chevron',1600.00,'wear loose clothing','15:15:00');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-08 23:14:27
+-- Dump completed on 2025-09-10  8:11:54
