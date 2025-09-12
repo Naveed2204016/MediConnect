@@ -2,10 +2,13 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class AssistantDashboardController {
@@ -86,7 +89,16 @@ public class AssistantDashboardController {
 
     @FXML
     private void logout(ActionEvent event) {
-        System.out.println("Assistant is logging out.");
-        statusMessage.setText("Logged out successfully.");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login_assistant.fxml"));
+            Scene scene = new Scene(loader.load());
+            LoginController loginController=loader.getController();
+            loginController.setRole("assistant");
+            Stage stage=(Stage) contentArea.getScene().getWindow();
+            stage.setScene(scene);
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
