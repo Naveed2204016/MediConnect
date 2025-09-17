@@ -66,24 +66,34 @@ public class AssistantDashboardController {
     @FXML
     private void emergencyRequest(ActionEvent event) {
         try {
-            Parent emergencyRequestView = FXMLLoader
-                    .load(getClass().getResource("/fxml/AssistantEmergencyRequest.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssistantEmergencyRequest.fxml"));
+            Parent emergencyRequestView = loader.load();
+
+            // Pass assistantId dynamically
+            AssistantEmergencyRequestController emergencyController = loader.getController();
+            emergencyController.setAssistantId(this.assistantId);
+
             contentArea.getChildren().setAll(emergencyRequestView);
         } catch (IOException e) {
             e.printStackTrace();
-            statusMessage.setText("Error loading view.");
+            statusMessage.setText("Error loading Emergency Request.");
         }
     }
 
     @FXML
     private void cancelAppointment(ActionEvent event) {
         try {
-            Parent cancelAppointmentView = FXMLLoader
-                    .load(getClass().getResource("/fxml/AssistantCancelAppointment.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssistantCancelAppointment.fxml"));
+            Parent cancelAppointmentView = loader.load();
+
+            // Pass assistantId dynamically
+            AssistantCancelAppointmentController cancelController = loader.getController();
+            cancelController.setAssistantId(this.assistantId);
+
             contentArea.getChildren().setAll(cancelAppointmentView);
         } catch (IOException e) {
             e.printStackTrace();
-            statusMessage.setText("Error loading view.");
+            statusMessage.setText("Error loading Cancel Appointment.");
         }
     }
 

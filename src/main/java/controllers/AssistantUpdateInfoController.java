@@ -25,8 +25,30 @@ public class AssistantUpdateInfoController {
 
     private int assistantId;
 
+    // Called from previous screen to set which assistant is updating
     public void setAssistantId(int assistantId) {
         this.assistantId = assistantId;
+        loadAssistantInfo(); // load data from DB when ID is set
+    }
+
+    // Load existing assistant info from DB and show in fields
+    private void loadAssistantInfo() {
+        try (Connection connection = DBConnection.getConnection()) {
+            String sql = "SELECT name, contact_number, email FROM assistant WHERE assistant_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, assistantId);
+            var rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                fullNameField.setText(rs.getString("name"));
+                contactNoField.setText(rs.getString("contact_number"));
+                emailField.setText(rs.getString("email"));
+                // password fields remain empty for security
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Database Error", "Could not load information", e.getMessage());
+        }
     }
 
     @FXML
