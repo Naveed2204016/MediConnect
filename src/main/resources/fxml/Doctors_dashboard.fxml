@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700" prefWidth="1000"  stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Doctors_Dashboard_controller">
+<BorderPane prefHeight="700" prefWidth="1000" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Doctors_Dashboard_controller">
    <left>
       <VBox prefHeight="623.0" prefWidth="202.0" spacing="10.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <padding>
@@ -39,7 +39,7 @@
    <!-- Status Bar -->
    <bottom>
       <HBox alignment="CENTER_RIGHT" styleClass="status-bar">
-         <Label styleClass="welcome-message" text="Welcome, Admin" />
+         <Label styleClass="welcome-message" text="Welcome_Doctor" />
          <Label fx:id="statusMessage" styleClass="status-message" text="Ready" />
       </HBox>
    </bottom>
