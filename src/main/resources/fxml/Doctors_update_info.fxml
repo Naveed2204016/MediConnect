@@ -4,8 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -22,7 +20,7 @@
     <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #5bbcff;" text="Update Your Information" />
 
     <!-- Doctor Info Grid -->
-    <GridPane hgap="5.0" prefHeight="278.0" prefWidth="572.0" vgap="5.0">
+    <GridPane hgap="5.0" prefHeight="347.0" prefWidth="572.0" vgap="5.0">
         <columnConstraints>
             <ColumnConstraints halignment="RIGHT" prefWidth="150.0" />
             <ColumnConstraints maxWidth="222.80002441406253" minWidth="151.60001220703128" prefWidth="153.19998779296878" />
@@ -67,9 +65,6 @@
       <Label text="City" GridPane.columnIndex="2" GridPane.rowIndex="10" />
       <Label text="start time" GridPane.rowIndex="15" />
       <Label text="End time" GridPane.columnIndex="2" GridPane.rowIndex="15" />
-   
-                <!-- Locations Table -->
-       <Label prefHeight="20.0" prefWidth="178.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Locations &amp; Timings:" GridPane.columnIndex="2" GridPane.rowIndex="17" />
       <rowConstraints>
          <RowConstraints />
          <RowConstraints />

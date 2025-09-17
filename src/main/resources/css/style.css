@@ -165,3 +165,16 @@
 .table-row-cell:even {
     -fx-background-color: #f4f8fb;
 }
+
+.main-background {
+    -fx-background-image: url("../images/back.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+.backport{
+    -fx-background-image: url("../images/backport.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
