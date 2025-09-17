@@ -55,7 +55,8 @@ public class DashboardPatientController {
 
     @FXML
     private void loadNotifications() throws IOException {
-        loadPage("/fxml/patient_notifications.fxml");
+        System.out.println("yo");
+        loadPage("/fxml/patient_notification.fxml");
     }
 
     private void loadPage(String path) throws IOException {
@@ -74,7 +75,8 @@ public class DashboardPatientController {
         } else if (path.equals("/fxml/patient_book_test.fxml")) {
             BookDiagnosticTestController controller = loader.getController();
             controller.setUserId(userID);
-        } else if (path.equals("/fxml/patient_notifications.fxml")) {
+        } else if (path.equals("/fxml/patient_notification.fxml")) {
+            System.out.println("yo2");
             PatientNotificationController controller = loader.getController();
             controller.setUserId(userID);
         }

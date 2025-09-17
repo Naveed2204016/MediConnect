@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.PatientNotificationController"
+      spacing="15" alignment="TOP_CENTER"
+      style="-fx-padding: 20;">
+
+    <!-- Approved / Proposed Requests Section -->
+    <Label text="Proposed Emergency Requests"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <TableView fx:id="proposedTable" prefHeight="220">
+        <columns>
+            <TableColumn fx:id="doctorNameCol" text="Doctor" prefWidth="250"/>
+            <TableColumn fx:id="tentativeDateCol" text="Tentative Date" prefWidth="250"/>
+        </columns>
+    </TableView>
+
+    <!-- Pending / Rejected Requests Section -->
+    <Label text="Pending / Rejected Emergency Requests"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <TableView fx:id="historyTable" prefHeight="220">
+        <columns>
+            <TableColumn fx:id="doctorNameHistoryCol" text="Doctor" prefWidth="250"/>
+            <TableColumn fx:id="requestDateCol" text="Request Date" prefWidth="250"/>
+            <TableColumn fx:id="statusCol" text="Status" prefWidth="250"/>
+        </columns>
+    </TableView>
+
+</VBox>

@@ -168,7 +168,7 @@ public class BookDiagnosticTestController {
     private void addTestToSelection(DiagnosticTest test) {
         if (!selectedTests.contains(test)) {
             selectedTests.add(test);
-            selectedTestsList.getItems().add(test.getName() + " - $" + test.getFee());
+            selectedTestsList.getItems().add(test.getName() + " - tk " + test.getFee());
             totalAmount += test.getFee();
             updatePaymentButton();
         }
@@ -241,7 +241,7 @@ public class BookDiagnosticTestController {
         }
 
         showAlert("Success", String.format(
-                "Booked %d tests for %s\nDue Amount: $%.2f",
+                "Booked %d tests for %s\nDue Amount: %.2f tk",
                 selectedTests.size(),
                 testDatePicker.getValue().toString(),
                 totalAmount- Double.parseDouble(amount.getText().trim()
@@ -252,7 +252,7 @@ public class BookDiagnosticTestController {
 
     private void updatePaymentButton() {
         //paymentButton.setText(String.format("Proceed to Payment ($%.2f)", totalAmount));
-        totalLabel.setText(String.format("Total: $%.2f", totalAmount));
+        totalLabel.setText(String.format("Total: %.2f tk", totalAmount));
     }
 
     private void resetForm() {

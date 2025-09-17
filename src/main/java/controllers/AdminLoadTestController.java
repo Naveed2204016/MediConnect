@@ -99,51 +99,51 @@ public class AdminLoadTestController {
     }
 
 
-    @FXML
+     @FXML
     public void initialize() {
 
-        nameCol.setCellValueFactory(Data -> new javafx.beans.property.SimpleStringProperty(Data.getValue().getName()));
-        hospitalCol.setCellValueFactory(Data -> new javafx.beans.property.SimpleStringProperty(Data.getValue().getHospital_name()));
-        feeCol.setCellValueFactory(Data -> new javafx.beans.property.SimpleDoubleProperty(Data.getValue().getFee()).asObject());
-        timeslotcol.setCellValueFactory(data -> {
-            java.sql.Time time = data.getValue().getTest_time_slot(); // assuming returns TIME
+          nameCol.setCellValueFactory(Data -> new javafx.beans.property.SimpleStringProperty(Data.getValue().getName()));
+          hospitalCol.setCellValueFactory(Data -> new javafx.beans.property.SimpleStringProperty(Data.getValue().getHospital_name()));
+           feeCol.setCellValueFactory(Data -> new javafx.beans.property.SimpleDoubleProperty(Data.getValue().getFee()).asObject());
+           timeslotcol.setCellValueFactory(data -> {
+             java.sql.Time time = data.getValue().getTest_time_slot(); // assuming returns TIME
             String formattedTime = (time != null)
                     ? time.toLocalTime().format(DateTimeFormatter.ofPattern("hh:mm a"))
                     : "";
             return new javafx.beans.property.SimpleStringProperty(formattedTime);
-        });
-        instructioncol.setCellValueFactory(data -> {
-            String instruction = data.getValue().getInstruction();
+          });
+         instructioncol.setCellValueFactory(data -> {
+           String instruction = data.getValue().getInstruction();
             return new javafx.beans.property.SimpleStringProperty(instruction != null ? instruction : "N/A");
         });
 
-        testsTable.setEditable(true);
+         testsTable.setEditable(true);
 
-        nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        hospitalCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        feeCol.setCellFactory(TextFieldTableCell.forTableColumn(new javafx.util.converter.DoubleStringConverter()));
-        timeslotcol.setCellFactory(TextFieldTableCell.forTableColumn());
-        instructioncol.setCellFactory(TextFieldTableCell.forTableColumn());
+         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+         hospitalCol.setCellFactory(TextFieldTableCell.forTableColumn());
+         feeCol.setCellFactory(TextFieldTableCell.forTableColumn(new javafx.util.converter.DoubleStringConverter()));
+         timeslotcol.setCellFactory(TextFieldTableCell.forTableColumn());
+         instructioncol.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        nameCol.setOnEditCommit(event -> {
+         nameCol.setOnEditCommit(event -> {
             DiagnosticTest test = event.getRowValue();
             test.setName(event.getNewValue());
-        });
+         });
 
-        hospitalCol.setOnEditCommit(event -> {
+         hospitalCol.setOnEditCommit(event -> {
             DiagnosticTest test = event.getRowValue();
             test.setHospital_name(event.getNewValue());
         });
 
-        feeCol.setOnEditCommit(event -> {
+       feeCol.setOnEditCommit(event -> {
             DiagnosticTest test = event.getRowValue();
-            test.setFee(event.getNewValue());
+           test.setFee(event.getNewValue());
         });
 
-        timeslotcol.setOnEditCommit(event -> {
+       timeslotcol.setOnEditCommit(event -> {
             DiagnosticTest test = event.getRowValue();
             test.setTest_time_slot(Time.valueOf(LocalTime.parse(event.getNewValue(), DateTimeFormatter.ofPattern("hh:mm a"))));
-        });
+       });
 
         instructioncol.setOnEditCommit(event -> {
             DiagnosticTest test = event.getRowValue();
@@ -154,33 +154,32 @@ public class AdminLoadTestController {
         testsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
-        TableColumn<DiagnosticTest, Void> actionCol = new TableColumn<>("Action");
-        actionCol.setPrefWidth(100);
-        actionCol.setCellFactory(param -> new TableCell<>() {
-            private final Button addButton = new Button("Remove");
-
-            {
-                addButton.setOnAction(event -> {
+         TableColumn<DiagnosticTest, Void> actionCol = new TableColumn<>("Action");
+         actionCol.setPrefWidth(100);
+         actionCol.setCellFactory(param -> new TableCell<>() {
+             private final Button addButton = new Button("Remove");
+             {
+               addButton.setOnAction(event -> {
                     DiagnosticTest test = getTableView().getItems().get(getIndex());
                     removetest(test);
                 });
                 addButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
             }
 
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
+             @Override
+             protected void updateItem(Void item, boolean empty) {
+                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
-                } else {
-                    setGraphic(addButton);
-                }
+               } else {
+                   setGraphic(addButton);
+               }
             }
         });
 
-        testsTable.getColumns().add(actionCol);
-        testsTable.setItems(testData);
-    }
+         testsTable.getColumns().add(actionCol);
+          testsTable.setItems(testData);
+     }
 
     public void loadtests() {
         testData.clear();

@@ -46,7 +46,7 @@
     <VBox spacing="5" style="-fx-padding: 10; -fx-border-color: #ddd; -fx-border-radius: 5;">
         <Label text="Selected Tests:" style="-fx-font-weight: bold;"/>
         <ListView fx:id="selectedTestsList" prefHeight="100"/>
-        <Label fx:id="totalLabel" text="Total: $0.00" style="-fx-font-weight: bold;"/>
+        <Label fx:id="totalLabel" text="Total: 0.00 tk" style="-fx-font-weight: bold;"/>
     </VBox>
 
     <!-- Test Date Selection -->

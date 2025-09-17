@@ -84,8 +84,8 @@ public class Doctors_Dashboard_controller {
             controller.setUserId(userID);
     }
       else if (path.equals("/fxml/doctorprimarycheckup.fxml")) {
-           DoctorPrimaryCheckupController controller = loader.getController();
-            controller.setUserId(userID);
+               DoctorPrimaryCheckupController controller = loader.getController();
+               controller.setUserId(userID);
         }
        contentArea.getChildren().setAll(pane);
     }

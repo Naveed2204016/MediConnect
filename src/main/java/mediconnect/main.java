@@ -6,12 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 import java.time.LocalDate;
 import java.util.Objects;
 
->>>>>>> 878d3ce68f7deecfac19e16b9e944f3de270a45b
+//>>>>>>> 878d3ce68f7deecfac19e16b9e944f3de270a45b
 public class
 main extends Application {
     @Override
