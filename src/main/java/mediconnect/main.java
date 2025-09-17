@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class
 main extends Application {
@@ -15,7 +16,7 @@ main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/welcome.fxml"));
         Scene scene = new Scene(loader.load());
         primaryStage.setTitle("MediConnect");
-        Image image =new Image(getClass().getResource("/images/1583625.png").toExternalForm());
+        Image image =new Image(Objects.requireNonNull(getClass().getResource("/images/1583625.png")).toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(image);
         primaryStage.show();

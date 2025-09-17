@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="628.0" prefWidth="772.0" spacing="10" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.doctor_patient_detailscontroller">
+<VBox prefHeight="628.0" prefWidth="818.0" spacing="10" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.doctor_patient_detailscontroller">
 
    <!-- Search Bar -->
    <HBox alignment="CENTER_LEFT" prefHeight="152.0" prefWidth="772.0" spacing="10">
-      <Label text="Search a Patient Name" />
+      <Label prefHeight="18.0" prefWidth="155.0" text="Search a Patient Name" />
       <TextField fx:id="patient_name" prefWidth="200" />
       <Label text="Search  Patient Id" />
       <TextField fx:id="patd" />
@@ -28,7 +28,7 @@
          <TableColumn fx:id="diagnosis" prefWidth="159.2" text="Diagnosis" />
          <TableColumn fx:id="treatment" prefWidth="156.0" text="Treatment" />
          <TableColumn fx:id="notes" prefWidth="127.2" text="Notes" />
-         <TableColumn fx:id="prescribed_test" prefWidth="75.0" text="Prescribed Test" />
+         <TableColumn fx:id="prescribed_test" prefWidth="124.800048828125" text="Prescribed Test" />
       </columns>
    </TableView>
 

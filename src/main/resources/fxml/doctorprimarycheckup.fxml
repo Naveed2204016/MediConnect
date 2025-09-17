@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" spacing="15" style="-fx-padding: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="controllers.DoctorPrimaryCheckupController">
+<VBox alignment="TOP_CENTER" prefHeight="434.0" prefWidth="695.0" spacing="15" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DoctorPrimaryCheckupController">
 
     <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Primary Checkup Details of Patients'" />
 
@@ -40,7 +40,7 @@
             <TableColumn fx:id="p_name" prefWidth="150" text="Patient Name" />
             <TableColumn fx:id="page" prefWidth="150" text="Age(kg)" />
             <TableColumn fx:id="pweight" prefWidth="150" text="Weight" />
-            <TableColumn fx:id="pbloodpressure" prefWidth="150" text="Blood Pressure(mmHg)" />
+            <TableColumn fx:id="pbloodpressure" prefWidth="198.39996337890625" text="Blood Pressure(mmHg)" />
         </columns>
     </TableView>
 
