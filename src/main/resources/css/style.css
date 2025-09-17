@@ -31,7 +31,12 @@
 }
 
 .button:hover, .form-button:hover {
-    -fx-background-color: #399be0; /* darker blue for hover */
+    -fx-background-color: #399be0;     /* darker blue on hover */
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,255,255,0.8), 25, 0.4, 0, 0); /* cyan glow */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 /* Back and Logout Buttons */
@@ -45,11 +50,18 @@
     -fx-cursor: hand;
 }
 
-.back-button:hover, .logout-button:hover {
-    -fx-background-color: #c5303c; /* darker red for hover */
-}
 
-/* Error Text */
+    .back-button:hover, .logout-button:hover {
+        -fx-background-color: #c5303c;   /* darker red */
+        -fx-text-fill: white;
+        -fx-cursor: hand;
+        -fx-effect: dropshadow(gaussian, rgba(255,0,0,0.8), 25, 0.4, 0, 0);
+        -fx-scale-x: 1.05;
+        -fx-scale-y: 1.05;
+    }
+
+
+    /* Error Text */
 .error-text {
     -fx-font-size: 12px;
     -fx-text-fill: red;
@@ -174,6 +186,12 @@
 }
 .backport{
     -fx-background-image: url("../images/backport.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+.allback{
+    -fx-background-image: url("../images/allback.png");
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
