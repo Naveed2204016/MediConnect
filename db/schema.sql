@@ -36,7 +36,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,'Naveed','abcd'),(2,'Arka','sos');
+INSERT INTO `admin` VALUES (1,'aziz','xyz'),(2,'Arka','sos');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `emergency_request` (
   CONSTRAINT `emergency_request_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `emergency_request_ibfk_2` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `emergency_request_ibfk_3` FOREIGN KEY (`a_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `emergency_request` (
 
 LOCK TABLES `emergency_request` WRITE;
 /*!40000 ALTER TABLE `emergency_request` DISABLE KEYS */;
-INSERT INTO `emergency_request` VALUES (2,2,3,3,'sudden chest pain','2025-09-04',NULL,'Pending','Not Seen'),(3,2,4,4,'high fever','2025-09-17','2025-09-18','proposed','seen');
+INSERT INTO `emergency_request` VALUES (2,2,3,3,'sudden chest pain','2025-09-04',NULL,'Pending','Not Seen'),(3,2,4,4,'high fever','2025-09-17','2025-09-18','proposed','seen'),(4,2,1,1,'High fever','2025-09-17',NULL,'Pending','Not Seen');
 /*!40000 ALTER TABLE `emergency_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,6 +258,7 @@ CREATE TABLE `primary_checkup` (
 
 LOCK TABLES `primary_checkup` WRITE;
 /*!40000 ALTER TABLE `primary_checkup` DISABLE KEYS */;
+INSERT INTO `primary_checkup` VALUES (2,1,1,52.00,21,'120/80');
 /*!40000 ALTER TABLE `primary_checkup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +311,7 @@ CREATE TABLE `test` (
   `instructions` varchar(250) DEFAULT NULL,
   `test_time_slot` time DEFAULT NULL,
   PRIMARY KEY (`test_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +320,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES (1,'Blood Test','Parkview',800.00,'Fast for 8 hours before the test','08:30:00'),(2,'MRI Scan','Evercare',5100.00,'Remove all metallic objects before test','09:00:00'),(3,'X-Ray','Chevron',1600.00,'wear loose clothing','15:15:00');
+INSERT INTO `test` VALUES (1,'Blood Test','Parkview',800.00,'Fast for 8 hours before the test','08:30:00'),(2,'MRI Scan','evercare',5100.00,'Remove all metallic objects before test','09:00:00'),(3,'X-Ray','Chevron',1600.00,'wear loose clothing','15:15:00');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-17 12:30:50
+-- Dump completed on 2025-09-18  7:04:39
