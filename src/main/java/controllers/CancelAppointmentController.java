@@ -99,7 +99,7 @@ public class CancelAppointmentController {
             String query="SELECT a.appointment_id, d.name AS doctor_name, d.contact_number, a.appointment_date " +
                     "FROM Appointment a JOIN Doctor d ON a.d_id = d.doctor_id " +
                     "WHERE a.p_id = ? AND a.Status=? AND d.name=? AND d.contact_number=?"+
-                    "ORDER BY a.appointment_date";
+                    "ORDER BY a.appointment_date desc";
             PreparedStatement pmt=connection.prepareStatement(query);
             pmt.setInt(1,userId);
             pmt.setString(2,"confirmed");
