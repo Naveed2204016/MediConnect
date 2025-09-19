@@ -174,6 +174,32 @@ INSERT INTO `emergency_request` VALUES (2,2,3,3,'sudden chest pain','2025-09-04'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `handle`
+--
+
+DROP TABLE IF EXISTS `handle`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `handle` (
+  `a_id` int NOT NULL,
+  `ad_id` int NOT NULL,
+  PRIMARY KEY (`a_id`,`ad_id`),
+  KEY `ad_id` (`ad_id`),
+  CONSTRAINT `handle_ibfk_1` FOREIGN KEY (`ad_id`) REFERENCES `admin` (`admin_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `handle_ibfk_2` FOREIGN KEY (`a_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `handle`
+--
+
+LOCK TABLES `handle` WRITE;
+/*!40000 ALTER TABLE `handle` DISABLE KEYS */;
+/*!40000 ALTER TABLE `handle` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `location`
 --
 
@@ -199,6 +225,32 @@ LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
 INSERT INTO `location` VALUES (1,'parkview','chittagong','18:00:00','21:00:00'),(2,'bellview','chittagong','17:00:00','21:00:00'),(3,'evercare','chittagong','19:00:00','22:00:00'),(4,'labaid','dhaka','11:00:00','15:00:00'),(5,'parkview','chittagong','12:00:00','16:00:00'),(6,'labaid','dhaka','11:00:00','15:00:00'),(7,'apollo','dhaka','15:00:00','18:30:00'),(8,'chevron','chittagong','18:00:00','21:30:00'),(9,'chevron','chittagong','19:00:00','22:00:00');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `manage`
+--
+
+DROP TABLE IF EXISTS `manage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manage` (
+  `d_id` int NOT NULL,
+  `ad_id` int NOT NULL,
+  PRIMARY KEY (`d_id`,`ad_id`),
+  KEY `ad_id` (`ad_id`),
+  CONSTRAINT `manage_ibfk_1` FOREIGN KEY (`ad_id`) REFERENCES `admin` (`admin_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `manage_ibfk_2` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `manage`
+--
+
+LOCK TABLES `manage` WRITE;
+/*!40000 ALTER TABLE `manage` DISABLE KEYS */;
+/*!40000 ALTER TABLE `manage` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -297,6 +349,32 @@ INSERT INTO `record` VALUES (1,5,1,'2025-09-01','Common Cold','Rest and hydratio
 UNLOCK TABLES;
 
 --
+-- Table structure for table `search`
+--
+
+DROP TABLE IF EXISTS `search`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `search` (
+  `d_id` int NOT NULL,
+  `p_id` int NOT NULL,
+  PRIMARY KEY (`d_id`,`p_id`),
+  KEY `p_id` (`p_id`),
+  CONSTRAINT `search_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `search_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `search`
+--
+
+LOCK TABLES `search` WRITE;
+/*!40000 ALTER TABLE `search` DISABLE KEYS */;
+/*!40000 ALTER TABLE `search` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `test`
 --
 
@@ -322,6 +400,58 @@ LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
 INSERT INTO `test` VALUES (1,'Blood Test','Parkview',800.00,'Fast for 8 hours before the test','08:30:00'),(2,'MRI Scan','evercare',5100.00,'Remove all metallic objects before test','09:00:00'),(3,'X-Ray','Chevron',1600.00,'wear loose clothing','15:15:00');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_search`
+--
+
+DROP TABLE IF EXISTS `test_search`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test_search` (
+  `p_id` int NOT NULL,
+  `t_id` int NOT NULL,
+  PRIMARY KEY (`p_id`,`t_id`),
+  KEY `t_id` (`t_id`),
+  CONSTRAINT `test_search_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `test_search_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `test` (`test_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_search`
+--
+
+LOCK TABLES `test_search` WRITE;
+/*!40000 ALTER TABLE `test_search` DISABLE KEYS */;
+/*!40000 ALTER TABLE `test_search` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_update`
+--
+
+DROP TABLE IF EXISTS `test_update`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test_update` (
+  `ad_id` int NOT NULL,
+  `t_id` int NOT NULL,
+  PRIMARY KEY (`t_id`,`ad_id`),
+  KEY `ad_id` (`ad_id`),
+  CONSTRAINT `test_update_ibfk_1` FOREIGN KEY (`t_id`) REFERENCES `test` (`test_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `test_update_ibfk_2` FOREIGN KEY (`ad_id`) REFERENCES `admin` (`admin_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_update`
+--
+
+LOCK TABLES `test_update` WRITE;
+/*!40000 ALTER TABLE `test_update` DISABLE KEYS */;
+/*!40000 ALTER TABLE `test_update` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -367,4 +497,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-18  7:04:39
+-- Dump completed on 2025-09-19  9:19:31
