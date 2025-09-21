@@ -128,39 +128,66 @@ public class BookDiagnosticTestController {
         String testName = testNameField.getText().trim();
         String hospital = hospitalField.getText().trim();
 
-        if (testName.isEmpty() || hospital.isEmpty()) {
+        if (testName.isEmpty()) {
             showAlert("Input Required", "Please enter at least test name and hospital name");
             return;
         }
 
-        testData.clear();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
-            String query = "SELECT * FROM Test WHERE name=? and hospital_name=?";
-            PreparedStatement pmt = connection.prepareStatement(query);
-            pmt.setString(1, testName);
-            pmt.setString(2,hospital);
-            ResultSet resultSet = pmt.executeQuery();
-            while (resultSet.next()) {
-                int testId = resultSet.getInt("test_id");
-                String name = resultSet.getString("name");
-                String hospitalName = resultSet.getString("hospital_name");
-                double fee = resultSet.getDouble("fee");
-                java.sql.Time timeSlot = resultSet.getTime("test_time_slot");
-                String instruction = resultSet.getString("instructions");
+        if(!testName.isEmpty() && !hospital.isEmpty()) {
+            testData.clear();
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
+                String query = "SELECT * FROM Test WHERE name=? and hospital_name=?";
+                PreparedStatement pmt = connection.prepareStatement(query);
+                pmt.setString(1, testName);
+                pmt.setString(2, hospital);
+                ResultSet resultSet = pmt.executeQuery();
+                while (resultSet.next()) {
+                    int testId = resultSet.getInt("test_id");
+                    String name = resultSet.getString("name");
+                    String hospitalName = resultSet.getString("hospital_name");
+                    double fee = resultSet.getDouble("fee");
+                    java.sql.Time timeSlot = resultSet.getTime("test_time_slot");
+                    String instruction = resultSet.getString("instructions");
 
-                DiagnosticTest test = new DiagnosticTest(testId, name, hospitalName, fee,instruction,timeSlot);
-                testData.add(test);
+                    DiagnosticTest test = new DiagnosticTest(testId, name, hospitalName, fee, instruction, timeSlot);
+                    testData.add(test);
+                }
+
+            } catch (ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
-
-        }catch(ClassNotFoundException e)
-        {
-            System.out.println(e.getMessage());
         }
-        catch(SQLException e)
+        else if(!testName.isEmpty() && hospital.isEmpty())
         {
-            System.out.println(e.getMessage());
+            testData.clear();
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connection = DBConnection.getConnection(); //DriverManager.getConnection(url, username, password);
+                String query = "SELECT * FROM Test WHERE name=?";
+                PreparedStatement pmt = connection.prepareStatement(query);
+                pmt.setString(1, testName);
+                ResultSet resultSet = pmt.executeQuery();
+                while (resultSet.next()) {
+                    int testId = resultSet.getInt("test_id");
+                    String name = resultSet.getString("name");
+                    String hospitalName = resultSet.getString("hospital_name");
+                    double fee = resultSet.getDouble("fee");
+                    java.sql.Time timeSlot = resultSet.getTime("test_time_slot");
+                    String instruction = resultSet.getString("instructions");
+
+                    DiagnosticTest test = new DiagnosticTest(testId, name, hospitalName, fee, instruction, timeSlot);
+                    testData.add(test);
+                }
+
+            } catch (ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
         testsTable.setItems(testData);
     }

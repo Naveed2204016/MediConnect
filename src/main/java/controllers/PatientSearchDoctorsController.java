@@ -222,6 +222,44 @@ public class PatientSearchDoctorsController {
                 throw new RuntimeException(e);
             }
         }
+        else if(hospital1.isEmpty())
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connection = DBConnection.getConnection();
+                String Query="SELECT * FROM (Doctor as d,Location as l) WHERE d.doctor_id=l.d_id AND d.name=? AND d.specialization=? AND l.city=?";
+                PreparedStatement pmt= connection.prepareStatement(Query);
+                pmt.setString(1, name1);
+                pmt.setString(2, specialization1);
+                pmt.setString(3, city1);
+
+                ResultSet rs = pmt.executeQuery();
+                while(rs.next()) {
+                    int doctorId = rs.getInt("doctor_id");
+                    String name = rs.getString("name");
+                    String specialization = rs.getString("specialization");
+                    String qualification = rs.getString("qualification");
+                    String hospital = rs.getString("hospital");
+                    String city = rs.getString("city");
+                    Time startTime = rs.getTime("start_time");
+                    Time endTime = rs.getTime("End_time");
+                    double fees = rs.getDouble("fees");
+                    String contact_number = rs.getString("contact_number");
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    int capaity_per_day = rs.getInt("capacity_per_day");
+                    int emergency_slots_per_day = rs.getInt("emergency_slots_per_day");
+                    doctor1 doc = new doctor1(doctorId, name, specialization, qualification, hospital, city, startTime, endTime, fees, contact_number, email, capaity_per_day, emergency_slots_per_day, password);
+                    doctors.add(doc);
+                }
+                doctorsTable.setItems(doctors);
+            } catch (ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
         else {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
