@@ -70,8 +70,8 @@ This project was built as part of **CSE-252 (Database Management Systems Session
 ## 👥 Project Team
 
 - [Naveed Wazed Khan](https://github.com/Naveed2204016) : 2204016  
-- [Arka Dhar](https://github.com/ADUTTA108) : 2204025
-- [Ramijh Wasith Rahat](https://github.com/Mr-Wasith) : 2204022
+- [Arka Dutta](https://github.com/ADUTTA108) : 2204025
+- [Ramij Wasith Rahat](https://github.com/Mr-Wasith) : 2204022
 - [Abdul Aziz Abid](https://github.com/abdulazizabid) : 2204023
 
 ---
