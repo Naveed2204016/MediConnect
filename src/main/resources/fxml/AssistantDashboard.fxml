@@ -41,7 +41,7 @@
 
     <bottom>
         <HBox alignment="CENTER_RIGHT" styleClass="status-bar">
-            <Label styleClass="welcome-message" text="Welcome, Admin" />
+            <Label styleClass="welcome-message" text="Welcome, Assistant" />
             <Label fx:id="statusMessage" styleClass="status-message" text="Ready" />
         </HBox>
     </bottom>
