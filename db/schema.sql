@@ -61,7 +61,7 @@ CREATE TABLE `appointment` (
   CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `appointment_ibfk_3` FOREIGN KEY (`a_id`) REFERENCES `assistant` (`assistant_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,1,2,1,'2025-10-03','cancelled'),(4,1,3,1,'2025-08-19','cancelled'),(6,6,2,6,'2025-08-30','Confirmed'),(7,43,3,23,'2025-09-23','Confirmed'),(8,2,2,2,'2025-09-24','Confirmed'),(9,1,2,1,'2025-09-25','cancelled'),(10,1,2,1,'2025-09-25','cancelled'),(11,3,2,3,'2025-09-28','Confirmed'),(12,4,2,4,'2025-09-28','Confirmed');
+INSERT INTO `appointment` VALUES (1,1,2,1,'2025-10-03','cancelled'),(4,1,3,1,'2025-08-19','cancelled'),(6,6,2,6,'2025-08-30','Confirmed'),(7,43,3,23,'2025-09-23','Confirmed'),(8,2,2,2,'2025-09-24','Confirmed'),(9,1,2,1,'2025-09-25','cancelled'),(10,1,2,1,'2025-09-25','cancelled'),(13,1,2,1,'2025-09-29','Confirmed'),(14,2,2,2,'2025-09-29','Confirmed'),(15,1,3,1,'2025-09-30','Confirmed'),(16,3,2,3,'2025-09-30','Confirmed'),(17,3,3,3,'2025-09-30','Confirmed'),(18,3,4,3,'2025-09-30','Confirmed'),(19,3,4,3,'2025-09-30','Confirmed'),(20,3,5,3,'2025-09-30','Confirmed'),(21,3,6,3,'2025-09-30','Confirmed'),(22,3,7,3,'2025-09-30','Confirmed');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,7 +475,7 @@ CREATE TABLE `testbooking` (
   KEY `p_id` (`p_id`),
   CONSTRAINT `testbooking_ibfk_1` FOREIGN KEY (`t_id`) REFERENCES `test` (`test_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `testbooking_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +484,7 @@ CREATE TABLE `testbooking` (
 
 LOCK TABLES `testbooking` WRITE;
 /*!40000 ALTER TABLE `testbooking` DISABLE KEYS */;
-INSERT INTO `testbooking` VALUES (1,2,2,'2025-08-17','2025-08-18','2025-08-25','Email',1000.00),(2,3,2,'2025-08-17','2025-08-20','2025-08-27','SMS',500.00),(3,16,3,'2025-09-22','2025-09-23','2025-09-30','Email',0.00),(4,6,2,'2025-09-24','2025-09-25','2025-10-02','Email',0.00),(5,1,2,'2025-09-24','2025-09-25','2025-10-02','Email',0.00);
+INSERT INTO `testbooking` VALUES (1,2,2,'2025-08-17','2025-08-18','2025-08-25','Email',1000.00),(2,3,2,'2025-08-17','2025-08-20','2025-08-27','SMS',500.00),(3,16,3,'2025-09-22','2025-09-23','2025-09-30','Email',0.00),(4,6,2,'2025-09-24','2025-09-25','2025-10-02','Email',0.00),(5,1,2,'2025-09-24','2025-09-25','2025-10-02','Email',0.00),(6,3,5,'2025-09-29','2025-09-30','2025-10-07','SMS',0.00);
 /*!40000 ALTER TABLE `testbooking` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -497,4 +497,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-27  7:32:58
+-- Dump completed on 2025-09-29 12:35:32
